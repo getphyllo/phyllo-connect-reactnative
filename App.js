@@ -7,6 +7,7 @@
  */
 
  import React, {Component, Fragment} from 'react';
+ import { createUser, createUserToken } from './APIHandler';
  import {
    View,
    StyleSheet,
@@ -76,14 +77,25 @@
     console.log('onExit callback', body);
   }
 
-  initializePhylloConnect = value => {
-    phyllo.initialize(
-      'ReactNative',
-      'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNjgzYzAzMGMtZDBmZC00NjI0LWE4YzAtNGMwNTNjMjFjYzFkIiwidGVuYW50X2lkIjoiZGRkNWU0YzUtZjQ1Zi00YzU2LWI0MjgtM2QzMjllOGE1YTE1IiwidGFuYW50X2FwcF9pZCI6IjI3NzhjOTk3LWY0YmMtNDAxZC05NWM0LTZmMjE3OGI4NTQwNCIsInByb2R1Y3RzIjpbIklERU5USVRZIiwiRU5HQUdFTUVOVCIsIklOQ09NRSJdLCJpc3MiOiJodHRwczovL2FwaS5kZXYuZ2V0cGh5bGxvLmNvbSIsImF1ZCI6Imh0dHBzOi8vYXBpLmRldi5nZXRwaHlsbG8uY29tL3YxL2ludGVybmFsIiwiaWF0IjoxNjQzMDk5NTA2Ljg1MiwiZXhwIjoxNjQzNzA0MzA2Ljg1MTk4NH0.38hDrSoE8K5rSZ_oGZX6Nntafx2Jb9qlywrquGh1KFA',
-      '683c030c-d0fd-4624-a8c0-4c053c21cc1d',
-      'dev',
-      value
-    );
+  initializePhylloConnect = async (value) => {
+      try {
+        const env = "dev";
+        const timeStamp = new Date();
+        const userId = await createUser("SampleApp",timeStamp.getTime());
+        const token = await createUserToken(userId);
+        const appName = "Sample App";
+        debugger;  
+        phyllo.initialize(
+          'ReactNative',
+          'Bearer '+token,
+          userId,
+          'dev',
+          value
+        );
+
+      } catch (err) {
+        console.log(err);
+      }
   }
 
   render() {
