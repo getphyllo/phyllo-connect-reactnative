@@ -1,0 +1,6 @@
+module Pods_rn_phylloconnect_rn_phylloconnectTests {
+  umbrella header "Pods-rn_phylloconnect-rn_phylloconnectTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

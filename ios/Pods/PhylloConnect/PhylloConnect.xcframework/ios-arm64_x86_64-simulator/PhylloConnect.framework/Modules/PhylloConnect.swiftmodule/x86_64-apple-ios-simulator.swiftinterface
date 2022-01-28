@@ -1,0 +1,232 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name PhylloConnect
+import AuthenticationServices
+import CoreGraphics
+import Foundation
+@_exported import PhylloConnect
+import SafariServices
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+public func unown<T, U, V>(_ owner: T, _ method: @escaping (T) -> ((U) -> V)) -> (U) -> V where T : AnyObject
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class LoginViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Swift.Dictionary {
+  public mutating func add(_ dictionary: [Key : Value])
+}
+public protocol SVGShapeElement : Fillable, Identifiable, SVGElement, Strokable, Stylable, Transformable {
+  var svgLayer: QuartzCore.CAShapeLayer { get set }
+}
+extension UIKit.UIColor {
+  convenience public init?(cssName: Swift.String)
+}
+public protocol Fillable {
+}
+public protocol SVGContainerElement : DelaysApplyingAttributes, Fillable, Identifiable, SVGElement, Strokable, Stylable, Transformable {
+  var containerLayer: QuartzCore.CALayer { get set }
+}
+public protocol SVGParser {
+  init(svgData: Foundation.Data, supportedElements: SVGParserSupportedElements?, completion: ((SVGLayer) -> ())?)
+  var completionBlock: ((SVGLayer) -> ())? { get }
+  var supportedElements: SVGParserSupportedElements? { get }
+  var containerLayer: SVGLayer { get }
+  func startParsing()
+}
+public struct SVGParserSupportedElements {
+  public typealias ElementGenerator = () -> SVGElement
+  public let tags: [Swift.String : SVGParserSupportedElements.ElementGenerator]
+  public init(tags: [Swift.String : SVGParserSupportedElements.ElementGenerator])
+  public static var barebones: SVGParserSupportedElements {
+    get
+  }
+  public static var allSupportedElements: SVGParserSupportedElements {
+    get
+  }
+}
+extension QuartzCore.CALayer {
+  @discardableResult
+  convenience public init(svgURL: Foundation.URL, parser: SVGParser? = nil, completion: @escaping (SVGLayer) -> ())
+  @available(*, deprecated, renamed: "init(svgURL:parser:completion:)")
+  @discardableResult
+  convenience public init(SVGURL: Foundation.URL, parser: SVGParser? = nil, completion: @escaping (SVGLayer) -> ())
+  @discardableResult
+  convenience public init(svgData: Foundation.Data, parser: SVGParser? = nil, completion: @escaping (SVGLayer) -> ())
+  @available(*, deprecated, renamed: "init(svgData:parser:completion:)")
+  @discardableResult
+  convenience public init(SVGData: Foundation.Data, parser: SVGParser? = nil, completion: @escaping (SVGLayer) -> ())
+}
+public protocol Identifiable {
+}
+extension NSXMLSVGParser : SVGParser {
+}
+@objc @_hasMissingDesignatedInitializers open class NSXMLSVGParser : Foundation.XMLParser, Foundation.XMLParserDelegate {
+  public var completionBlock: ((SVGLayer) -> ())?
+  public var supportedElements: SVGParserSupportedElements?
+  open var containerLayer: SVGLayer
+  convenience public init(svgURL: Foundation.URL, supportedElements: SVGParserSupportedElements? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @available(*, deprecated, renamed: "init(svgURL:supportedElements:completion:)")
+  convenience public init(SVGURL: Foundation.URL, supportedElements: SVGParserSupportedElements? = nil, completion: ((SVGLayer) -> ())? = nil)
+  required public init(svgData: Foundation.Data, supportedElements: SVGParserSupportedElements? = SVGParserSupportedElements.allSupportedElements, completion: ((SVGLayer) -> ())? = nil)
+  @available(*, deprecated, renamed: "init(svgData:supportedElements:completion:)")
+  convenience public init(SVGData: Foundation.Data, supportedElements: SVGParserSupportedElements? = SVGParserSupportedElements.allSupportedElements, completion: ((SVGLayer) -> ())? = nil)
+  public func startParsing()
+  @objc open func parser(_ parser: Foundation.XMLParser, didStartElement elementName: Swift.String, namespaceURI: Swift.String?, qualifiedName qName: Swift.String?, attributes attributeDict: [Swift.String : Swift.String])
+  @objc open func parser(_ parser: Foundation.XMLParser, didEndElement elementName: Swift.String, namespaceURI: Swift.String?, qualifiedName qName: Swift.String?)
+  @objc public func parserDidEndDocument(_ parser: Foundation.XMLParser)
+  @objc public func parser(_ parser: Foundation.XMLParser, parseErrorOccurred parseError: Swift.Error)
+  @objc deinit
+}
+public struct PhylloConfig {
+  public static var shared: PhylloConfig
+  public init()
+  public var environment: PhylloEnvironment
+  public var clientDisplayName: Swift.String
+  public var token: Swift.String
+  public var userId: Swift.String
+  public var workPlatformId: Swift.String
+}
+public protocol Stylable {
+}
+extension UIKit.UIBezierPath {
+  convenience public init(pathString: Swift.String)
+  @available(*, deprecated, message: "This method is deprecated. If you want to parse a single path, instantiate a new instance of SVGPath using the SVGPath(singlePathString:) initializer and pass the path string.")
+  public class func pathWithSVGURL(_ SVGURL: Foundation.URL) -> UIKit.UIBezierPath?
+}
+public protocol PhylloConnectDelegate : AnyObject {
+  func onAccountConnected(account_id: Swift.String, work_platform_id: Swift.String, user_id: Swift.String)
+  func onAccountDisconnected(account_id: Swift.String, work_platform_id: Swift.String, user_id: Swift.String)
+  func onTokenExpired(user_id: Swift.String)
+  func onExit(reason: Swift.String, user_id: Swift.String)
+}
+@_hasMissingDesignatedInitializers public class PhylloConnect {
+  public class var shared: PhylloConnect {
+    get
+  }
+  weak public var phylloConnectDelegate: PhylloConnectDelegate?
+  public func initialize(config: PhylloConfig = PhylloConfig())
+  public func open()
+  @objc deinit
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) convenience public init(pathString: Swift.String)
+  @_Concurrency.MainActor(unsafe) convenience public init(svgNamed: Swift.String, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @available(*, deprecated, renamed: "init(svgNamed:parser:completion:)")
+  @_Concurrency.MainActor(unsafe) convenience public init(SVGNamed: Swift.String, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(svgURL: Foundation.URL, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @available(*, deprecated, renamed: "init(svgURL:parser:completion:)")
+  @_Concurrency.MainActor(unsafe) convenience public init(SVGURL: Foundation.URL, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(svgData: Foundation.Data, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+  @available(*, deprecated, renamed: "init(svgData:parser:completion:)")
+  @_Concurrency.MainActor(unsafe) convenience public init(SVGData svgData: Foundation.Data, parser: SVGParser? = nil, completion: ((SVGLayer) -> ())? = nil)
+}
+extension QuartzCore.CALayer {
+  open func applyOnSublayers<T>(ofType: T.Type, closure: (T) -> ()) where T : QuartzCore.CALayer
+  public func sublayers<T, U>(in layer: T) -> [U] where T : QuartzCore.CALayer
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class SVGView : UIKit.UIView {
+  @objc @IBInspectable @_Concurrency.MainActor(unsafe) open var svgName: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @available(*, deprecated, renamed: "svgName")
+  @_Concurrency.MainActor(unsafe) open var SVGName: Swift.String?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol SVGElement {
+  static var elementName: Swift.String { get }
+  var supportedAttributes: [Swift.String : (Swift.String) -> ()] { get set }
+  func didProcessElement(in container: SVGContainerElement?)
+}
+extension Swift.String {
+  public subscript(integerRange: Swift.Range<Swift.Int>) -> Swift.String {
+    get
+  }
+}
+public enum PhylloEnvironment : Swift.String {
+  case dev
+  case sandbox
+  case prod
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class SVGCache {
+  public static let `default`: SVGCache
+  final public let memoryCache: Foundation.NSCache<Foundation.NSString, SVGLayer>
+  public subscript(key: Swift.String) -> SVGLayer? {
+    get
+    set
+  }
+  public func removeObject(key: Swift.String)
+  @objc deinit
+}
+public protocol Strokable {
+}
+extension Swift.FloatingPoint {
+  public var toRadians: Self {
+    get
+  }
+  public var toDegrees: Self {
+    get
+  }
+}
+public protocol Transformable {
+  var layerToTransform: QuartzCore.CALayer { get }
+}
+public protocol SVGLayerType {
+  var boundingBox: CoreGraphics.CGRect { get }
+}
+extension SVGLayerType where Self : QuartzCore.CALayer {
+  @discardableResult
+  public func resizeToFit(_ rect: CoreGraphics.CGRect) -> Self
+}
+@objc @_inheritsConvenienceInitializers open class SVGLayer : QuartzCore.CAShapeLayer, SVGLayerType {
+  public var boundingBox: CoreGraphics.CGRect
+  @objc override dynamic public init()
+  @objc override dynamic public init(layer: Any)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension SVGLayer {
+  public var svgLayerCopy: SVGLayer? {
+    get
+  }
+}
+extension SVGLayer {
+  @objc override dynamic open var fillColor: CoreGraphics.CGColor? {
+    @objc get
+    @objc set
+  }
+}
+extension SVGLayer {
+  @objc override dynamic open var lineWidth: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open var strokeColor: CoreGraphics.CGColor? {
+    @objc get
+    @objc set
+  }
+}
+extension QuartzCore.CAShapeLayer {
+  convenience public init(pathString: Swift.String)
+}
+public protocol DelaysApplyingAttributes {
+  var delayedAttributes: [Swift.String : Swift.String] { get set }
+}
+extension DelaysApplyingAttributes where Self : SVGElement {
+  public mutating func applyDelayedAttributes()
+}
+extension PhylloEnvironment : Swift.Equatable {}
+extension PhylloEnvironment : Swift.Hashable {}
+extension PhylloEnvironment : Swift.RawRepresentable {}

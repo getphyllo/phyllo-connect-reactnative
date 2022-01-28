@@ -1,0 +1,11 @@
+framework module PhylloConnect {
+  umbrella header "PhylloConnect.h"
+
+  export *
+  module * { export * }
+}
+
+module PhylloConnect.Swift {
+    header "PhylloConnect-Swift.h"
+    requires objc
+}
