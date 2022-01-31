@@ -25,7 +25,6 @@
  } from 'react-native';
 
  var phyllo = NativeModules.NativeMethods;
- //var phyllo = ReactNative.NativeModules;
 
  class App extends Component {
   constructor(props) {
@@ -79,8 +78,6 @@
   }
 
   initializePhylloConnect = async (value) => {
-    console.log('Phyllo' ,phyllo);
-
       try {
         const env = "dev";
         const timeStamp = new Date();
