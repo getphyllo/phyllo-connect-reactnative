@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pankajpatel.reactnativeconnect">
+    
+    <application>
+    <meta-data
+      android:name="com.plaid.link.react_native"
+      android:value="7.2.1" />
+  </application>
+
+    </manifest>
