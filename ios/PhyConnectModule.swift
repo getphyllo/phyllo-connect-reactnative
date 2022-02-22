@@ -18,7 +18,7 @@ public class PhyConnectModule: RCTEventEmitter {
     
     override public func supportedEvents() -> [String]! {
         //I will be honest, I am sending these events from DeviceManager.swift, but react native's packager gripes if I dont put the events that DeviceManager.swift is sending through the rootView's bridge here
-        return ["onAccountConnected","onAccountDisconnected","onTokenExpired","onExit"]
+        return ["onAccountConnected","onAccountDisconnected","onTokenExpired","onExit","getPhylloEnvironmentUrl"]
     }
     
     public override init() {
@@ -59,6 +59,18 @@ public class PhyConnectModule: RCTEventEmitter {
         }
     }
     
+    @objc(getPhylloEnvironmentUrl:)
+    func getPhylloEnvironmentUrl(env:String) {
+          env.rawValue
+        DispatchQueue.main.async {
+          var dic = [String:String]()
+          dic["env"] = self.getEnvironment(env: environment).rawValue
+          if self.hasObservers ?? false {
+            self.sendEvent(withName: "getPhylloEnvironmentUrl", body: dic)
+          }
+        }
+    }
+
     func getEnvironment(env:String) -> PhylloEnvironment {
         switch env {
         case "development":
