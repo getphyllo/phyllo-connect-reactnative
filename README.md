@@ -1,1 +1,1 @@
-# phyllo-connect-reactnative
+# react-native-phyllo-connect-sdk
