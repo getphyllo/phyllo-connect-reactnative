@@ -59,17 +59,24 @@ public class PhyConnectModule: RCTEventEmitter {
         }
     }
     
-    @objc(getPhylloEnvironmentUrl:)
-    func getPhylloEnvironmentUrl(env:String) {
-          env.rawValue
-        DispatchQueue.main.async {
-          var dic = [String:String]()
-          dic["env"] = self.getEnvironment(env: environment).rawValue
-          if self.hasObservers ?? false {
-            self.sendEvent(withName: "getPhylloEnvironmentUrl", body: dic)
-          }
-        }
-    }
+  //  @objc(getPhylloEnvironmentUrl:)
+  //   func getPhylloEnvironmentUrl(env:String) {  
+  //       DispatchQueue.main.async {
+  //         var dic = [String:String]()
+  //         dic["env"] = self.getEnvironment(env: env).rawValue
+  //         if self.hasObservers ?? false {
+  //           self.sendEvent(withName: "getPhylloEnvironmentUrl", body: dic)
+  //         }
+  //       }
+  //   }
+
+    @objc func getPhylloEnvironmentUrl(env:String,callback: RCTResponseSenderBlock) -> Void {
+    let resultsDict = [
+      "envUrl" : self.getEnvironment(env: env).rawValue
+    ];
+    callback([NSNull() ,resultsDict])
+    // return [NSNull() ,resultsDict]
+  }
 
     func getEnvironment(env:String) -> PhylloEnvironment {
         switch env {
