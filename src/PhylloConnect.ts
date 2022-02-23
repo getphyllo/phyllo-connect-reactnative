@@ -15,71 +15,29 @@ interface IPhylloInitialize {
 }
 
 type TEventType =
-  | 'onTokenExpired'
   | 'onAccountConnected'
   | 'onAccountDisconnected'
   | 'onExit'
-  | 'getPhylloEnvironmentUrl'
+  | 'onTokenExpired'
 
 const phyllo = NativeModules.PhyConnectModule
 
 class PhylloConnect {
-  eventListeners: Set<EmitterSubscription>
+  // eventListeners: Set<EmitterSubscription>
   eventEmitter: NativeEventEmitter
 
   constructor() {
-    this.eventListeners = new Set()
+    // this.eventListeners = new Set()
     this.eventEmitter = new NativeEventEmitter(phyllo)
-
-    //   this.addAnEventListener('onExit', this.onExitCallback)
-    //   this.addAnEventListener('onTokenExpired', this.onTokenExpiredCallback)
-    //   this.addAnEventListener(
-    //     'onAccountConnected',
-    //     this.onAccountConnectedCallback
-    //   )
-    //   this.addAnEventListener(
-    //     'onAccountDisconnected',
-    //     this.onAccountDisconnectedCallback
-    //   )
-    //   this.addAnEventListener(
-    //     'getPhylloEnvironmentUrl',
-    //     this.getPhylloEnvironmentUrlCallback
-    //   )
-    // }
-
-    // onExitCallback = () => {
-    //   console.log('exit callback called')
-    // }
-    // onTokenExpiredCallback = () => {
-    //   console.log('token expired')
-    // }
-    // onAccountConnectedCallback = () => {
-    //   console.log('account connected')
-    // }
-    // onAccountDisconnectedCallback = () => {
-    //   console.log('account disconnected')
-    // }
-    // getPhylloEnvironmentUrlCallback = (obj: {}) => {
-    //   console.log(obj)
   }
 
-  addAnEventListener = (event: string, callback: any) => {
-    const eventListener = this.eventEmitter.addListener(event, callback)
-    this.eventListeners.add(eventListener)
+  addAnEventListener = (event: TEventType, callback: any) => {
+    return this.eventEmitter.addListener(event, callback)
   }
 
-  getPhylloEnv = (env: string) => {
-    return phyllo.getPhylloEnvironmentUrl(env, (obj: any) => {
-      console.log(obj, 'get phyllo url')
-    })
+  getPhylloEnv = (env: string, callback: () => {}) => {
+    phyllo.getPhylloEnvironmentUrl(env, callback)
   }
-
-  // phylloDisconnect = () => {
-  //   this.eventListeners.forEach((eventLister) => {
-  //     eventLister.remove()
-  //   })
-  //   this.eventListeners.clear()
-  // }
 
   initializePhylloConnect = async ({
     appName,

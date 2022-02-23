@@ -11,32 +11,30 @@ import { generateRandomString, generateRandomId } from './randomGenerator'
 
 export default function TesterApp() {
   const [existingUser, setExistingUser] = useState(false)
+  const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    PhylloConnect.addAnEventListener('onExit', onExitCallBack)
-    // PhylloConnect.addAnEventListener('getPhylloEnvironmentUrl', onChangeURL)
+    const onExitWatcher = PhylloConnect.addAnEventListener(
+      'onExit',
+      onExitCallBack
+    )
 
-    const url = PhylloConnect.getPhylloEnv('development')
-    console.log(url)
+    PhylloConnect.getPhylloEnv(config.env, onChangeURL)
 
     return () => {
-      PhylloConnect.phylloDisconnect()
+      onExitWatcher.remove()
     }
   }, [])
 
-  const onChangeURL = (body) => {
-    console.log(body)
-    console.log('this is a get phyllo env url')
+  const onChangeURL = (envURL) => {
+    setEnvURL(envURL)
   }
 
   const onExitCallBack = (body) => {
     console.log('exited from the phyllo connect')
-    console.log(body)
   }
 
   const onPressButton = async (platformId) => {
-    const env = PhylloConnect.getPhylloEnv(config.env)
-    // const env = ""
     const clientDisplayName = generateRandomString()
     const externalId = generateRandomId()
 
@@ -50,8 +48,8 @@ export default function TesterApp() {
           return
         }
       } else {
-        userId = await createUser(clientDisplayName, externalId)
-        token = await createUserToken(userId, env)
+        userId = await createUser(clientDisplayName, externalId, envURL)
+        token = await createUserToken(userId, envURL)
         await AsyncStorage.setItem('user-id', userId)
         await AsyncStorage.setItem('user-token', token)
       }
@@ -60,12 +58,13 @@ export default function TesterApp() {
         clientDisplayName,
         token,
         userId,
-        env,
         platformId,
+        env: config.env,
       })
       // phyllo.open()
     } catch (e) {
       Alert.alert('Unable to connect platforms')
+      console.log(e)
     }
   }
   return (

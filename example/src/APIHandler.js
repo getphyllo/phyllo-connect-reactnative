@@ -33,7 +33,7 @@ export const createUser = async (name, externalId, envURL) => {
       name,
       external_id: externalId,
     })
-    console.log('userResponse', response.data)
+
     return response.data.id
   } catch (err) {
     throw err
