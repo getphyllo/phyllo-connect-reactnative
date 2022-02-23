@@ -70,7 +70,8 @@ public class PhyConnectModule: RCTEventEmitter {
   //       }
   //   }
 
-    @objc func getPhylloEnvironmentUrl(env:String,callback: RCTResponseSenderBlock) -> Void {
+    @objc (getPhylloEnvironmentUrl::)
+    func getPhylloEnvironmentUrl(env:String,callback: RCTResponseSenderBlock) -> Void {
     let resultsDict = [
       "envUrl" : self.getEnvironment(env: env).rawValue
     ];

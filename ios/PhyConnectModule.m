@@ -11,6 +11,6 @@
 
 RCT_EXTERN_METHOD(initialize:clientDisplayName:token:userId:environment:workPlatformId)
 RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env)
-RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env:callbackMethod:(RCTResponseSenderBlock)callback))
+RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env:callbackMethod:)
 
 @end
