@@ -70,14 +70,11 @@ public class PhyConnectModule: RCTEventEmitter {
   //       }
   //   }
 
-    @objc (getPhylloEnvironmentUrl::)
-    func getPhylloEnvironmentUrl(env:String,callback: RCTResponseSenderBlock) -> Void {
-    let resultsDict = [
-      "envUrl" : self.getEnvironment(env: env).rawValue
-    ];
-    callback([NSNull() ,resultsDict])
-    // return [NSNull() ,resultsDict]
-  }
+    @objc(getPhylloEnvironmentUrl::)
+    func getPhylloEnvironmentUrl(env:String , _ callback: RCTResponseSenderBlock) -> Void {
+      
+       callback([self.getEnvironment(env: env).rawValue])
+    }
 
     func getEnvironment(env:String) -> PhylloEnvironment {
         switch env {

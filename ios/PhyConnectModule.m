@@ -10,7 +10,6 @@
 @interface RCT_EXTERN_MODULE(PhyConnectModule, NSObject)
 
 RCT_EXTERN_METHOD(initialize:clientDisplayName:token:userId:environment:workPlatformId)
-RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env)
-RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env:callbackMethod:)
+RCT_EXTERN_METHOD(getPhylloEnvironmentUrl:env:(RCTResponseSenderBlock)callback)
 
 @end
