@@ -8,25 +8,25 @@ import { createUser, createUserToken } from './APIHandler'
 
 import config from './config'
 import { generateRandomString, generateRandomId } from './randomGenerator'
-
+console.log(PhylloConnect)
 export default function TesterApp() {
   const [existingUser, setExistingUser] = useState(false)
   const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    // adding a event handler for onExit action
-    const onExitWatcher = PhylloConnect.addAnEventListener(
-      'onExit',
-      onExitCallBack
-    )
-
-    // checks the config.env and calls callback fn for changing env URL
+    console.log(PhylloConnect, 'this is Phyllo Connect')
+    console.log(PhylloConnect.getPhylloEnv)
+    // // adding a event handler for onExit action
+    // const onExitWatcher = PhylloConnect.addAnEventListener(
+    //   'onExit',
+    //   onExitCallBack
+    // )
+    // // checks the config.env and calls callback fn for changing env URL
     PhylloConnect.getPhylloEnv(config.env, onChangeURL)
-
-    // remove the event watcher
-    return () => {
-      onExitWatcher.remove()
-    }
+    // // remove the event watcher
+    // return () => {
+    //   onExitWatcher.remove()
+    // }
   }, [])
 
   // callback function for changing env url on change
