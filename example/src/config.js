@@ -6,7 +6,6 @@ const config = {
   env: PhylloEnvironment.Development,
 }
 
-// generates a random string of length <= 25
 // const USER_NAME = Math.random().toString(36).slice(0, 25)
 
 export default config

@@ -1,5 +1,5 @@
-import PhylloConnect from './PhylloConnect'
+import phylloConnect, { PhylloConnectSDK } from './PhylloConnect'
 import { PhylloEnvironment } from './PhylloEnvironment'
 
-export { PhylloEnvironment }
-export default PhylloConnect
+export { PhylloEnvironment, PhylloConnectSDK }
+export default phylloConnect

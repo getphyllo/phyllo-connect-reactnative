@@ -1,8 +1,4 @@
-import {
-  NativeModules,
-  NativeEventEmitter,
-  EmitterSubscription,
-} from 'react-native'
+import { NativeModules, NativeEventEmitter } from 'react-native'
 
 import { PhylloEnvironment } from './PhylloEnvironment'
 
@@ -22,7 +18,7 @@ type TEventType =
 
 const phyllo = NativeModules.PhyConnectModule
 
-class PhylloConnect {
+export class PhylloConnectSDK {
   // eventListeners: Set<EmitterSubscription>
   eventEmitter: NativeEventEmitter
 
@@ -31,11 +27,12 @@ class PhylloConnect {
     this.eventEmitter = new NativeEventEmitter(phyllo)
   }
 
-  addAnEventListener = (event: TEventType, callback: any) => {
+  addAnEventListener = (event: TEventType, callback: (body?: any) => {}) => {
+    // return the event, let the user handle it
     return this.eventEmitter.addListener(event, callback)
   }
 
-  getPhylloEnv = (env: string, callback: () => {}) => {
+  getPhylloEnv = (env: string, callback: (body?: any) => {}) => {
     phyllo.getPhylloEnvironmentUrl(env, callback)
   }
 
@@ -44,7 +41,7 @@ class PhylloConnect {
     token,
     userId,
     env,
-    platformId = '',
+    platformId = undefined,
   }: IPhylloInitialize) => {
     try {
       const result = phyllo.initialize(appName, token, userId, env, platformId)
@@ -55,5 +52,6 @@ class PhylloConnect {
   }
 }
 
+const PhylloConnect = new PhylloConnectSDK()
 // create a new object and export
-export default new PhylloConnect()
+export default PhylloConnect
