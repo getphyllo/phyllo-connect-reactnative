@@ -58,17 +58,8 @@ public class PhylloConnectModule: RCTEventEmitter {
             PhylloConnect.shared.open()
         }
     }
+
     
-  //  @objc(getPhylloEnvironmentUrl:)
-  //   func getPhylloEnvironmentUrl(env:String) {  
-  //       DispatchQueue.main.async {
-  //         var dic = [String:String]()
-  //         dic["env"] = self.getEnvironment(env: env).rawValue
-  //         if self.hasObservers ?? false {
-  //           self.sendEvent(withName: "getPhylloEnvironmentUrl", body: dic)
-  //         }
-  //       }
-  //   }
 
     @objc(getPhylloEnvironmentUrl::)
     func getPhylloEnvironmentUrl(env:String , _ callback: RCTResponseSenderBlock) -> Void {

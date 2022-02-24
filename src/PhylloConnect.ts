@@ -20,36 +20,36 @@ const phyllo = NativeModules.PhylloConnectModule
 
 export class PhylloConnectSDK {
   // eventListeners: Set<EmitterSubscription>
-  eventEmitter: NativeEventEmitter
+  // eventEmitter: NativeEventEmitter
 
-  constructor() {
-    // this.eventListeners = new Set()
-    this.eventEmitter = new NativeEventEmitter(phyllo)
-  }
+  // constructor() {
+  //   // this.eventListeners = new Set()
+  //   this.eventEmitter = new NativeEventEmitter(phyllo)
+  // }
 
-  addAnEventListener = (event: TEventType, callback: (body?: any) => {}) => {
-    // return the event, let the user handle it
-    return this.eventEmitter.addListener(event, callback)
-  }
+  // addAnEventListener = (event: TEventType, callback: (body?: any) => {}) => {
+  //   // return the event, let the user handle it
+  //   return this.eventEmitter.addListener(event, callback)
+  // }
 
-  getPhylloEnv = (env: string, callback: (body?: any) => {}) => {
-    phyllo.getPhylloEnvironmentUrl(env, callback)
-  }
+  // getPhylloEnv = (env: string, callback: (body?: any) => {}) => {
+  //   phyllo.getPhylloEnvironmentUrl(env, callback)
+  // }
 
-  initializePhylloConnect = async ({
-    appName,
-    token,
-    userId,
-    env,
-    platformId = undefined,
-  }: IPhylloInitialize) => {
-    try {
-      const result = phyllo.initialize(appName, token, userId, env, platformId)
-      return result
-    } catch (err) {
-      throw err
-    }
-  }
+  // initializePhylloConnect = async ({
+  //   appName,
+  //   token,
+  //   userId,
+  //   env,
+  //   platformId = undefined,
+  // }: IPhylloInitialize) => {
+  //   try {
+  //     const result = phyllo.initialize(appName, token, userId, env, platformId)
+  //     return result
+  //   } catch (err) {
+  //     throw err
+  //   }
+  // }
 }
 
 const PhylloConnect = new PhylloConnectSDK()

@@ -1,17 +1,5 @@
-
-allprojects {
-    repositories {
-        mavenLocal()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
-        }
-        google()
-        jcenter()
-    }
-}
-
 buildscript {
+
     ext.safeExtGet = { prop, fallback ->
         return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
     }
@@ -22,7 +10,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.10')}"
     }
 }
 
@@ -31,30 +20,15 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android'
 
 android {
-    //compileSdkVersion safeExtGet('compileSdkVersion', 31)
-    //buildToolsVersion safeExtGet('buildToolsVersion', '31.0.0')
-
-    // defaultConfig {
-    //     minSdkVersion safeExtGet('minSdkVersion', 21)
-    //     targetSdkVersion safeExtGet('targetSdkVersion', 31)
-    // }
-
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion safeExtGet('compileSdkVersion', 31)
+    buildToolsVersion safeExtGet('buildToolsVersion', '31.0.0')
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "0.0.1"
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        minSdkVersion safeExtGet('minSdkVersion', 21)
+        targetSdkVersion safeExtGet('targetSdkVersion', 31)
     }
 }
 
@@ -66,5 +40,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation "com.getphyllo:phyllo-connect:0.1.13"
+
 }
