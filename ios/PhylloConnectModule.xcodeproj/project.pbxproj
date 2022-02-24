@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FA0EFF60236CC8FB00069FA8 /* libPhyConnectModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPhyConnectModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0EFF60236CC8FB00069FA8 /* libPhylloConnectModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPhylloConnectModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA4F9FE62512AA41002DB4D5 /* PhyConnectModule-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhyConnectModule-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA4F9FE72512AA42002DB4D5 /* PhyConnectModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhyConnectModule.swift; sourceTree = "<group>"; };
 		FA4F9FEA2512ACC2002DB4D5 /* PhyConnectModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhyConnectModule.m; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		FA0EFF61236CC8FB00069FA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FA0EFF60236CC8FB00069FA8 /* libPhyConnectModule.a */,
+				FA0EFF60236CC8FB00069FA8 /* libPhylloConnectModule.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,9 +62,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FA0EFF5F236CC8FB00069FA8 /* PhyConnectModule */ = {
+		FA0EFF5F236CC8FB00069FA8 /* PhylloConnectModule */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA0EFF69236CC8FB00069FA8 /* Build configuration list for PBXNativeTarget "PhyConnectModule" */;
+			buildConfigurationList = FA0EFF69236CC8FB00069FA8 /* Build configuration list for PBXNativeTarget "PhylloConnectModule" */;
 			buildPhases = (
 				FA0EFF5C236CC8FB00069FA8 /* Sources */,
 				FA0EFF5D236CC8FB00069FA8 /* Frameworks */,
@@ -74,9 +74,9 @@
 			);
 			dependencies = (
 			);
-			name = PhyConnectModule;
+			name = PhylloConnectModule;
 			productName = PhyConnectModule;
-			productReference = FA0EFF60236CC8FB00069FA8 /* libPhyConnectModule.a */;
+			productReference = FA0EFF60236CC8FB00069FA8 /* libPhylloConnectModule.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -107,7 +107,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FA0EFF5F236CC8FB00069FA8 /* PhyConnectModule */,
+				FA0EFF5F236CC8FB00069FA8 /* PhylloConnectModule */,
 			);
 		};
 /* End PBXProject section */
@@ -299,7 +299,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA0EFF69236CC8FB00069FA8 /* Build configuration list for PBXNativeTarget "PhyConnectModule" */ = {
+		FA0EFF69236CC8FB00069FA8 /* Build configuration list for PBXNativeTarget "PhylloConnectModule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA0EFF6A236CC8FB00069FA8 /* Debug */,

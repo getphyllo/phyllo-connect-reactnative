@@ -20,7 +20,7 @@ type TEventType =
   | 'onExit'
   | 'onTokenExpired'
 
-const phyllo = NativeModules.PhyConnectModule
+const phyllo = NativeModules.PhylloConnectModule
 
 class PhylloConnect {
   // eventListeners: Set<EmitterSubscription>

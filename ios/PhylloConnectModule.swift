@@ -11,7 +11,7 @@ import PhylloConnect
 import React
 
 @objc(PhyConnectModule)
-public class PhyConnectModule: RCTEventEmitter {
+public class PhylloConnectModule: RCTEventEmitter {
     
     var hasObservers:Bool?
     
@@ -94,7 +94,7 @@ public class PhyConnectModule: RCTEventEmitter {
     }
 }
 
-extension PhyConnectModule : PhylloConnectDelegate {
+extension PhylloConnectModule : PhylloConnectDelegate {
   
   public func onAccountConnected(account_id: String, work_platform_id: String, user_id: String) {
     print("onAccountConnected => account_id : \(account_id),work_platform_id : \(work_platform_id),user_id : \(user_id)")

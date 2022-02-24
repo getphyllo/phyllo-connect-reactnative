@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FA0EFF5F236CC8FB00069FA8"
                BuildableName = "libPhyConnectModule.a"
-               BlueprintName = "PhyConnectModule"
+               BlueprintName = "PhylloConnectModule"
                ReferencedContainer = "container:PhyConnectModule.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -52,7 +52,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FA0EFF5F236CC8FB00069FA8"
             BuildableName = "libPhyConnectModule.a"
-            BlueprintName = "PhyConnectModule"
+            BlueprintName = "PhylloConnectModule"
             ReferencedContainer = "container:PhyConnectModule.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
