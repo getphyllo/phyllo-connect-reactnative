@@ -1,3 +1,4 @@
+// generates a random string of length <= 25, used for creating a user
 const generateRandomString = () => {
   const length = 25
   let result = ''
@@ -11,6 +12,7 @@ const generateRandomString = () => {
   return result
 }
 
+// generates a random id of length < 10, for extId, used for creating user
 const generateRandomId = () => {
   const length = 10
   return Math.floor(

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Button, Text, Alert } from 'react-native'
-import PhylloConnect, { PhylloEnvironment } from 'react-native-phyllo-connect'
+import { View, StyleSheet, Button, Alert } from 'react-native'
+import PhylloConnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
@@ -14,22 +14,27 @@ export default function TesterApp() {
   const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
+    // adding a event handler for onExit action
     const onExitWatcher = PhylloConnect.addAnEventListener(
       'onExit',
       onExitCallBack
     )
 
+    // checks the config.env and calls callback fn for changing env URL
     PhylloConnect.getPhylloEnv(config.env, onChangeURL)
 
+    // remove the event watcher
     return () => {
       onExitWatcher.remove()
     }
   }, [])
 
+  // callback function for changing env url on change
   const onChangeURL = (envURL) => {
     setEnvURL(envURL)
   }
 
+  // A callback function called upon event
   const onExitCallBack = (body) => {
     console.log('exited from the phyllo connect')
   }
@@ -40,6 +45,7 @@ export default function TesterApp() {
 
     let userId, token
     try {
+      // Create a user, SDK Token if the user is new user
       if (existingUser) {
         userId = await AsyncStorage.getItem('user-id')
         token = await AsyncStorage.getItem('user-token')
@@ -54,6 +60,7 @@ export default function TesterApp() {
         await AsyncStorage.setItem('user-token', token)
       }
 
+      // opens the sdk flow
       const phyllo = await PhylloConnect.initializePhylloConnect({
         clientDisplayName,
         token,
