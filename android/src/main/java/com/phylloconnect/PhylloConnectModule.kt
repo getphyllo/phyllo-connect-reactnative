@@ -43,7 +43,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             environment = PhylloConnect.ENVIRONMENT.DEVELOPMENT, // TODO remove
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
-                    Log.d(logTag, "onAccountConnected $accountId $platformId  $userId")
+                
                     val params = Arguments.createMap();
                     params.putString("account_id", accountId);
                     params.putString("user_id", userId);
@@ -52,35 +52,32 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                 }
 
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
-                    Log.d(logTag, "onAccountDisconnected $accountId $platformId  $userId")
-                //     WritableMap params = Arguments.createMap();
-                //   params.putString("account_id", accountId);
-                //   params.putString("user_id", userId);
-                //   params.putString("work_platform_id", platformId);
-                //   sendEvent(reactContext, "onAccountDisconnected", params);
+                    val params = Arguments.createMap();
+                    params.putString("account_id", accountId);
+                    params.putString("user_id", userId);
+                    params.putString("work_platform_id", platformId);
+                    sendEvent("onAccountDisconnected", params);
                 }
 
                 override fun onError(errorMsg: String?) {
-                    Log.d(logTag, "on Error  errorMsg")
+                    //Log.d(logTag, "on Error  errorMsg")
                 }
 
                 override fun onTokenExpired(userId: String?) {
-                    Log.d(logTag, "onTokenExpired  $userId")
-                    // WritableMap params = Arguments.createMap();
-                    // params.putString("user_id", userId);
-                    // sendEvent(reactContext, "onTokenExpired", params);
+                    val params = Arguments.createMap();
+                    params.putString("user_id", userId);
+                    sendEvent("onTokenExpired", params);
                 }
 
                 override fun onEvent(event: PhylloConnect.EVENT) {
-                    Log.d(logTag, "onEvent  $event")
+                    //Log.d(logTag, "onEvent  $event")
                 }
 
                 override fun onExit(reason:String?,userId: String?) {
-                    Log.d(logTag, "onExit $userId $reason")
-                //     WritableMap params = Arguments.createMap();
-                //   params.putString("reason", reason);
-                //   params.putString("user_id", userId);
-                //   sendEvent(reactContext, "onExit", params);
+                    val params = Arguments.createMap();
+                    params.putString("user_id", userId);
+                    params.putString("reason", reason);
+                    sendEvent("onExit", params);
                 }
             })
         }
@@ -101,6 +98,11 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         }
     }
 
+    @ReactMethod
+    public fun getPhylloEnvironmentUrl(env:String, callBack:Callback) {
+        val envUrl = getPhylloEnvironment(env).baseUrl
+        callBack.invoke(envUrl)
+    }
 
     @ReactMethod
     public fun open() {
