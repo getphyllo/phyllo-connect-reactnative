@@ -41,5 +41,10 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
     implementation "com.getphyllo:phyllo-connect:0.1.13"
-
+    
+    def retrofit_version = "2.6.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }
