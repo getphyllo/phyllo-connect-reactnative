@@ -1,4 +1,4 @@
-import { PhylloEnvironment } from 'react-native-phyllo-connect'
+import { PhylloEnvironment } from 'phyllo-connect-react-native'
 
 const config = {
   clientId: '2778c997-f4bc-401d-95c4-6f2178b85404',
