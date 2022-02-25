@@ -43,10 +43,20 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
                     Log.d(logTag, "onAccountConnected $accountId $platformId  $userId")
+                    WritableMap params = Arguments.createMap();
+                    params.putString("account_id", accountId);
+                    params.putString("user_id", userId);
+                    params.putString("work_platform_id", platformId);
+                    sendEvent(reactContext, "onAccountConnected", params);
                 }
 
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
                     Log.d(logTag, "onAccountDisconnected $accountId $platformId  $userId")
+                    WritableMap params = Arguments.createMap();
+                  params.putString("account_id", accountId);
+                  params.putString("user_id", userId);
+                  params.putString("work_platform_id", platformId);
+                  sendEvent(reactContext, "onAccountDisconnected", params);
                 }
 
                 override fun onError(errorMsg: String?) {
@@ -55,6 +65,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
                 override fun onTokenExpired(userId: String?) {
                     Log.d(logTag, "onTokenExpired  $userId")
+                    WritableMap params = Arguments.createMap();
+                    params.putString("user_id", userId);
+                    sendEvent(reactContext, "onTokenExpired", params);
                 }
 
                 override fun onEvent(event: PhylloConnect.EVENT) {
@@ -63,10 +76,53 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
                 override fun onExit(reason:String?,userId: String?) {
                     Log.d(logTag, "onExit $userId $reason")
+                    WritableMap params = Arguments.createMap();
+                  params.putString("reason", reason);
+                  params.putString("user_id", userId);
+                  sendEvent(reactContext, "onExit", params);
                 }
             })
             PhylloConnect.open()
         }
+    }
+
+    private fun getPhylloEnvironment(env: String): PhylloConnect.ENVIRONMENT {
+        return when (env) {
+            "development" -> {
+                return PhylloConnect.ENVIRONMENT.DEVELOPMENT
+            }
+            "sandbox" -> {
+                return PhylloConnect.ENVIRONMENT.SANDBOX
+            }
+            "production" -> {
+                return PhylloConnect.ENVIRONMENT.PRODUCTION
+            }
+            else -> PhylloConnect.ENVIRONMENT.DEVELOPMENT
+        }
+    }
+
+
+    @ReactMethod
+    public fun open() {
+        Log.d(logTag,"Open Phyllo Connect Sdk")
+        PhylloConnect.open()
+    } 
+  
+    private fun sendEvent(reactContext:ReactContext,
+                    eventName:String,
+                    params:WritableMap) {
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
+  
+     // Required for rn built in EventEmitter Calls.
+    @ReactMethod
+    public fun addListener(eventName:String) {
+        Log.d("eventName",eventName);
+     }
+
+    @ReactMethod
+    public fun removeListeners(count:Integer) {
+    //Log.d("removeListeners",count);
     }
 
 }
