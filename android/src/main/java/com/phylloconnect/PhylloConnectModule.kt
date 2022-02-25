@@ -27,6 +27,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
     val logTag: String = "PhylloConnectModule"
 
+    //TODO remove
     override fun getConstants(): MutableMap<String, Any> {
         return hashMapOf("count" to 1)
     }
@@ -39,24 +40,24 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             userId = userId,
             token = token,
             platformId = platformId,
-            environment = PhylloConnect.ENVIRONMENT.DEVELOPMENT,
+            environment = PhylloConnect.ENVIRONMENT.DEVELOPMENT, // TODO remove
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
                     Log.d(logTag, "onAccountConnected $accountId $platformId  $userId")
-                    WritableMap params = Arguments.createMap();
+                    val params = Arguments.createMap();
                     params.putString("account_id", accountId);
                     params.putString("user_id", userId);
                     params.putString("work_platform_id", platformId);
-                    sendEvent(reactContext, "onAccountConnected", params);
+                    sendEvent("onAccountConnected", params);
                 }
 
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
                     Log.d(logTag, "onAccountDisconnected $accountId $platformId  $userId")
-                    WritableMap params = Arguments.createMap();
-                  params.putString("account_id", accountId);
-                  params.putString("user_id", userId);
-                  params.putString("work_platform_id", platformId);
-                  sendEvent(reactContext, "onAccountDisconnected", params);
+                //     WritableMap params = Arguments.createMap();
+                //   params.putString("account_id", accountId);
+                //   params.putString("user_id", userId);
+                //   params.putString("work_platform_id", platformId);
+                //   sendEvent(reactContext, "onAccountDisconnected", params);
                 }
 
                 override fun onError(errorMsg: String?) {
@@ -65,9 +66,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
                 override fun onTokenExpired(userId: String?) {
                     Log.d(logTag, "onTokenExpired  $userId")
-                    WritableMap params = Arguments.createMap();
-                    params.putString("user_id", userId);
-                    sendEvent(reactContext, "onTokenExpired", params);
+                    // WritableMap params = Arguments.createMap();
+                    // params.putString("user_id", userId);
+                    // sendEvent(reactContext, "onTokenExpired", params);
                 }
 
                 override fun onEvent(event: PhylloConnect.EVENT) {
@@ -76,10 +77,10 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
                 override fun onExit(reason:String?,userId: String?) {
                     Log.d(logTag, "onExit $userId $reason")
-                    WritableMap params = Arguments.createMap();
-                  params.putString("reason", reason);
-                  params.putString("user_id", userId);
-                  sendEvent(reactContext, "onExit", params);
+                //     WritableMap params = Arguments.createMap();
+                //   params.putString("reason", reason);
+                //   params.putString("user_id", userId);
+                //   sendEvent(reactContext, "onExit", params);
                 }
             })
         }
@@ -107,10 +108,11 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         PhylloConnect.open()
     } 
   
-    private fun sendEvent(reactContext:ReactContext,
+    private fun sendEvent(
                     eventName:String,
-                    params:WritableMap) {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+                    params:WritableMap?) {
+        //reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+        reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, params)
     }
   
      // Required for rn built in EventEmitter Calls.

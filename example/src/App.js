@@ -17,29 +17,29 @@ export default function ExampleApp() {
   const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    // // checks the config.env and calls callback fn for changing env URL
-    // phylloConnect.getPhylloEnv(config.env, onChangeURL)
-    // // adding a event handler for onExit action
-    // const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
-    // const onAccountConnected = phylloConnect.addAnEventListener(
-    //   'onAccountConnected',
-    //   onAccountConnectedCallBack
-    // )
-    // const onAccountDisconnected = phylloConnect.addAnEventListener(
-    //   'onAccountDisconnected',
-    //   onAccountDisconnectedCallBack
-    // )
-    // const onTokenExpired = phylloConnect.addAnEventListener(
-    //   'onTokenExpired',
-    //   onTokenExpiredCallBack
-    // )
-    // // remove the event watcher
-    // return () => {
-    //   onExit.remove()
-    //   onAccountConnected.remove()
-    //   onAccountDisconnected.remove()
-    //   onTokenExpired.remove()
-    // }
+    // checks the config.env and calls callback fn for changing env URL
+    //phylloConnect.getPhylloEnv(config.env, onChangeURL)
+    // adding a event handler for onExit action
+    const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
+    const onAccountConnected = phylloConnect.addAnEventListener(
+      'onAccountConnected',
+      onAccountConnectedCallBack
+    )
+    const onAccountDisconnected = phylloConnect.addAnEventListener(
+      'onAccountDisconnected',
+      onAccountDisconnectedCallBack
+    )
+    const onTokenExpired = phylloConnect.addAnEventListener(
+      'onTokenExpired',
+      onTokenExpiredCallBack
+    )
+    // remove the event watcher
+    return () => {
+      onExit.remove()
+      onAccountConnected.remove()
+      onAccountDisconnected.remove()
+      onTokenExpired.remove()
+    }
     console.log(phylloConnect.initialize, 'what is initialize')
   }, [])
 
@@ -77,8 +77,8 @@ export default function ExampleApp() {
           return
         }
       } else {
-        userId = await createUser(clientDisplayName, externalId, envURL)
-        token = await createUserToken(userId, envURL)
+        userId = await createUser(clientDisplayName, externalId, 'https://api.dev.getphyllo.com')
+        token = await createUserToken(userId, 'https://api.dev.getphyllo.com')
         await AsyncStorage.setItem('user-id', userId)
         await AsyncStorage.setItem('user-token', token)
       }
@@ -89,7 +89,7 @@ export default function ExampleApp() {
         token,
         userId,
         platformId,
-        env: config.env,
+        env: 'development',
       })
 
       const open = phylloConnect.open()
