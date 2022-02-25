@@ -7,6 +7,9 @@
   "author": "Phyllo <phyl@getphyllo.com>",
   "license": "MIT",
   "main": "./lib/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/getphyllo/react-native-phyllo-connect-sdk/issues"
+  },
   "files": [
     "android",
     "ios",

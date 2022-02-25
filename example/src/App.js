@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Button, Alert } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Text,
+  Platform,
+} from 'react-native'
 import PhylloConnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -7,18 +14,15 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { createUser, createUserToken } from './APIHandler'
 
 import config from './config'
-import { generateRandomString, generateRandomId } from './randomGenerator'
+import { generateRandomString } from './randomGenerator'
 
 // create a new instance for PhylloConnect
 const phylloConnect = new PhylloConnect()
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
-  const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    // checks the config.env and calls callback fn for changing env URL
-    //phylloConnect.getPhylloEnv(config.env, onChangeURL)
     // adding a event handler for onExit action
     const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
     const onAccountConnected = phylloConnect.addAnEventListener(
@@ -40,13 +44,7 @@ export default function ExampleApp() {
       onAccountDisconnected.remove()
       onTokenExpired.remove()
     }
-    console.log(phylloConnect.initialize, 'what is initialize')
   }, [])
-
-  // callback function for changing env url on change
-  const onChangeURL = (envURL) => {
-    setEnvURL(envURL)
-  }
 
   // A callback function called upon event
   const onExitCallBack = (body) => {
@@ -63,8 +61,8 @@ export default function ExampleApp() {
   }
 
   const onPressButton = async (platformId) => {
-    const clientDisplayName = generateRandomString()
-    const externalId = generateRandomId()
+    const clientDisplayName = 'App name'
+    const externalId = generateRandomString(20)
 
     let userId, token
     try {
@@ -77,8 +75,8 @@ export default function ExampleApp() {
           return
         }
       } else {
-        userId = await createUser(clientDisplayName, externalId, 'https://api.dev.getphyllo.com')
-        token = await createUserToken(userId, 'https://api.dev.getphyllo.com')
+        userId = await createUser(generateRandomString(8), externalId)
+        token = await createUserToken(userId)
         await AsyncStorage.setItem('user-id', userId)
         await AsyncStorage.setItem('user-token', token)
       }
@@ -89,11 +87,10 @@ export default function ExampleApp() {
         token,
         userId,
         platformId,
-        env: 'development',
+        env: config.env,
       })
 
       const open = phylloConnect.open()
-      console.log(open, 'this is phyllo connect open()')
     } catch (e) {
       Alert.alert(e.message)
       console.log(e)
@@ -101,18 +98,25 @@ export default function ExampleApp() {
   }
   return (
     <View style={styles.containerStyle}>
-      <Button
+      <TouchableOpacity
         onPress={() => onPressButton('')}
-        title='Connect Platform Account(s)'
-      ></Button>
-      <Button
+        style={styles.buttonStyle}
+      >
+        <Text style={styles.buttonText}>Connect Platform Account(s)</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => onPressButton('9bb8913b-ddd9-430b-a66a-d74d846e6c66')}
-        title='Connect Instagram using Phyllo'
-      ></Button>
-      <Button
+        style={styles.buttonStyle}
+      >
+        <Text style={styles.buttonText}>Connect Instagram using Phyllo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => onPressButton('14d9ddf5-51c6-415e-bde6-f8ed36ad7054')}
-        title='Connect YouTube using Phyllo'
-      ></Button>
+        style={styles.buttonStyle}
+        underlayColor='#fff'
+      >
+        <Text style={styles.buttonText}>Connect YouTube using Phyllo</Text>
+      </TouchableOpacity>
 
       <BouncyCheckbox
         fillColor='green'
@@ -124,18 +128,51 @@ export default function ExampleApp() {
         textStyle={{
           textDecorationLine: 'none',
         }}
+        style={styles.checkboxStyle}
       />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  buttonStyle:
+    Platform.OS === 'android'
+      ? {
+          marginVertical: 30,
+          paddingBottom: 10,
+          backgroundColor: '#524FA1',
+          borderColor: '#524FA1',
+          height: 40,
+          display: 'flex',
+          justifyContent: 'center',
+        }
+      : {
+          paddingBottom: 10,
+          backgroundColor: '#524FA1',
+          borderColor: '#524FA1',
+          height: 50,
+          display: 'flex',
+          justifyContent: 'center',
+        },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontWeight: 'bold',
+  },
   containerStyle: {
     display: 'flex',
     flex: 0.5,
     margin: 10,
     justifyContent: 'space-around',
-    alignItems: 'center',
+    paddingHorizontal: 40,
     paddingVertical: 150,
   },
+  checkboxStyle:
+    Platform.OS === 'android'
+      ? {
+          marginTop: 30,
+        }
+      : {},
 })

@@ -17,9 +17,6 @@ type TEventType =
   | 'onTokenExpired'
 
 const phyllo = NativeModules.PhylloConnectModule
-// console.clear()
-console.log('-'.repeat(50))
-console.log(phyllo, "phyllo's value")
 
 class PhylloConnectSDK {
   // eventListeners: Set<EmitterSubscription>
@@ -31,10 +28,6 @@ class PhylloConnectSDK {
   addAnEventListener = (event: TEventType, callback: (body?: any) => {}) => {
     // return the event, let the user handle it
     return this.eventEmitter.addListener(event, callback)
-  }
-  getPhylloEnv = (env: string, callback: (body?: any) => {}) => {
-    console.log(env, callback)
-    phyllo.getPhylloEnvironmentUrl(env, callback)
   }
 
   open = () => {
@@ -49,9 +42,8 @@ class PhylloConnectSDK {
     platformId = undefined,
   }: IPhylloInitialize) => {
     try {
-      console.log(clientDisplayName, 'appName', token, userId, env, platformId)
       const result = await phyllo.initialize(
-        'appName',
+        clientDisplayName,
         token,
         userId,
         env,

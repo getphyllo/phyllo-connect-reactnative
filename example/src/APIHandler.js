@@ -5,6 +5,7 @@ import config from './config'
 // endpoints
 const CREATE_USER_TOKEN_ENDPOINT = '/v1/sdk-tokens'
 const CREATE_USER_ENDPOINT = '/v1/users'
+const BASE_URL = 'https://api.dev.getphyllo.com'
 
 // React-Native doesn't have a atob(decoding) and btoa(encoding) in its global object.
 // Which is used by axios to create a http request
@@ -17,9 +18,10 @@ if (!global.atob) {
   global.atob = decode
 }
 
-const getAxiosInstance = (baseURL) => {
+// create axios base
+const getAxiosInstance = () => {
   const api = axios.create({
-    baseURL,
+    baseURL: BASE_URL,
     auth: {
       username: config.clientId,
       password: config.clientSecret,
@@ -29,10 +31,9 @@ const getAxiosInstance = (baseURL) => {
 }
 
 // creates a user, https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user
-export const createUser = async (name, externalId, envURL) => {
+export const createUser = async (name, externalId) => {
   try {
-    const api = getAxiosInstance(envURL)
-    console.log('api instance', api)
+    const api = getAxiosInstance()
 
     let response = await api.post(CREATE_USER_ENDPOINT, {
       name,
@@ -46,18 +47,17 @@ export const createUser = async (name, externalId, envURL) => {
 }
 
 // creates a sdk token, https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token
-export const createUserToken = async (userId, envURL) => {
+export const createUserToken = async (userId) => {
   if (!userId) {
     let err = new Error('User id cannot be blank or null')
     throw err
   }
   try {
-    const api = getAxiosInstance(envURL)
+    const api = getAxiosInstance()
     let response = await api.post(CREATE_USER_TOKEN_ENDPOINT, {
       user_id: userId,
       products: ['IDENTITY', 'ENGAGEMENT', 'INCOME'],
     })
-    console.log('TokenResponse', response.data)
     return response.data.sdk_token
   } catch (err) {
     throw err
