@@ -17,31 +17,30 @@ export default function ExampleApp() {
   const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    // checks the config.env and calls callback fn for changing env URL
-    phylloConnect.getPhylloEnv(config.env, onChangeURL)
-
-    // adding a event handler for onExit action
-    const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
-    const onAccountConnected = phylloConnect.addAnEventListener(
-      'onAccountConnected',
-      onAccountConnectedCallBack
-    )
-    const onAccountDisconnected = phylloConnect.addAnEventListener(
-      'onAccountDisconnected',
-      onAccountDisconnectedCallBack
-    )
-    const onTokenExpired = phylloConnect.addAnEventListener(
-      'onTokenExpired',
-      onTokenExpiredCallBack
-    )
-
-    // remove the event watcher
-    return () => {
-      onExit.remove()
-      onAccountConnected.remove()
-      onAccountDisconnected.remove()
-      onTokenExpired.remove()
-    }
+    // // checks the config.env and calls callback fn for changing env URL
+    // phylloConnect.getPhylloEnv(config.env, onChangeURL)
+    // // adding a event handler for onExit action
+    // const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
+    // const onAccountConnected = phylloConnect.addAnEventListener(
+    //   'onAccountConnected',
+    //   onAccountConnectedCallBack
+    // )
+    // const onAccountDisconnected = phylloConnect.addAnEventListener(
+    //   'onAccountDisconnected',
+    //   onAccountDisconnectedCallBack
+    // )
+    // const onTokenExpired = phylloConnect.addAnEventListener(
+    //   'onTokenExpired',
+    //   onTokenExpiredCallBack
+    // )
+    // // remove the event watcher
+    // return () => {
+    //   onExit.remove()
+    //   onAccountConnected.remove()
+    //   onAccountDisconnected.remove()
+    //   onTokenExpired.remove()
+    // }
+    console.log(phylloConnect.initialize, 'what is initialize')
   }, [])
 
   // callback function for changing env url on change
