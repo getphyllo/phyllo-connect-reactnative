@@ -3,7 +3,7 @@ import { NativeModules, NativeEventEmitter, Platform } from 'react-native'
 import { PhylloEnvironment } from './PhylloEnvironment'
 
 interface IPhylloInitialize {
-  appName: string
+  clientDisplayName: string
   token: string
   userId: string
   env: PhylloEnvironment
@@ -42,15 +42,16 @@ class PhylloConnectSDK {
   }
 
   initialize = async ({
-    appName,
+    clientDisplayName,
     token,
     userId,
     env,
     platformId = undefined,
   }: IPhylloInitialize) => {
     try {
+      console.log(clientDisplayName, 'appName', token, userId, env, platformId)
       const result = await phyllo.initialize(
-        appName,
+        'appName',
         token,
         userId,
         env,
