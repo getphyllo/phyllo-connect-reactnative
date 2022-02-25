@@ -40,7 +40,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             userId = userId,
             token = token,
             platformId = platformId,
-            environment = PhylloConnect.ENVIRONMENT.DEVELOPMENT, // TODO remove
+            environment = getPhylloEnvironment(environment), // TODO remove
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
                 
