@@ -4,6 +4,8 @@ import com.getphyllo.*
 import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+
 
 class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -14,7 +16,8 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     override fun getConstants(): MutableMap<String, Any> {
         return hashMapOf("count" to 1)
     }
-
+    
+    @ReactMethod
     public fun initialize(name: String, userId: String, token: String, platformId: String? = "") {
 
         PhylloConnect.initialize(context = reactApplicationContext,
