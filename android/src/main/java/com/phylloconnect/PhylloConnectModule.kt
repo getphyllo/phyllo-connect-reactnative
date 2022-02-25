@@ -82,7 +82,6 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                   sendEvent(reactContext, "onExit", params);
                 }
             })
-            PhylloConnect.open()
         }
     }
 
