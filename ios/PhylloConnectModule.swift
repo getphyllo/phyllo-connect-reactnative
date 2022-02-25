@@ -10,7 +10,7 @@ import Foundation
 import PhylloConnect
 import React
 
-@objc(PhyConnectModule)
+@objc(PhylloConnectModule)
 public class PhylloConnectModule: RCTEventEmitter {
     
     var hasObservers:Bool?

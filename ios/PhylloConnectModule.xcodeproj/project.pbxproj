@@ -75,7 +75,7 @@
 			dependencies = (
 			);
 			name = PhylloConnectModule;
-			productName = PhyConnectModule;
+			productName = PhylloConnectModule;
 			productReference = FA0EFF60236CC8FB00069FA8 /* libPhylloConnectModule.a */;
 			productType = "com.apple.product-type.library.static";
 		};
@@ -256,7 +256,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "PhyConnectModule-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhylloConnectModule-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -281,7 +281,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "PhyConnectModule-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhylloConnectModule-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
