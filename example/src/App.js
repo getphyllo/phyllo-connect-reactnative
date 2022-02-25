@@ -9,26 +9,39 @@ import { createUser, createUserToken } from './APIHandler'
 import config from './config'
 import { generateRandomString, generateRandomId } from './randomGenerator'
 
-export default function ExampleApp() {
+// create a new instance for PhylloConnect
+const phylloConnect = new PhylloConnect()
 
+export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
   const [envURL, setEnvURL] = useState('')
 
   useEffect(() => {
-    console.log(PhylloConnect, 'this is Phyllo Connect')
-    console.log(PhylloConnect.getPhylloEnv)
-    // // adding a event handler for onExit action
-    const onExit = PhylloConnect.addAnEventListener(
-      'onExit',
-      onExitCallBack
+    // checks the config.env and calls callback fn for changing env URL
+    phylloConnect.getPhylloEnv(config.env, onChangeURL)
+
+    // adding a event handler for onExit action
+    const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
+    const onAccountConnected = phylloConnect.addAnEventListener(
+      'onAccountConnected',
+      onAccountConnectedCallBack
     )
-    // // checks the config.env and calls callback fn for changing env URL
-    PhylloConnect.getPhylloEnv(config.env, onChangeURL)
-    // // remove the event watcher
+    const onAccountDisconnected = phylloConnect.addAnEventListener(
+      'onAccountDisconnected',
+      onAccountDisconnectedCallBack
+    )
+    const onTokenExpired = phylloConnect.addAnEventListener(
+      'onTokenExpired',
+      onTokenExpiredCallBack
+    )
+
+    // remove the event watcher
     return () => {
       onExit.remove()
+      onAccountConnected.remove()
+      onAccountDisconnected.remove()
+      onTokenExpired.remove()
     }
-    
   }, [])
 
   // callback function for changing env url on change
@@ -38,10 +51,17 @@ export default function ExampleApp() {
 
   // A callback function called upon event
   const onExitCallBack = (body) => {
-    console.log('exited from the phyllo connect')
+    console.log('Exited from phyllo flow')
   }
-
-
+  const onAccountConnectedCallBack = (body) => {
+    console.log('Account got connected')
+  }
+  const onAccountDisconnectedCallBack = (body) => {
+    console.log('Account got disconnected')
+  }
+  const onTokenExpiredCallBack = (body) => {
+    console.log('The token got expired')
+  }
 
   const onPressButton = async (platformId) => {
     const clientDisplayName = generateRandomString()
@@ -65,17 +85,18 @@ export default function ExampleApp() {
       }
 
       // opens the sdk flow
-      PhylloConnect.initialize({
+      await phylloConnect.initialize({
         clientDisplayName,
         token,
         userId,
         platformId,
         env: config.env,
       })
-      //PhylloConnect.open()
-    
+
+      const open = phylloConnect.open()
+      console.log(open, 'this is phyllo connect open()')
     } catch (e) {
-      Alert.alert('Unable to connect platforms')
+      Alert.alert(e.message)
       console.log(e)
     }
   }

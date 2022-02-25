@@ -16,14 +16,12 @@ type TEventType =
   | 'onExit'
   | 'onTokenExpired'
 
-const phyllo =
-  Platform.OS === 'ios'
-    ? NativeModules.PhylloConnectModule
-    : NativeModules.PhylloConnectModule
-
+const phyllo = NativeModules.PhylloConnectModule
+// console.clear()
+console.log('-'.repeat(50))
 console.log(phyllo, "phyllo's value")
 
-export class PhylloConnectSDK {
+class PhylloConnectSDK {
   // eventListeners: Set<EmitterSubscription>
   eventEmitter: NativeEventEmitter
   constructor() {
@@ -36,7 +34,11 @@ export class PhylloConnectSDK {
   }
   getPhylloEnv = (env: string, callback: (body?: any) => {}) => {
     console.log(env, callback)
-    // phyllo.getPhylloEnvironmentUrl(env, callback)
+    phyllo.getPhylloEnvironmentUrl(env, callback)
+  }
+
+  open = () => {
+    phyllo.open()
   }
 
   initialize = async ({
@@ -47,17 +49,20 @@ export class PhylloConnectSDK {
     platformId = undefined,
   }: IPhylloInitialize) => {
     try {
-      const result = phyllo.initialize(appName, token, userId, env, platformId)
+      const result = await phyllo.initialize(
+        appName,
+        token,
+        userId,
+        env,
+        platformId
+      )
       return result
     } catch (err) {
       throw err
     }
   }
-
-
-
 }
 
-const PhylloConnect = new PhylloConnectSDK()
+// const PhylloConnect = new PhylloConnectSDK()
 // create a new object and export
-export default PhylloConnect
+export default PhylloConnectSDK
