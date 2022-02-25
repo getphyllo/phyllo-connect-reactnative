@@ -1,10 +1,3 @@
-//
-//  PhyConnectModule.m
-//  PhyConnectModule
-//
-//  Copyright © 2022 Pankaj Patel. All rights reserved.
-//
-
 #import <React/RCTBridgeModule.h>
 
 @interface RCT_EXTERN_MODULE(PhylloConnectModule, NSObject)

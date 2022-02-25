@@ -2,7 +2,7 @@
 //  PhyConnectModule.swift
 //  PhyConnectModule
 //
-//  Copyright © 2022 Pankaj Patel. All rights reserved.
+//  Copyright © 2022 Phyllo. All rights reserved.
 //
 
 
