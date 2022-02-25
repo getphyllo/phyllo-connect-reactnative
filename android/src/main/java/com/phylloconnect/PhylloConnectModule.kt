@@ -98,12 +98,8 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         }
     }
 
-    @ReactMethod
-    public fun getPhylloEnvironmentUrl(env:String, callBack:Callback) {
-        val envUrl = getPhylloEnvironment(env).baseUrl
-        callBack.invoke(envUrl)
-    }
 
+    
     @ReactMethod
     public fun open() {
         Log.d(logTag,"Open Phyllo Connect Sdk")
