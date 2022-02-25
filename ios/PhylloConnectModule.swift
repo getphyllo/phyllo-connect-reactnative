@@ -14,7 +14,7 @@ import React
 public class PhylloConnectModule: RCTEventEmitter {
     
     var hasObservers:Bool?
-    
+    var phylloConfig = PhylloConfig()
     
     override public func supportedEvents() -> [String]! {
         //I will be honest, I am sending these events from DeviceManager.swift, but react native's packager gripes if I dont put the events that DeviceManager.swift is sending through the rootView's bridge here
@@ -47,19 +47,26 @@ public class PhylloConnectModule: RCTEventEmitter {
         debugPrint("start initialize ..........")
         
         DispatchQueue.main.async {
-            var phylloConfig = PhylloConfig()
+          
             phylloConfig.clientDisplayName = clientDisplayName
             phylloConfig.token = "Bearer \(token)"
             phylloConfig.userId = userId
             phylloConfig.environment = self.getEnvironment(env: environment)
             phylloConfig.workPlatformId = workPlatformId
             PhylloConnect.shared.initialize(config: phylloConfig)
+        }
+    }
+
+   @objc(open)
+    func open() {
+        debugPrint("start open ..........")
+        DispatchQueue.main.async {
             PhylloConnect.shared.phylloConnectDelegate = self
             PhylloConnect.shared.open()
         }
     }
-
     
+
 
     @objc(getPhylloEnvironmentUrl::)
     func getPhylloEnvironmentUrl(env:String , _ callback: RCTResponseSenderBlock) -> Void {

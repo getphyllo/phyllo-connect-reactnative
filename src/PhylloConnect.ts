@@ -38,7 +38,8 @@ export class PhylloConnectSDK {
     console.log(env, callback)
     // phyllo.getPhylloEnvironmentUrl(env, callback)
   }
-  initializePhylloConnect = async ({
+
+  initialize = async ({
     appName,
     token,
     userId,
@@ -52,6 +53,9 @@ export class PhylloConnectSDK {
       throw err
     }
   }
+
+
+
 }
 
 const PhylloConnect = new PhylloConnectSDK()

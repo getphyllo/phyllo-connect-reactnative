@@ -8,8 +8,9 @@ import { createUser, createUserToken } from './APIHandler'
 
 import config from './config'
 import { generateRandomString, generateRandomId } from './randomGenerator'
-console.log(PhylloConnect)
-export default function TesterApp() {
+
+export default function ExampleApp() {
+
   const [existingUser, setExistingUser] = useState(false)
   const [envURL, setEnvURL] = useState('')
 
@@ -17,16 +18,17 @@ export default function TesterApp() {
     console.log(PhylloConnect, 'this is Phyllo Connect')
     console.log(PhylloConnect.getPhylloEnv)
     // // adding a event handler for onExit action
-    // const onExitWatcher = PhylloConnect.addAnEventListener(
-    //   'onExit',
-    //   onExitCallBack
-    // )
+    const onExit = PhylloConnect.addAnEventListener(
+      'onExit',
+      onExitCallBack
+    )
     // // checks the config.env and calls callback fn for changing env URL
     PhylloConnect.getPhylloEnv(config.env, onChangeURL)
     // // remove the event watcher
-    // return () => {
-    //   onExitWatcher.remove()
-    // }
+    return () => {
+      onExit.remove()
+    }
+    
   }, [])
 
   // callback function for changing env url on change
@@ -38,6 +40,8 @@ export default function TesterApp() {
   const onExitCallBack = (body) => {
     console.log('exited from the phyllo connect')
   }
+
+
 
   const onPressButton = async (platformId) => {
     const clientDisplayName = generateRandomString()
@@ -61,14 +65,15 @@ export default function TesterApp() {
       }
 
       // opens the sdk flow
-      const phyllo = await PhylloConnect.initializePhylloConnect({
+      PhylloConnect.initialize({
         clientDisplayName,
         token,
         userId,
         platformId,
         env: config.env,
       })
-      // phyllo.open()
+      //PhylloConnect.open()
+    
     } catch (e) {
       Alert.alert('Unable to connect platforms')
       console.log(e)
