@@ -2,45 +2,27 @@
 
 ## Getting Started
 
+Clone this example from github and move inside example project. Install all dependencies using
+
 ```bash
-yarn
+npm install
 ```
 
-for iOS:
+This project uses some dependencies for iOS which you can install by:
 
 ```bash
-npx pod-install
+cd ios && pod install
 ```
 
 To run the app use:
 
 ```bash
-yarn ios
+// to run on IOS
+npm run ios
+
+// to run on android
+npm run android
+
+// to run server
+npm start
 ```
-
-or
-
-```bash
-yarn android
-```
-
-## Updating project
-
-1. Remove current `example` project
-2. Create a project named `example` using [react-native-better-template](https://github.com/demchenkoalex/react-native-better-template)
-3. Revert `README.md` so you can see this guide
-4. In `tsconfig.json` add
-
-```json
-"baseUrl": ".",
-"paths": {
-  "react-native-module-template": ["../src"]
-},
-```
-
-5. Check the difference in `metro.config.js` and combine all
-6. Revert `App.tsx`
-7. Check the difference in `settings.gradle` and combine all
-8. Check the difference in `android/app/build.gradle` and combine all
-9. Check the difference in `MainApplication.kt` and combine all
-10. Open new `example` project in Xcode, right click on the `Libraries` folder, select "Add Files to". Navigate to the library root, `ios` folder, select `RNModuleTemplateModule.xcodeproj`. Deselect "Copy items if needed", click add. Go to the `Build Phases` of the `example` target, "Link Binary with Libraries", click +, search for the `libRNModuleTemplateModule.a`, click add.
