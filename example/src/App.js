@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import PhylloConnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Toast from 'react-native-simple-toast'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { createUser, createUserToken } from './APIHandler'
@@ -49,15 +50,19 @@ export default function ExampleApp() {
   // A callback function called upon event
   const onExitCallBack = (body) => {
     console.log('Exited from phyllo flow')
+    Toast.show('Exited from phyllo flow')
   }
   const onAccountConnectedCallBack = (body) => {
-    console.log('Account got connected')
+    Toast.show('Account has connected')
+    console.log('Account has connected')
   }
   const onAccountDisconnectedCallBack = (body) => {
-    console.log('Account got disconnected')
+    console.log('Account has disconnected')
+    Toast.show('Account has disconnected')
   }
   const onTokenExpiredCallBack = (body) => {
-    console.log('The token got expired')
+    console.log('The token has expired')
+    Toast.show('The token has expired')
   }
 
   const onPressButton = async (platformId) => {
@@ -145,6 +150,7 @@ const styles = StyleSheet.create({
           height: 40,
           display: 'flex',
           justifyContent: 'center',
+          borderRadius: 5,
         }
       : {
           paddingBottom: 10,
@@ -153,6 +159,7 @@ const styles = StyleSheet.create({
           height: 50,
           display: 'flex',
           justifyContent: 'center',
+          borderRadius: 5,
         },
   buttonText: {
     color: '#fff',
@@ -163,7 +170,7 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     display: 'flex',
-    flex: 0.5,
+    flex: 0.6,
     margin: 10,
     justifyContent: 'space-around',
     paddingHorizontal: 40,

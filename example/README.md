@@ -45,4 +45,6 @@ npm run ios
 npm run android
 ```
 
+### Quick look
+
 Are you facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
