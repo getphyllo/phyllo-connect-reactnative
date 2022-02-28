@@ -6,18 +6,11 @@
   Sample application
 </h1>
 
-## 📋Requirements
+## 📋 Requirements
 
 To get started, you will require the client ID and secret to access the Phyllo environment. To get your API credentials, please reach out at contact@getphyllo.com.
 
-Add your `client id` and `secret` in .env file
-
-```
-CLIENT_ID="YOUR-CLIENT-ID"
-CLIENT_SECRET="YOUR-CLIENT-SECRET"
-```
-
-## Getting Started
+## 🏁 Getting Started
 
 ### Install the application in your local system
 
@@ -35,16 +28,25 @@ npm install
 cd ios && pod install
 ```
 
-### 🚀 To launch the application, run the following commands in example folder:
+### 🔑 Add your client ID and secrets to `example/.env` file
 
-```bash
-// to run on IOS
-npm run ios
-
-// to run on android
-npm run android
+```
+CLIENT_ID="YOUR-CLIENT-ID"
+CLIENT_SECRET="YOUR-CLIENT-SECRET"
 ```
 
-### Quick look
+### 🚀 To launch the application, run the following commands in example folder:
+
+To run in iOS platform
+
+```bash
+npm run ios
+```
+
+To run in Android platform
+
+```bash
+npm run android
+```
 
 Are you facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)

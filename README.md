@@ -19,12 +19,6 @@ Installing via npm
 npm install phyllo-connect-react-native
 ```
 
-Installing via yarn
-
-```sh
-yarn add phyllo-connect-react-native
-```
-
 Install iOS dependencies using pods
 
 ```sh
