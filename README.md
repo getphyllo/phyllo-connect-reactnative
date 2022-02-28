@@ -11,7 +11,7 @@
 
 </div>
 
-### Install using npm
+## Configuring the SDK
 
 Installing via npm
 
@@ -25,17 +25,15 @@ Installing via yarn
 yarn add phyllo-connect-react-native
 ```
 
-This will bring all dependencies to your project.
-
-This package uses some dependencies to work, which you can install using
+Install iOS dependencies using pods
 
 ```sh
 cd ios && pod install
 ```
 
-### Using Phyllo-connect-react-native-sdk in your project
+## Using Phyllo-connect-react-native-sdk in your project
 
-Import and create an instace
+### Import and create an instace
 
 ```sh
 // import the PhylloConnect to your application
@@ -45,7 +43,7 @@ import PhylloConnect from 'phyllo-connect-react-native'
 const phylloConnect = new PhylloConnect()
 ```
 
-Subscribing to events
+### Subscribing to events
 
 ```sh
 // Subscribe to an event by passing a callback
@@ -57,15 +55,15 @@ eventWatcher.remove()
 
 here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
 
-Creating a user and token for a user\
+Creating a user and token for a user
 
 - [Check this document on creating a user](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user)
-- [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)\
+- [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)
 
-To open the SDK flow
+### Open Phyllo SDK flow
 
 ```sh
-phylloConnect.initialize({ AppName: clientName, userId: userId, token: userToken, platformId: platformId, env: environmenType})
+phylloConnect.initialize({ AppName, userId, token, platformId, env});
 ```
 
 | Arguments  | Value                  | Type                                       |
@@ -75,3 +73,5 @@ phylloConnect.initialize({ AppName: clientName, userId: userId, token: userToken
 | token      | User Token             | String                                     |
 | platformId | Platform Id            | String or Undefined                        |
 | env        | Development Environmen | "development" or "production" or "sandbox" |
+
+Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
