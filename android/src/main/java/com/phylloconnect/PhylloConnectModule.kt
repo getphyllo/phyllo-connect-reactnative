@@ -45,6 +45,14 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     sendEvent("onAccountConnected", params);
                 }
 
+                override fun onError(errorMsg: String?) {
+
+                }
+
+                override fun onEvent(event: PhylloConnect.EVENT) {
+
+                }
+
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
                     val params = Arguments.createMap();
                     params.putString("account_id", accountId);
