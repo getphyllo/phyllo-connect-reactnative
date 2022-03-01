@@ -5,6 +5,7 @@
   <br>
   Sample application
 </h1>
+<p align="center">Sample apps using the Phyllo connect React Native SDK on both iOS and Android.</p>
 
 ## 📋 Requirements
 
@@ -30,6 +31,8 @@ cd ios && pod install
 
 ### 🔑 Add your client ID and secrets to `example/.env` file
 
+> Assuming you have a client ID and secret, if not reach out at contact@getphyllo.com
+
 Set the environment to `development` or `production` or `sandbox`
 
 ```
@@ -40,16 +43,17 @@ ENVIRONMENT="YOUR-DEV-ENVIRONMENT"
 
 ### 🚀 To launch the application, run the following commands in example folder:
 
-To run in iOS platform
+Run the application using npm
 
 ```bash
 npm run ios
+npm run android
 ```
 
-To run in Android platform
+Make sure you have a metro bundler running or run using
 
-```bash
-npm run android
+```sh
+npm start
 ```
 
 Are you facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)

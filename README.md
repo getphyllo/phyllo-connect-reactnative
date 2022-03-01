@@ -3,8 +3,7 @@
     Phyllo connect react-native SDK
   </a>
 </h1>
-
-<div align='center'>
+<div align="center">
 
 [![npm package](https://img.shields.io/npm/v/phyllo-connect-react-native.svg)](https://www.npmjs.com/package/phyllo-connect-react-native)
 <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Phyllo-connect-react-native is released under the MIT license." />
@@ -13,19 +12,20 @@
 
 ## Configuring the SDK
 
-Installing via npm
+In your react-native project directory:
 
 ```sh
 npm install phyllo-connect-react-native
 ```
 
-Install iOS dependencies using pods
+Then install iOS dependencies using cocoapods:\
+[![Version](https://img.shields.io/cocoapods/v/PhylloConnect.svg?style=flat)](http://cocoadocs.org/docsets/PhylloConnect)
 
 ```sh
 cd ios && pod install
 ```
 
-## Using Phyllo-connect-react-native-sdk in your project
+## React native implementation
 
 ### Import and create an instace
 
@@ -68,4 +68,50 @@ phylloConnect.initialize({ AppName, userId, token, platformId, env});
 | platformId | Platform Id            | String or Undefined                        |
 | env        | Development Environmen | "development" or "production" or "sandbox" |
 
+### Examples
+
+<b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/release-v0.0.1/example)
+</b>
+
+<!-- ```sh
+import React, { useEffect } from 'react'
+import { Button, View } from 'react-native'
+import PhylloConnect from 'phyllo-connect-react-native'
+
+const phylloConnect = new PhylloConnect()
+
+const App = () => {
+
+  useEffect(() => {
+    return
+  }, [])
+
+  const onPressHandler = async() => {
+    await phylloConnect.initialize({
+      clientDisplayName,
+      token,
+      userId,
+      platformId,
+      env: config.env,
+    })
+  }
+
+
+  return (
+    <View>
+      <Button title="Connect platforms" onPress={onPressHandler}/>
+    </View>
+  )
+}
+
+``` -->
+
 Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
+
+## Author
+
+Phyllo, phyl@getphyllo.com
+
+## License
+
+PhylloConnect is available under the MIT license. See the LICENSE file for more info.
