@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Text,
-  Platform,
-} from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
 import PhylloConnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
