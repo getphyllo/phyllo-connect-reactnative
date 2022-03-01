@@ -70,3 +70,4 @@ examples/ios/*
 react-native-connect-0.0.1.tgz
 phyllo-connect-react-native-0.0.1.tgz
 .env
+.vscode

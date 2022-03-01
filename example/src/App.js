@@ -95,7 +95,7 @@ export default function ExampleApp() {
         env: config.env,
       })
 
-      const open = phylloConnect.open()
+      phylloConnect.open()
     } catch (e) {
       Alert.alert(e.message)
       console.log(e)
