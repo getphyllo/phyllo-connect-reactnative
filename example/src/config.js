@@ -1,13 +1,16 @@
-import { PhylloEnvironment } from 'phyllo-connect-react-native'
 import { CLIENT_ID, CLIENT_SECRET, ENVIRONMENT } from '@env'
 
-console.log(CLIENT_ID, CLIENT_SECRET, ENVIRONMENT)
+const getEnvBaseURL = (env) => {
+  if (env === 'production') return 'https://api.getphyllo.com'
+  if (env === 'sandbox') return 'https://api.sandbox.getphyllo.com'
+  else return 'https://api.dev.getphyllo.com'
+}
+
 const config = {
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
   env: ENVIRONMENT,
+  baseUrl: getEnvBaseURL(ENVIRONMENT),
 }
-
-// const USER_NAME = Math.random().toString(36).slice(0, 25)
 
 export default config

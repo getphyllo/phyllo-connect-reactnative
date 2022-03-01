@@ -5,7 +5,6 @@ import config from './config'
 // endpoints
 const CREATE_USER_TOKEN_ENDPOINT = '/v1/sdk-tokens'
 const CREATE_USER_ENDPOINT = '/v1/users'
-const BASE_URL = 'https://api.dev.getphyllo.com'
 
 // React-Native doesn't have a atob(decoding) and btoa(encoding) in its global object.
 // Which is used by axios to create a http request
@@ -21,7 +20,7 @@ if (!global.atob) {
 // create axios base
 const getAxiosInstance = () => {
   const api = axios.create({
-    baseURL: BASE_URL,
+    baseURL: config.baseUrl,
     auth: {
       username: config.clientId,
       password: config.clientSecret,

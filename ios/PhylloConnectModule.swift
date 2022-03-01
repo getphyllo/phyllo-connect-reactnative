@@ -16,7 +16,6 @@ public class PhylloConnectModule: RCTEventEmitter {
     var hasObservers:Bool?
     
     override public func supportedEvents() -> [String]! {
-        //I will be honest, I am sending these events from DeviceManager.swift, but react native's packager gripes if I dont put the events that DeviceManager.swift is sending through the rootView's bridge here
         return ["onAccountConnected","onAccountDisconnected","onTokenExpired","onExit"]
     }
     
@@ -25,26 +24,18 @@ public class PhylloConnectModule: RCTEventEmitter {
     }
     
     public override func startObserving() {
-        print("startObserving")
         self.hasObservers = true
         super.startObserving()
     }
     
     public override func stopObserving() {
-        print("stopObserving")
         self.hasObservers = false
         super.stopObserving()
     }
     
-    @objc
-    public override func constantsToExport() -> [AnyHashable : Any]! {
-        return ["count": 1]
-    }
     
     @objc(initialize:::::)
     func initialize(clientDisplayName:String,token:String,userId:String ,environment:String, workPlatformId:String) {
-        debugPrint("start initialize ..........")
-        
         DispatchQueue.main.async {
             var phylloConfig = PhylloConfig()
           
@@ -59,7 +50,6 @@ public class PhylloConnectModule: RCTEventEmitter {
 
    @objc(open)
     func open() {
-        debugPrint("start open ..........")
         DispatchQueue.main.async {
             PhylloConnect.shared.phylloConnectDelegate = self
             PhylloConnect.shared.open()
@@ -88,8 +78,6 @@ public class PhylloConnectModule: RCTEventEmitter {
 extension PhylloConnectModule : PhylloConnectDelegate {
   
   public func onAccountConnected(account_id: String, work_platform_id: String, user_id: String) {
-    print("onAccountConnected => account_id : \(account_id),work_platform_id : \(work_platform_id),user_id : \(user_id)")
-    
     //Event Sent After Get Connect
     DispatchQueue.main.async {
       var dic = [String:String]()
@@ -104,8 +92,6 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   }
   
   public func onAccountDisconnected(account_id: String, work_platform_id: String, user_id: String) {
-    print("onAccountDisconnected => account_id : \(account_id),work_platform_id : \(work_platform_id),user_id : \(user_id)")
-    
     //Event Sent After Get Connect
     DispatchQueue.main.async {
       var dic = [String:String]()
@@ -119,8 +105,6 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   }
   
   public func onTokenExpired(user_id: String) {
-    print("onTokenExpired => user_id : \(user_id)")
-    
     //Event Sent After Get Connect
     DispatchQueue.main.async {
       var dic = [String:String]()
@@ -132,7 +116,6 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   }
   
   public func onExit(reason: String, user_id: String) {
-    print("onExit => reason : \(reason),user_id : \(user_id)")
     //Event Sent After Get Connect
     DispatchQueue.main.async {
       var dic = [String:String]()

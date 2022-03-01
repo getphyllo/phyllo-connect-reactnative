@@ -30,9 +30,12 @@ cd ios && pod install
 
 ### 🔑 Add your client ID and secrets to `example/.env` file
 
+Set the environment to `development` or `production` or `sandbox`
+
 ```
 CLIENT_ID="YOUR-CLIENT-ID"
 CLIENT_SECRET="YOUR-CLIENT-SECRET"
+ENVIRONMENT="YOUR-DEV-ENVIRONMENT"
 ```
 
 ### 🚀 To launch the application, run the following commands in example folder:

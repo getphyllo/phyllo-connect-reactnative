@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import PhylloConnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import Toast from 'react-native-simple-toast'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { createUser, createUserToken } from './APIHandler'
@@ -50,19 +49,15 @@ export default function ExampleApp() {
   // A callback function called upon event
   const onExitCallBack = (body) => {
     console.log('Exited from phyllo flow')
-    Toast.show('Exited from phyllo flow')
   }
   const onAccountConnectedCallBack = (body) => {
-    Toast.show('Account has connected')
     console.log('Account has connected')
   }
   const onAccountDisconnectedCallBack = (body) => {
     console.log('Account has disconnected')
-    Toast.show('Account has disconnected')
   }
   const onTokenExpiredCallBack = (body) => {
     console.log('The token has expired')
-    Toast.show('The token has expired')
   }
 
   const onPressButton = async (platformId) => {
@@ -140,46 +135,35 @@ export default function ExampleApp() {
 }
 
 const styles = StyleSheet.create({
-  buttonStyle:
-    Platform.OS === 'android'
-      ? {
-          marginVertical: 30,
-          paddingBottom: 10,
-          backgroundColor: '#524FA1',
-          borderColor: '#524FA1',
-          height: 40,
-          display: 'flex',
-          justifyContent: 'center',
-          borderRadius: 5,
-        }
-      : {
-          paddingBottom: 10,
-          backgroundColor: '#524FA1',
-          borderColor: '#524FA1',
-          height: 50,
-          display: 'flex',
-          justifyContent: 'center',
-          borderRadius: 5,
-        },
+  buttonStyle: {
+    marginVertical: 5,
+    backgroundColor: '#524FA1',
+    borderColor: '#524FA1',
+    height: 40,
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 5,
+    shadowColor: 'black',
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 3,
+  },
+
   buttonText: {
     color: '#fff',
     textAlign: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
     fontWeight: 'bold',
   },
   containerStyle: {
     display: 'flex',
-    flex: 0.6,
-    margin: 10,
-    justifyContent: 'space-around',
-    paddingHorizontal: 40,
-    paddingVertical: 150,
+    flex: 0.8,
+    marginHorizontal: 35,
+    // marginTop: 10,
+    // marginVertical
+    justifyContent: 'center',
   },
-  checkboxStyle:
-    Platform.OS === 'android'
-      ? {
-          marginTop: 30,
-        }
-      : {},
+  checkboxStyle: {
+    marginTop: 20,
+  },
 })

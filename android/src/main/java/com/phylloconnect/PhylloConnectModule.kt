@@ -27,11 +27,6 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
 
     val logTag: String = "PhylloConnectModule"
 
-    //TODO remove
-    override fun getConstants(): MutableMap<String, Any> {
-        return hashMapOf("count" to 1)
-    }
-
     @ReactMethod
     public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String) {       
         Handler(Looper.getMainLooper()).post {
@@ -40,10 +35,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             userId = userId,
             token = token,
             platformId = platformId,
-            environment = getPhylloEnvironment(environment), // TODO remove
+            environment = getPhylloEnvironment(environment),
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
-                
                     val params = Arguments.createMap();
                     params.putString("account_id", accountId);
                     params.putString("user_id", userId);
@@ -59,18 +53,10 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     sendEvent("onAccountDisconnected", params);
                 }
 
-                override fun onError(errorMsg: String?) {
-                    //Log.d(logTag, "on Error  errorMsg")
-                }
-
                 override fun onTokenExpired(userId: String?) {
                     val params = Arguments.createMap();
                     params.putString("user_id", userId);
                     sendEvent("onTokenExpired", params);
-                }
-
-                override fun onEvent(event: PhylloConnect.EVENT) {
-                    //Log.d(logTag, "onEvent  $event")
                 }
 
                 override fun onExit(reason:String?,userId: String?) {
@@ -102,26 +88,15 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     
     @ReactMethod
     public fun open() {
-        Log.d(logTag,"Open Phyllo Connect Sdk")
         PhylloConnect.open()
     } 
   
     private fun sendEvent(
                     eventName:String,
                     params:WritableMap?) {
-        //reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
+        
         reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, params)
     }
   
-     // Required for rn built in EventEmitter Calls.
-    @ReactMethod
-    public fun addListener(eventName:String) {
-        Log.d("eventName",eventName);
-     }
-
-    @ReactMethod
-    public fun removeListeners(count:Integer) {
-    //Log.d("removeListeners",count);
-    }
 
 }
