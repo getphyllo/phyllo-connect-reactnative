@@ -105,6 +105,16 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         
         reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, params)
     }
+
+      // Required for rn built in EventEmitter Calls. Otherwise it'll show warnings
+      @ReactMethod
+      public fun addListener(eventName:String) {
+        //   Log.d("eventName",eventName);
+       }
   
+      @ReactMethod
+      public fun removeListeners(count:Integer) {
+      //Log.d("removeListeners",count);
+      }
 
 }
