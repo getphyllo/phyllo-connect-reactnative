@@ -5,7 +5,7 @@ import config from './config'
 // endpoints
 const CREATE_USER_TOKEN_ENDPOINT = '/v1/sdk-tokens'
 const CREATE_USER_ENDPOINT = '/v1/users'
-
+console.log(config,'Config')
 // React-Native doesn't have a atob(decoding) and btoa(encoding) in its global object.
 // Which is used by axios to create a http request
 // So we added them on the global object
