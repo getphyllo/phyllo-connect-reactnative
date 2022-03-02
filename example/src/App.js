@@ -14,6 +14,8 @@ const phylloConnect = new PhylloConnect()
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
+  const [userId, setUserId] = useState('')
+  const [userToken, setUserToken] = useState('')
 
   useEffect(() => {
     // adding a event handler for onExit action
@@ -30,6 +32,20 @@ export default function ExampleApp() {
       'onTokenExpired',
       onTokenExpiredCallBack
     )
+    // check if user exist or not
+    const getUserFromStorage = async () => {
+      const userId = await AsyncStorage.getItem('user-id')
+      const token = await AsyncStorage.getItem('user-token')
+      console.log(userId, token)
+      if (!userId || !token) {
+        return
+      }
+      setUserId(userId)
+      setUserToken(token)
+    }
+
+    getUserFromStorage()
+
     // remove the event watcher
     return () => {
       onExit.remove()
@@ -55,34 +71,34 @@ export default function ExampleApp() {
   const onTokenExpiredCallBack = (body) => {
     console.log('The token has expired')
     Toast.show('Token has expired')
+    AsyncStorage.clear()
   }
 
   const onPressButton = async (platformId) => {
     const clientDisplayName = 'Creator'
     const externalId = generateRandomString(20)
 
-    let userId, token
+    let id, token
     try {
       // Create a user, SDK Token if the user is new user
       if (existingUser) {
-        userId = await AsyncStorage.getItem('user-id')
-        token = await AsyncStorage.getItem('user-token')
-        if (!token || !userId) {
-          Alert.alert('User does not exist')
-          return
-        }
+        id = userId
+        token = userToken
       } else {
-        userId = await createUser(generateRandomString(8), externalId)
-        token = await createUserToken(userId)
-        await AsyncStorage.setItem('user-id', userId)
+        id = await createUser(generateRandomString(8), externalId)
+        token = await createUserToken(id)
+
+        await AsyncStorage.setItem('user-id', id)
         await AsyncStorage.setItem('user-token', token)
+        setUserId(id)
+        setUserToken(token)
       }
 
       // opens the sdk flow
       phylloConnect.initialize({
         clientDisplayName,
         token,
-        userId,
+        userId: id,
         platformId,
         env: config.env,
       })
@@ -115,18 +131,20 @@ export default function ExampleApp() {
         <Text style={styles.buttonText}>Connect YouTube using Phyllo</Text>
       </TouchableOpacity>
 
-      <BouncyCheckbox
-        fillColor='green'
-        onPress={(isChecked) => {
-          setExistingUser(isChecked)
-        }}
-        text='Existing user'
-        isChecked={existingUser}
-        textStyle={{
-          textDecorationLine: 'none',
-        }}
-        style={styles.checkboxStyle}
-      />
+      {!!userId && !!userToken && (
+        <BouncyCheckbox
+          fillColor='green'
+          onPress={(isChecked) => {
+            setExistingUser(isChecked)
+          }}
+          text='Existing user'
+          isChecked={existingUser}
+          textStyle={{
+            textDecorationLine: 'none',
+          }}
+          style={styles.checkboxStyle}
+        />
+      )}
     </View>
   )
 }
