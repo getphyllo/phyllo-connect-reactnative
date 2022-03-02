@@ -29,17 +29,17 @@ npm install
 cd ios && pod install
 ```
 
-### 🔑 Add your client ID and secrets to `example/.env` file
+### 🔑 Add your client ID and secrets to `example/config.js` file
 
 > Assuming you have a client ID and secret, if not reach out at contact@getphyllo.com
 
-Set the environment to `development` or `production` or `sandbox`
+```
+clientId = 'YOUR-CLIENT-ID'
+clientSecret = 'YOUR-SECRET-KEY'
+env = 'APPLICATION-ENVIRONMENT'
+```
 
-```
-CLIENT_ID="YOUR-CLIENT-ID"
-CLIENT_SECRET="YOUR-CLIENT-SECRET"
-ENVIRONMENT="YOUR-DEV-ENVIRONMENT"
-```
+Set the env to `development` or `production` or `sandbox`
 
 ### 🚀 To launch the application, run the following commands in example folder:
 
