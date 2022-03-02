@@ -73,39 +73,6 @@ phylloConnect.initialize({ AppName, userId, token, platformId, env});
 <b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/release-v0.0.1/example)
 </b>
 
-<!-- ```sh
-import React, { useEffect } from 'react'
-import { Button, View } from 'react-native'
-import PhylloConnect from 'phyllo-connect-react-native'
-
-const phylloConnect = new PhylloConnect()
-
-const App = () => {
-
-  useEffect(() => {
-    return
-  }, [])
-
-  const onPressHandler = async() => {
-    await phylloConnect.initialize({
-      clientDisplayName,
-      token,
-      userId,
-      platformId,
-      env: config.env,
-    })
-  }
-
-
-  return (
-    <View>
-      <Button title="Connect platforms" onPress={onPressHandler}/>
-    </View>
-  )
-}
-
-``` -->
-
 Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
 
 ## Author
@@ -114,4 +81,4 @@ Phyllo, phyl@getphyllo.com
 
 ## License
 
-PhylloConnect is available under the MIT license. See the LICENSE file for more info.
+PhylloConnect is available under the MIT license. See the LICENSE file for more information.
