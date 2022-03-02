@@ -97,8 +97,8 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     @ReactMethod
     public fun open() {
         Handler(Looper.getMainLooper()).post {
-             PhylloConnect.open()
-        })
+            PhylloConnect.open()
+        }
     } 
   
     private fun sendEvent(
