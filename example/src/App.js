@@ -36,7 +36,7 @@ export default function ExampleApp() {
     const getUserFromStorage = async () => {
       const userId = await AsyncStorage.getItem('user-id')
       const token = await AsyncStorage.getItem('user-token')
-      console.log(userId, token)
+
       if (!userId || !token) {
         return
       }
