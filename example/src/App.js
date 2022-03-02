@@ -58,7 +58,7 @@ export default function ExampleApp() {
   }
 
   const onPressButton = async (platformId) => {
-    const clientDisplayName = 'App name'
+    const clientDisplayName = 'Creator'
     const externalId = generateRandomString(20)
 
     let userId, token
