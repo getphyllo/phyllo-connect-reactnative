@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
 import PhylloConnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
-import { createUser, createUserToken } from './APIHandler'
+import Toast from 'react-native-simple-toast'
 
+import { createUser, createUserToken } from './APIHandler'
 import config from './config'
 import { generateRandomString } from './randomGenerator'
 
@@ -41,16 +41,20 @@ export default function ExampleApp() {
 
   // A callback function called upon event
   const onExitCallBack = (body) => {
-    console.log('Exited from phyllo flow')
+    Toast.show('Exited from phyllo')
+    console.log('Exited from Phyllo flow')
   }
   const onAccountConnectedCallBack = (body) => {
+    Toast.show('Account connected')
     console.log('Account has connected')
   }
   const onAccountDisconnectedCallBack = (body) => {
     console.log('Account has disconnected')
+    Toast.show('Account has disconnected')
   }
   const onTokenExpiredCallBack = (body) => {
     console.log('The token has expired')
+    Toast.show('Token has expired')
   }
 
   const onPressButton = async (platformId) => {
@@ -75,7 +79,7 @@ export default function ExampleApp() {
       }
 
       // opens the sdk flow
-      await phylloConnect.initialize({
+      phylloConnect.initialize({
         clientDisplayName,
         token,
         userId,
