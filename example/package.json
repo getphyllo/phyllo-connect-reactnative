@@ -15,7 +15,7 @@
     "axios": "^0.26.0",
     "babel-runtime": "^6.26.0",
     "base-64": "^1.0.0",
-    "phyllo-connect-react-native": "0.0.2",
+    "phyllo-connect-react-native": "0.0.3",
     "react": "^17.0.2",
     "react-native": "^0.67.1",
     "react-native-bouncy-checkbox": "^2.1.10"
