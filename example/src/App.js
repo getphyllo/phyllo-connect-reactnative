@@ -3,11 +3,10 @@ import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
 import PhylloConnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
-import Toast from 'react-native-simple-toast'
 
 import { createUser, createUserToken } from './APIHandler'
-import config from './config'
 import { generateRandomString } from './randomGenerator'
+import config from './config'
 
 // create a new instance for PhylloConnect
 const phylloConnect = new PhylloConnect()
@@ -57,20 +56,16 @@ export default function ExampleApp() {
 
   // A callback function called upon event
   const onExitCallBack = (body) => {
-    Toast.show('Exited from phyllo')
     console.log('Exited from Phyllo flow')
   }
   const onAccountConnectedCallBack = (body) => {
-    Toast.show('Account connected')
     console.log('Account has connected')
   }
   const onAccountDisconnectedCallBack = (body) => {
     console.log('Account has disconnected')
-    Toast.show('Account has disconnected')
   }
   const onTokenExpiredCallBack = (body) => {
     console.log('The token has expired')
-    Toast.show('Token has expired')
     AsyncStorage.clear()
   }
 
@@ -102,7 +97,6 @@ export default function ExampleApp() {
         platformId,
         env: config.env,
       })
-
       phylloConnect.open()
     } catch (e) {
       Alert.alert(e.message)
@@ -131,20 +125,19 @@ export default function ExampleApp() {
         <Text style={styles.buttonText}>Connect YouTube using Phyllo</Text>
       </TouchableOpacity>
 
-      {!!userId && !!userToken && (
-        <BouncyCheckbox
-          fillColor='green'
-          onPress={(isChecked) => {
-            setExistingUser(isChecked)
-          }}
-          text='Existing user'
-          isChecked={existingUser}
-          textStyle={{
-            textDecorationLine: 'none',
-          }}
-          style={styles.checkboxStyle}
-        />
-      )}
+      <BouncyCheckbox
+        fillColor='green'
+        onPress={(isChecked) => {
+          setExistingUser(isChecked)
+        }}
+        text='Existing user'
+        isChecked={existingUser}
+        textStyle={{
+          textDecorationLine: 'none',
+        }}
+        style={styles.checkboxStyle}
+        disabled={!userId || !userToken}
+      />
     </View>
   )
 }
@@ -174,8 +167,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 0.8,
     marginHorizontal: 35,
-    // marginTop: 10,
-    // marginVertical
     justifyContent: 'center',
   },
   checkboxStyle: {

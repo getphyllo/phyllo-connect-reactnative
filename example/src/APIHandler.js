@@ -46,7 +46,6 @@ export const createUser = async (name, externalId) => {
       name,
       external_id: externalId,
     })
-    console.log(response.data.id, 'user id')
     return response.data.id
   } catch (err) {
     throw err

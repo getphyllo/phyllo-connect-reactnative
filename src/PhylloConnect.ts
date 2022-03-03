@@ -34,25 +34,14 @@ class PhylloConnectSDK {
     phyllo.open()
   }
 
-  initialize = async ({
+  initialize = ({
     clientDisplayName,
     token,
     userId,
     env,
     platformId = undefined,
   }: IPhylloInitialize) => {
-    try {
-      const result = await phyllo.initialize(
-        clientDisplayName,
-        token,
-        userId,
-        env,
-        platformId
-      )
-      return result
-    } catch (err) {
-      throw err
-    }
+    phyllo.initialize(clientDisplayName, token, userId, env, platformId)
   }
 }
 
