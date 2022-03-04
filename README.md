@@ -5,8 +5,8 @@
 </h1>
 <div align="center">
 
-[![npm package](https://img.shields.io/npm/v/phyllo-connect-react-native.svg)](https://www.npmjs.com/package/phyllo-connect-react-native)
-<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Phyllo-connect-react-native is released under the MIT license." />
+[![npm package](https://img.shields.io/npm/v/react-native-phyllo-connect.svg)](https://www.npmjs.com/package/react-native-phyllo-connect)
+<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="react-native-phyllo-connect is released under the MIT license." />
 
 </div>
 
@@ -15,7 +15,7 @@
 In your react-native project directory:
 
 ```sh
-npm install phyllo-connect-react-native
+npm install react-native-phyllo-connect
 ```
 
 Then install iOS dependencies using cocoapods:\
@@ -27,10 +27,10 @@ cd ios && pod install
 
 ## React native implementation
 
-### Importing from phyllo-connect-react-native
+### Importing from react-native-phyllo-connect
 
 ```sh
-import Phylloconnect from 'phyllo-connect-react-native'
+import Phylloconnect from 'react-native-phyllo-connect'
 ```
 
 ### Subscribing to events
@@ -60,7 +60,7 @@ here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, 
 ### Open Phyllo SDK flow
 
 ```sh
-import { PhylloEnvironment } from 'phyllo-connect-react-native'
+import { PhylloEnvironment } from 'react-native-phyllo-connect'
 
 const config = {
   clientDisplayName: clientDisplayName,

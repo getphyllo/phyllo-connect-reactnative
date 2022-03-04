@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
-import Phylloconnect from 'phyllo-connect-react-native'
+import Phylloconnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
