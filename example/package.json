@@ -8,14 +8,15 @@
     "ios": "react-native run-ios",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "build": "cd .. && npm pack && cd example && npm i ../phyllo-connect-react-native-0.0.4.tgz"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.16.1",
     "axios": "^0.26.0",
     "babel-runtime": "^6.26.0",
     "base-64": "^1.0.0",
-    "phyllo-connect-react-native": "0.0.3",
+    "phyllo-connect-react-native": "file:../phyllo-connect-react-native-0.0.4.tgz",
     "react": "^17.0.2",
     "react-native": "^0.67.1",
     "react-native-bouncy-checkbox": "^2.1.10"

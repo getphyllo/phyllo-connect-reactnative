@@ -27,24 +27,17 @@ cd ios && pod install
 
 ## React native implementation
 
-### Import and create an instace
+### Importing from phyllo-connect-react-native
 
 ```sh
-// import the PhylloConnect to your application
-import PhylloConnect from 'phyllo-connect-react-native'
-
-// create an instance of PhylloConnect
-const phylloConnect = new PhylloConnect()
+import Phylloconnect from 'phyllo-connect-react-native'
 ```
 
 ### Subscribing to events
 
 ```sh
 // Subscribe to an event by passing a callback
-const eventWatcher = phylloConnect.addAnEventListener('<event-type>', callbackFunction)
-
-// Unsubscribe with remove
-eventWatcher.remove()
+PhylloConnect.on('<event-type>', callbackFunction)
 ```
 
 here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
@@ -57,16 +50,24 @@ Creating a user and token for a user
 ### Open Phyllo SDK flow
 
 ```sh
-phylloConnect.initialize({ AppName, userId, token, platformId, env});
+const config = {
+  clientDisplayName,
+  token,
+  userId,
+  environment,
+  workPlatformId,
+}
+PhylloConnect.initialize({ AppName, userId, token, platformId, env})
+PhylloConnect.open()
 ```
 
-| Arguments  | Value                  | Type                                       |
-| ---------- | ---------------------- | ------------------------------------------ |
-| AppName    | Application Name       | String                                     |
-| userId     | User Id                | String                                     |
-| token      | User Token             | String                                     |
-| platformId | Platform Id            | String or Undefined                        |
-| env        | Development Environmen | "development" or "production" or "sandbox" |
+| Arguments         | Value                  | Type                                       |
+| ----------------- | ---------------------- | ------------------------------------------ |
+| clientDisplayName | Client Display Name    | String                                     |
+| userId            | User Id                | String                                     |
+| token             | User Token             | String                                     |
+| workPlatformId    | Your Work Platform Id  | String or Undefined                        |
+| environment       | Development Environmen | "development" or "production" or "sandbox" |
 
 ### Examples
 

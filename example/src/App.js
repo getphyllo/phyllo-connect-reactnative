@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
-import PhylloConnect from 'phyllo-connect-react-native'
+import Phylloconnect from 'phyllo-connect-react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
 import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
-import config from './config'
-
-// create a new instance for PhylloConnect
-const phylloConnect = new PhylloConnect()
+import clientConfig from './config'
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
@@ -18,16 +15,16 @@ export default function ExampleApp() {
 
   useEffect(() => {
     // adding a event handler for onExit action
-    const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
-    const onAccountConnected = phylloConnect.addAnEventListener(
+    const onExit = Phylloconnect.on('onExit', onExitCallBack)
+    const onAccountConnected = Phylloconnect.on(
       'onAccountConnected',
       onAccountConnectedCallBack
     )
-    const onAccountDisconnected = phylloConnect.addAnEventListener(
+    const onAccountDisconnected = Phylloconnect.on(
       'onAccountDisconnected',
       onAccountDisconnectedCallBack
     )
-    const onTokenExpired = phylloConnect.addAnEventListener(
+    const onTokenExpired = Phylloconnect.on(
       'onTokenExpired',
       onTokenExpiredCallBack
     )
@@ -69,9 +66,10 @@ export default function ExampleApp() {
     AsyncStorage.clear()
   }
 
-  const onPressButton = async (platformId) => {
+  const onPressButton = async (workPlatformId) => {
     const clientDisplayName = 'Creator'
     const externalId = generateRandomString(20)
+    const environment = clientConfig.env
 
     let id, token
     try {
@@ -89,15 +87,18 @@ export default function ExampleApp() {
         setUserToken(token)
       }
 
-      // opens the sdk flow
-      phylloConnect.initialize({
+      // set config
+      const config = {
         clientDisplayName,
         token,
-        userId: id,
-        platformId,
-        env: config.env,
-      })
-      phylloConnect.open()
+        userId,
+        workPlatformId,
+        environment,
+      }
+
+      // opens the sdk flow
+      Phylloconnect.initialize(config)
+      Phylloconnect.open()
     } catch (e) {
       Alert.alert(e.message)
       console.log(e)

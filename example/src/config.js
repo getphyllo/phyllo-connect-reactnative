@@ -1,6 +1,6 @@
 const clientId = ''
 const clientSecret = ''
-const env = 'development'
+const env = 'sandbox'
 
 export default {
   clientId,

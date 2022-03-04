@@ -6,8 +6,8 @@ interface IPhylloInitialize {
   clientDisplayName: string
   token: string
   userId: string
-  env: PhylloEnvironment
-  platformId?: string | undefined
+  environment: PhylloEnvironment
+  workPlatformId?: string | undefined
 }
 
 type TEventType =
@@ -17,34 +17,31 @@ type TEventType =
   | 'onTokenExpired'
 
 const phyllo = NativeModules.PhylloConnectModule
+const eventEmitter = new NativeEventEmitter(phyllo)
 
-class PhylloConnectSDK {
-  // eventListeners: Set<EmitterSubscription>
-  eventEmitter: NativeEventEmitter
-  constructor() {
-    // this.eventListeners = new Set()
-    this.eventEmitter = new NativeEventEmitter(phyllo)
-  }
-  addAnEventListener = (event: TEventType, callback: (body?: any) => {}) => {
-    // return the event, let the user handle it
-    return this.eventEmitter.addListener(event, callback)
-  }
-
-  open = () => {
-    phyllo.open()
-  }
-
-  initialize = ({
+const PhylloConnectSDK = {
+  on: (event: TEventType, callback: (body?: any) => {}) => {
+    return eventEmitter.addListener(event, callback)
+  },
+  initialize: ({
     clientDisplayName,
     token,
     userId,
-    env,
-    platformId = undefined,
+    environment,
+    workPlatformId,
   }: IPhylloInitialize) => {
-    phyllo.initialize(clientDisplayName, token, userId, env, platformId)
-  }
+    phyllo.initialize(
+      clientDisplayName,
+      token,
+      userId,
+      environment,
+      workPlatformId
+    )
+  },
+  open: () => {
+    phyllo.open()
+  },
 }
 
-// const PhylloConnect = new PhylloConnectSDK()
-// create a new object and export
+// export the object
 export default PhylloConnectSDK
