@@ -41,6 +41,12 @@ PhylloConnect.on('<event-type>', callbackFunction)
 ```
 
 here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
+| Event type | Description | Callback body|
+| -----------| ------------| --------- |
+| onExit | Called when a user exits from phyllo flow| user_id, reason |
+| onAccountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
+| onAccountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
+| onTokenExpired | Called when a user token expires| user_id |
 
 ### Creating a user and token
 
