@@ -42,7 +42,7 @@ PhylloConnect.on('<event-type>', callbackFunction)
 
 here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
 
-Creating a user and token for a user
+### Creating a user and token
 
 - [Check this document on creating a user](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user)
 - [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)
@@ -57,7 +57,8 @@ const config = {
   environment,
   workPlatformId,
 }
-PhylloConnect.initialize({ AppName, userId, token, platformId, env})
+
+PhylloConnect.initialize(config)
 PhylloConnect.open()
 ```
 
