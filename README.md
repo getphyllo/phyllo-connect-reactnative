@@ -38,6 +38,10 @@ import Phylloconnect from 'phyllo-connect-react-native'
 ```sh
 // Subscribe to an event by passing a callback
 PhylloConnect.on('<event-type>', callbackFunction)
+
+const callbackFunction = (body) => {
+  // callback body
+}
 ```
 
 here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
