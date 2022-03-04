@@ -37,6 +37,8 @@ const PhylloConnectSDK = {
       environment,
       workPlatformId
     )
+
+    // this is to match solely web sdk signature
     return { open: () => phyllo.open() }
   },
 }
