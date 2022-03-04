@@ -50,25 +50,27 @@ here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, 
 ### Open Phyllo SDK flow
 
 ```sh
+import { PhylloEnvironment } from 'phyllo-connect-react-native'
+
 const config = {
-  clientDisplayName,
-  token,
-  userId,
-  environment,
-  workPlatformId,
+  clientDisplayName: clientDisplayName,
+  token: token,
+  userId: userId,
+  environment: PhylloEnvironment.sandbox,
+  workPlatformId: workPlatformId,
 }
 
-PhylloConnect.initialize(config)
-PhylloConnect.open()
+const phylloConnect = PhylloConnect.initialize(config)
+phylloConnect.open()
 ```
 
-| Arguments         | Value                  | Type                                       |
-| ----------------- | ---------------------- | ------------------------------------------ |
-| clientDisplayName | Client Display Name    | String                                     |
-| userId            | User Id                | String                                     |
-| token             | User Token             | String                                     |
-| workPlatformId    | Your Work Platform Id  | String or Undefined                        |
-| environment       | Development Environmen | "development" or "production" or "sandbox" |
+| Arguments         | Value                            | Type                                       |
+| ----------------- | -------------------------------- | ------------------------------------------ |
+| clientDisplayName | Client Display Name              | String                                     |
+| token             | User Token                       | String                                     |
+| userId            | User Id                          | String                                     |
+| environment       | Development Environmen           | "development" or "production" or "sandbox" |
+| workPlatformId    | Your Work Platform Id (optional) | String or Undefined                        |
 
 ### Examples
 

@@ -37,9 +37,7 @@ const PhylloConnectSDK = {
       environment,
       workPlatformId
     )
-  },
-  open: () => {
-    phyllo.open()
+    return { open: () => phyllo.open() }
   },
 }
 

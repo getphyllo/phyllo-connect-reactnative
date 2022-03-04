@@ -1,7 +1,7 @@
 enum PhylloEnvironment {
-  Development = 'development',
-  Production = 'production',
-  Sandbox = 'sandbox',
+  development = 'development',
+  production = 'production',
+  sandbox = 'sandbox',
 }
 
 export { PhylloEnvironment }

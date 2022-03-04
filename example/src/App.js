@@ -97,8 +97,9 @@ export default function ExampleApp() {
       }
 
       // opens the sdk flow
-      Phylloconnect.initialize(config)
-      Phylloconnect.open()
+      const phylloConnect = Phylloconnect.initialize(config)
+      console.log(phylloConnect)
+      phylloConnect.open()
     } catch (e) {
       Alert.alert(e.message)
       console.log(e)
