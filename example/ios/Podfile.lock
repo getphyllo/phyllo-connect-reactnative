@@ -74,8 +74,8 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
-  - phyllo-connect-react-native (0.0.3):
-    - PhylloConnect (~> 0.1.21)
+  - phyllo-connect-react-native (0.0.1):
+    - PhylloConnect (~> 0.1.20)
     - React
   - PhylloConnect (0.1.21)
   - RCT-Folly (2021.06.28.00-v2):
@@ -508,7 +508,7 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  phyllo-connect-react-native: c3bda7461ae60bbe4d41189880ace2e1f2eefdda
+  phyllo-connect-react-native: 0d2366c5a2d3b92ff38c179ec1ed489ce80af7d4
   PhylloConnect: 77394c7b6ba60c18dafdf056327120776f77c212
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: 3c77b683474faf23920fbefc71c4e13af21470c0
