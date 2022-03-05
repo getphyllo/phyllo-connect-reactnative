@@ -5,8 +5,8 @@
 </h1>
 <div align="center">
 
-[![npm package](https://img.shields.io/npm/v/phyllo-connect-react-native.svg)](https://www.npmjs.com/package/phyllo-connect-react-native)
-<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Phyllo-connect-react-native is released under the MIT license." />
+[![npm package](https://img.shields.io/npm/v/react-native-phyllo-connect.svg)](https://www.npmjs.com/package/react-native-phyllo-connect)
+<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="react-native-phyllo-connect is released under the MIT license." />
 
 </div>
 
@@ -15,7 +15,7 @@
 In your react-native project directory:
 
 ```sh
-npm install phyllo-connect-react-native
+npm install react-native-phyllo-connect
 ```
 
 Then install iOS dependencies using cocoapods:\
@@ -31,7 +31,7 @@ cd ios && pod install
 
 ```sh
 // import the PhylloConnect to your application
-import PhylloConnect from 'phyllo-connect-react-native'
+import PhylloConnect from 'react-native-phyllo-connect'
 
 // create an instance of PhylloConnect
 const phylloConnect = new PhylloConnect()
@@ -57,16 +57,16 @@ Creating a user and token for a user
 ### Open Phyllo SDK flow
 
 ```sh
-phylloConnect.initialize({ AppName, userId, token, platformId, env});
+phylloConnect.initialize({ clientDisplayName, userId, token, platformId, env});
 ```
 
-| Arguments  | Value                  | Type                                       |
-| ---------- | ---------------------- | ------------------------------------------ |
-| AppName    | Application Name       | String                                     |
-| userId     | User Id                | String                                     |
-| token      | User Token             | String                                     |
-| platformId | Platform Id            | String or Undefined                        |
-| env        | Development Environmen | "development" or "production" or "sandbox" |
+| Arguments         | Value                   | Type                                       |
+| ----------------- | ----------------------- | ------------------------------------------ |
+| clientDisplayName | Application Name        | String                                     |
+| userId            | User Id                 | String                                     |
+| token             | User Token              | String                                     |
+| platformId        | Platform Id             | String or Undefined                        |
+| env               | Development Environment | "development" or "production" or "sandbox" |
 
 ### Examples
 

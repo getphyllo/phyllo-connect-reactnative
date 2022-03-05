@@ -1,20 +1,20 @@
 {
-  "name": "phyllo-connect-react-native",
-  "version": "0.0.4",
+  "name": "react-native-phyllo-connect",
+  "version": "0.0.5",
   "description": "Phyllo Connect is a quick and secure way to connect work platforms via Phyllo in your app. Supports: iOS, Android.",
-  "homepage": "https://github.com/getphyllo/react-native-phyllo-connect-sdk",
+  "homepage": "https://github.com/getphyllo/phyllo-connect-reactnative/",
   "types": "lib/index.d.ts",
   "author": "Phyllo <phyl@getphyllo.com>",
   "license": "MIT",
   "main": "./lib/index.d.ts",
   "bugs": {
-    "url": "https://github.com/getphyllo/react-native-phyllo-connect-sdk/issues"
+    "url": "https://github.com/getphyllo/phyllo-connect-reactnative/issues"
   },
   "files": [
     "android",
     "ios",
     "lib",
-    "phyllo-connect-react-native.podspec",
+    "react-native-phyllo-connect.podspec",
     "!android/build",
     "!.DS_Store",
     "!.gradle",
