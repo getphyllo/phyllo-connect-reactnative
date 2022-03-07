@@ -74,20 +74,20 @@ const phylloConnect = PhylloConnect.initialize(config)
 phylloConnect.open()
 ```
 
-| Arguments         | Value                            | Type                                       |
-| ----------------- | -------------------------------- | ------------------------------------------ |
-| clientDisplayName | Client Display Name              | String                                     |
-| token             | User Token                       | String                                     |
-| userId            | User Id                          | String                                     |
-| environment       | Development Environmen           | "development" or "production" or "sandbox" |
-| workPlatformId    | Your Work Platform Id (optional) | String or Undefined                        |
+| Arguments         | Value                            | Type                                                                                       |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------------------------------ |
+| clientDisplayName | Client Display Name              | String                                                                                     |
+| token             | User Token                       | String                                                                                     |
+| userId            | User Id                          | String                                                                                     |
+| environment       | Development Environmen           | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
+| workPlatformId    | Your Work Platform Id (optional) | String or Null                                                                             |
 
 ### Examples
 
 <b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/release-v0.0.1/example)
 </b>
 
-Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
+Facing any issue? We have listed solutions for some comman issues [here](https://github.com/getphyllo/phyllo-connect-reactnative/blob/develop/issues.md), If it doesn't help you feel free to raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
 
 ## Author
 
