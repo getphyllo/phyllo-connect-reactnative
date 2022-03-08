@@ -66,7 +66,7 @@ const config = {
   clientDisplayName: clientDisplayName,
   token: token,
   userId: userId,
-  environment: PhylloEnvironment.sandbox,
+  environment: PhylloEnvironment.<environmentType>,
   workPlatformId: workPlatformId,
 }
 
@@ -79,7 +79,7 @@ phylloConnect.open()
 | clientDisplayName | Client Display Name              | String                                                                                     |
 | token             | User Token                       | String                                                                                     |
 | userId            | User Id                          | String                                                                                     |
-| environment       | Development Environmen           | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
+| environment       | Development Environment          | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
 | workPlatformId    | Your Work Platform Id (optional) | String or Null                                                                             |
 
 ### Examples

@@ -84,7 +84,7 @@ export default function ExampleApp() {
       const config = {
         clientDisplayName,
         token,
-        userId,
+        userId: id,
         workPlatformId,
         environment,
       }
