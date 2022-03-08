@@ -12,7 +12,7 @@
 
 ## Configuring the SDK
 
-In your react-native project directory:
+In your React Native project directory:
 
 ```sh
 npm install react-native-phyllo-connect
@@ -25,7 +25,7 @@ Then install iOS dependencies using cocoapods:\
 cd ios && pod install
 ```
 
-## React native implementation
+## React Native implementation
 
 ### Importing from react-native-phyllo-connect
 
@@ -87,7 +87,7 @@ phylloConnect.open()
 <b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/main/example)
 </b>
 
-Facing any issue? We have listed solutions for some comman issues [here](https://github.com/getphyllo/phyllo-connect-reactnative/blob/develop/issues.md), If it doesn't help you, feel free to raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
+Facing any issue? We have listed solutions for some comman issues [here](https://github.com/getphyllo/phyllo-connect-reactnative/blob/develop/Issues.md), If it doesn't help you, feel free to raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
 
 ## Author
 
