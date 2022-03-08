@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
-import Phylloconnect from 'react-native-phyllo-connect'
+import PhylloConnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
@@ -15,10 +15,10 @@ export default function ExampleApp() {
 
   useEffect(() => {
     // adding a event handler for onExit action
-    Phylloconnect.on('exit', onExitCallBack)
-    Phylloconnect.on('accountConnected', onAccountConnectedCallBack)
-    Phylloconnect.on('accountDisconnected', onAccountDisconnectedCallBack)
-    Phylloconnect.on('tokenExpired', onTokenExpiredCallBack)
+    PhylloConnect.on('exit', onExitCallBack)
+    PhylloConnect.on('accountConnected', onAccountConnectedCallBack)
+    PhylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
+    PhylloConnect.on('tokenExpired', onTokenExpiredCallBack)
     // check if user exist or not
     const getUserFromStorage = async () => {
       const userId = await AsyncStorage.getItem('user-id')
@@ -90,7 +90,7 @@ export default function ExampleApp() {
       }
 
       // opens the sdk flow
-      const phylloConnect = Phylloconnect.initialize(config)
+      const phylloConnect = PhylloConnect.initialize(config)
       phylloConnect.open()
     } catch (e) {
       Alert.alert(e.message)
