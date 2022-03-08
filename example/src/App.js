@@ -6,10 +6,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
 import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
-import config from './config'
-
-// create a new instance for PhylloConnect
-const phylloConnect = new PhylloConnect()
+import clientConfig from './config'
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
@@ -18,19 +15,10 @@ export default function ExampleApp() {
 
   useEffect(() => {
     // adding a event handler for onExit action
-    const onExit = phylloConnect.addAnEventListener('onExit', onExitCallBack)
-    const onAccountConnected = phylloConnect.addAnEventListener(
-      'onAccountConnected',
-      onAccountConnectedCallBack
-    )
-    const onAccountDisconnected = phylloConnect.addAnEventListener(
-      'onAccountDisconnected',
-      onAccountDisconnectedCallBack
-    )
-    const onTokenExpired = phylloConnect.addAnEventListener(
-      'onTokenExpired',
-      onTokenExpiredCallBack
-    )
+    PhylloConnect.on('exit', onExitCallBack)
+    PhylloConnect.on('accountConnected', onAccountConnectedCallBack)
+    PhylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
+    PhylloConnect.on('tokenExpired', onTokenExpiredCallBack)
     // check if user exist or not
     const getUserFromStorage = async () => {
       const userId = await AsyncStorage.getItem('user-id')
@@ -44,34 +32,37 @@ export default function ExampleApp() {
     }
 
     getUserFromStorage()
-
-    // remove the event watcher
-    return () => {
-      onExit.remove()
-      onAccountConnected.remove()
-      onAccountDisconnected.remove()
-      onTokenExpired.remove()
-    }
   }, [])
 
   // A callback function called upon event
   const onExitCallBack = (body) => {
-    console.log('Exited from Phyllo flow')
+    const { user_id, reason } = body
+    console.log(
+      `Exited from Phyllo flow, reason: ${reason}, userId: ${user_id}`
+    )
   }
   const onAccountConnectedCallBack = (body) => {
-    console.log('Account has connected')
+    const { account_id, user_id, work_platform_id } = body
+    console.log(
+      `onAccountConnected => account_id:${account_id}, userId : ${user_id}, workPlatformId:${work_platform_id}`
+    )
   }
   const onAccountDisconnectedCallBack = (body) => {
-    console.log('Account has disconnected')
+    const { account_id, work_platform_id, user_id } = body
+    console.log(
+      `Account has disconnected userId: ${user_id}, workPlatformId: ${work_platform_id}, accountId: ${account_id} `
+    )
   }
   const onTokenExpiredCallBack = (body) => {
-    console.log('The token has expired')
+    const { user_id } = body
+    console.log(`The token has expired userId: ${user_id}`)
     AsyncStorage.clear()
   }
 
-  const onPressButton = async (platformId) => {
+  const onPressButton = async (workPlatformId) => {
     const clientDisplayName = 'Creator'
     const externalId = generateRandomString(20)
+    const environment = clientConfig.env
 
     let id, token
     try {
@@ -89,14 +80,17 @@ export default function ExampleApp() {
         setUserToken(token)
       }
 
-      // opens the sdk flow
-      phylloConnect.initialize({
+      // set config
+      const config = {
         clientDisplayName,
         token,
         userId: id,
-        platformId,
-        env: config.env,
-      })
+        workPlatformId,
+        environment,
+      }
+
+      // opens the sdk flow
+      const phylloConnect = PhylloConnect.initialize(config)
       phylloConnect.open()
     } catch (e) {
       Alert.alert(e.message)

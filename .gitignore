@@ -67,9 +67,9 @@ lib/
 
 # examples
 examples/ios/*
-react-native-connect-0.0.1.tgz
-react-native-phyllo-connect-0.0.1.tgz
+*.tgz
 .env
 .vscode
 package-lock.json
 example/package-lock.json
+example/config.js

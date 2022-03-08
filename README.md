@@ -12,7 +12,7 @@
 
 ## Configuring the SDK
 
-In your react-native project directory:
+In your React Native project directory:
 
 ```sh
 npm install react-native-phyllo-connect
@@ -25,31 +25,34 @@ Then install iOS dependencies using cocoapods:\
 cd ios && pod install
 ```
 
-## React native implementation
+## React Native implementation
 
-### Import and create an instace
+### Importing from react-native-phyllo-connect
 
 ```sh
-// import the PhylloConnect to your application
 import PhylloConnect from 'react-native-phyllo-connect'
-
-// create an instance of PhylloConnect
-const phylloConnect = new PhylloConnect()
 ```
 
 ### Subscribing to events
 
 ```sh
 // Subscribe to an event by passing a callback
-const eventWatcher = phylloConnect.addAnEventListener('<event-type>', callbackFunction)
+PhylloConnect.on('<event-type>', callbackFunction)
 
-// Unsubscribe with remove
-eventWatcher.remove()
+const callbackFunction = (body) => {
+  // callback body
+}
 ```
 
-here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
+Event types can be `exit`, `accountConnected`, `accountDisconnected`, or `tokenExpired`.
+| Event type | Description | Callback body|
+| -----------| ------------| --------- |
+| exit | Called when a user exits from phyllo flow| user_id, reason |
+| accountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
+| accountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
+| tokenExpired | Called when a user token expires| user_id |
 
-Creating a user and token for a user
+### Creating a user and token
 
 - [Check this document on creating a user](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user)
 - [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)
@@ -57,23 +60,34 @@ Creating a user and token for a user
 ### Open Phyllo SDK flow
 
 ```sh
-phylloConnect.initialize({ clientDisplayName, userId, token, platformId, env});
+import { PhylloEnvironment } from 'react-native-phyllo-connect'
+
+const config = {
+  clientDisplayName: clientDisplayName,
+  token: token,
+  userId: userId,
+  environment: PhylloEnvironment.<environmentType>,
+  workPlatformId: workPlatformId,
+}
+
+const phylloConnect = PhylloConnect.initialize(config)
+phylloConnect.open()
 ```
 
-| Arguments         | Value                   | Type                                       |
-| ----------------- | ----------------------- | ------------------------------------------ |
-| clientDisplayName | Application Name        | String                                     |
-| userId            | User Id                 | String                                     |
-| token             | User Token              | String                                     |
-| platformId        | Platform Id             | String or Undefined                        |
-| env               | Development Environment | "development" or "production" or "sandbox" |
+| Arguments         | Value                  | Type                                                                                       |
+| ----------------- | ---------------------- | ------------------------------------------------------------------------------------------ |
+| clientDisplayName | Client Display Name    | String                                                                                     |
+| token             | User Token             | String                                                                                     |
+| userId            | User Id                | String                                                                                     |
+| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
+| workPlatformId    | Platform Id (optional) | String or Null                                                                             |
 
 ### Examples
 
-<b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/release-v0.0.1/example)
+<b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/main/example)
 </b>
 
-Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
+Facing any issue? We have listed solutions for some comman issues [here](https://github.com/getphyllo/phyllo-connect-reactnative/blob/develop/Issues.md), If it doesn't help you, feel free to raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
 
 ## Author
 

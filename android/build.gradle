@@ -40,7 +40,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation "com.getphyllo:phyllo-connect:0.1.13"
+    implementation "com.getphyllo:phyllo-connect:0.1.14"
     
     implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"

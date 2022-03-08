@@ -29,11 +29,11 @@ npm install
 cd ios && pod install
 ```
 
-### 🔑 Add your client ID and secrets to `example/config.js` file
+### 🔑 Add your credentials in `example/src/config.js` file
 
 > Assuming you have a client ID and secret, if not reach out at contact@getphyllo.com
 
-```
+```sh
 clientId = 'YOUR-CLIENT-ID'
 clientSecret = 'YOUR-SECRET-KEY'
 env = 'APPLICATION-ENVIRONMENT'
