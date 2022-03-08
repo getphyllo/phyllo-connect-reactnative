@@ -25,3 +25,5 @@ If you are facing this error on Android, modify android/gradle.properties and ad
 ```sh
 org.gradle.jvmargs=--add-opens java.base/java.io=ALL-UNNAMED
 ```
+
+If your issue not listed here, raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
