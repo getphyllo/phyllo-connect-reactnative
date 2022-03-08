@@ -8,7 +8,7 @@
 
 import Foundation
 import PhylloConnect
-import React
+
 
 @objc(PhylloConnectModule)
 public class PhylloConnectModule: RCTEventEmitter {
