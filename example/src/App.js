@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
 import PhylloConnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import Toast from 'react-native-simple-toast'
 
 import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
@@ -40,11 +41,15 @@ export default function ExampleApp() {
     console.log(
       `Exited from Phyllo flow, reason: ${reason}, userId: ${user_id}`
     )
+    Toast.show(`Exited from flow, reason: ${reason}, userId: ${user_id}`)
   }
   const onAccountConnectedCallBack = (body) => {
     const { account_id, user_id, work_platform_id } = body
     console.log(
-      `onAccountConnected => account_id:${account_id}, workPlatformId:${work_platform_id}, userId : ${user_id}`
+      `onAccountConnected => account_id:${account_id}, userId : ${user_id}, workPlatformId:${work_platform_id}`
+    )
+    Toast.show(
+      `Account Connected accountId: ${account_id}, userId: ${user_id}, work_platform_id: ${work_platform_id}`
     )
   }
   const onAccountDisconnectedCallBack = (body) => {
@@ -52,11 +57,15 @@ export default function ExampleApp() {
     console.log(
       `Account has disconnected userId: ${user_id}, workPlatformId: ${work_platform_id}, accountId: ${account_id} `
     )
+    Toast.show(
+      `Account Disconnected accountId: ${account_id}, workPlatformId: ${work_platform_id}, userId: ${user_id}`
+    )
   }
   const onTokenExpiredCallBack = (body) => {
     const { user_id } = body
     console.log(`The token has expired userId: ${user_id}`)
     AsyncStorage.clear()
+    Toast.show(`Token expired userId:${user_id}`)
   }
 
   const onPressButton = async (workPlatformId) => {
