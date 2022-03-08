@@ -7,29 +7,54 @@ interface IPhylloInitialize {
   token: string
   userId: string
   environment: PhylloEnvironment
-  workPlatformId?: string | undefined
+  workPlatformId?: string
 }
 
 type TEventType =
-  | 'onAccountConnected'
-  | 'onAccountDisconnected'
-  | 'onExit'
-  | 'onTokenExpired'
+  | 'accountConnected'
+  | 'accountDisconnected'
+  | 'exit'
+  | 'tokenExpired'
 
 const phyllo = NativeModules.PhylloConnectModule
 const eventEmitter = new NativeEventEmitter(phyllo)
 
+const validateConfig = (params: IPhylloInitialize) => {
+  if (!params.environment || !(params.environment in PhylloEnvironment)) {
+    throw new Error('Please provide a valid environment')
+  }
+  if (!params.userId) {
+    throw new Error('Please provide a User Id')
+  }
+  if (!params.clientDisplayName) {
+    throw new Error('Please Provide Client Display Name')
+  }
+  if (!params.token) {
+    throw new Error('Please provide a Token')
+  }
+}
+
 const PhylloConnectSDK = {
   on: (event: TEventType, callback: (body?: any) => {}) => {
-    return eventEmitter.addListener(event, callback)
+    // we are adding 'on' at the beginning, capitalize the next work, ex: exit -> onExit
+    const eventName = 'on' + event[0].toUpperCase() + event.slice(1)
+    return eventEmitter.addListener(eventName, callback)
   },
   initialize: ({
     clientDisplayName,
     token,
     userId,
     environment,
-    workPlatformId,
+    workPlatformId = '',
   }: IPhylloInitialize) => {
+    validateConfig({
+      clientDisplayName,
+      token,
+      userId,
+      environment,
+    })
+
+    // maintain the same order
     phyllo.initialize(
       clientDisplayName,
       token,
@@ -38,7 +63,7 @@ const PhylloConnectSDK = {
       workPlatformId
     )
 
-    // this is to match solely web sdk signature
+    // this is to solely match web sdk signature
     return { open: () => phyllo.open() }
   },
 }

@@ -5,8 +5,8 @@
 </h1>
 <div align="center">
 
-[![npm package](https://img.shields.io/npm/v/phyllo-connect-react-native.svg)](https://www.npmjs.com/package/phyllo-connect-react-native)
-<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Phyllo-connect-react-native is released under the MIT license." />
+[![npm package](https://img.shields.io/npm/v/react-native-phyllo-connect.svg)](https://www.npmjs.com/package/react-native-phyllo-connect)
+<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="react-native-phyllo-connect is released under the MIT license." />
 
 </div>
 
@@ -15,7 +15,7 @@
 In your react-native project directory:
 
 ```sh
-npm install phyllo-connect-react-native
+npm install react-native-phyllo-connect
 ```
 
 Then install iOS dependencies using cocoapods:\
@@ -27,10 +27,10 @@ cd ios && pod install
 
 ## React native implementation
 
-### Importing from phyllo-connect-react-native
+### Importing from react-native-phyllo-connect
 
 ```sh
-import Phylloconnect from 'phyllo-connect-react-native'
+import Phylloconnect from 'react-native-phyllo-connect'
 ```
 
 ### Subscribing to events
@@ -44,13 +44,13 @@ const callbackFunction = (body) => {
 }
 ```
 
-here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, `onTokenExpired`.
+here event type can be `exit`, `accountConnected`, `accountDisconnected`, `tokenExpired`.
 | Event type | Description | Callback body|
 | -----------| ------------| --------- |
-| onExit | Called when a user exits from phyllo flow| user_id, reason |
-| onAccountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
-| onAccountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
-| onTokenExpired | Called when a user token expires| user_id |
+| exit | Called when a user exits from phyllo flow| user_id, reason |
+| accountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
+| accountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
+| tokenExpired | Called when a user token expires| user_id |
 
 ### Creating a user and token
 
@@ -60,7 +60,7 @@ here event type can be `onExit`, `onAccountConnected`, `onAccountDisconnected`, 
 ### Open Phyllo SDK flow
 
 ```sh
-import { PhylloEnvironment } from 'phyllo-connect-react-native'
+import { PhylloEnvironment } from 'react-native-phyllo-connect'
 
 const config = {
   clientDisplayName: clientDisplayName,
@@ -74,20 +74,20 @@ const phylloConnect = PhylloConnect.initialize(config)
 phylloConnect.open()
 ```
 
-| Arguments         | Value                            | Type                                       |
-| ----------------- | -------------------------------- | ------------------------------------------ |
-| clientDisplayName | Client Display Name              | String                                     |
-| token             | User Token                       | String                                     |
-| userId            | User Id                          | String                                     |
-| environment       | Development Environmen           | "development" or "production" or "sandbox" |
-| workPlatformId    | Your Work Platform Id (optional) | String or Undefined                        |
+| Arguments         | Value                            | Type                                                                                       |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------------------------------ |
+| clientDisplayName | Client Display Name              | String                                                                                     |
+| token             | User Token                       | String                                                                                     |
+| userId            | User Id                          | String                                                                                     |
+| environment       | Development Environmen           | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
+| workPlatformId    | Your Work Platform Id (optional) | String or Null                                                                             |
 
 ### Examples
 
 <b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/release-v0.0.1/example)
 </b>
 
-Facing any issue? Feel free to raise an issue in the [issues section](<(https://github.com/getphyllo/phyllo-connect-reactnative/issues)>)
+Facing any issue? We have listed solutions for some comman issues [here](https://github.com/getphyllo/phyllo-connect-reactnative/blob/develop/issues.md), If it doesn't help you feel free to raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
 
 ## Author
 
