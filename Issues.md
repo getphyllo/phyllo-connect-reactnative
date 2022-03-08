@@ -26,7 +26,7 @@ If you are facing this error on Android, modify android/gradle.properties and ad
 org.gradle.jvmargs=--add-opens java.base/java.io=ALL-UNNAMED
 ```
 
-If your issue not listed here, raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
-
 3. **Specs satisfying the PhylloConnect (~> 0.1.21) dependency were found, but they required a higher minimum deployment target**
    > [!] CocoaPods could not find compatible versions for pod "PhylloConnect":react-native-phyllo-connect (from ../node_modules/react-native-phyllo-connect) was resolved to X.Y.Z, which depends on PhylloConnect (~> X.Y.Z)
+
+If your issue not listed here, raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
