@@ -19,7 +19,7 @@
     "react": "^17.0.2",
     "react-native": "^0.67.1",
     "react-native-bouncy-checkbox": "^2.1.10",
-    "react-native-phyllo-connect": "0.0.3"
+    "react-native-phyllo-connect": "file:../react-native-phyllo-connect-0.0.3.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
