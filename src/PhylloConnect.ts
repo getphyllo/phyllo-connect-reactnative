@@ -1,5 +1,11 @@
-import { NativeModules, NativeEventEmitter } from 'react-native'
-
+import { NativeModules, NativeEventEmitter, ToastAndroid } from 'react-native'
+import {
+  PHYLLO_ACCOUNT_CONNECTED_KEY,
+  PHYLLO_ACCOUNT_DISCONNECTED_KEY,
+  PHYLLO_ON_EXIT_KEY,
+  PHYLLO_ON_TOKEN_EXPIRED_KEY,
+  callBacksDefintionArr,
+} from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 
 interface IPhylloInitialize {
@@ -34,19 +40,56 @@ const validateConfig = (params: IPhylloInitialize) => {
   }
 }
 
+const validateCallbacks = (callbacksObj: any) => {
+  const keysArr = Object.keys(callbacksObj)
+  for (var i = 0; i < keysArr.length; i++) {
+    // cheking if callbacks are passed by developer
+    if (!callbacksObj[keysArr[i]])
+      throw new Error('Please add the callback: ' + keysArr[i])
+
+    //checking if the required number of parameters are passed in the callback
+    if (
+      callbacksObj[keysArr[i]].length !==
+      callBacksDefintionArr.filter((key) => key.callbackName === keysArr[i])[0]
+        .argsLength
+    ) {
+      throw new Error(
+        'Please match the required number of parameters in callback: ' +
+          keysArr[i]
+      )
+    }
+  }
+}
+
+const attachCallbacks = (callbackObj: any) => {
+  for (let key in callbackObj) {
+    const eventName = 'on' + key[0].toUpperCase() + key.slice(1)
+    eventEmitter.removeAllListeners(eventName)
+  }
+
+  for (let key in callbackObj) {
+    const eventName = 'on' + key[0].toUpperCase() + key.slice(1)
+    const sysCallback = (body: Array<string>) => {
+      callbackObj[key](...body)
+    }
+    eventEmitter.addListener(eventName, sysCallback)
+  }
+}
+
 const PhylloConnectSDK = {
-  on: (event: TEventType, callback: (body?: any) => {}) => {
-    // we are adding 'on' at the beginning, capitalize the next work, ex: exit -> onExit
-    const eventName = 'on' + event[0].toUpperCase() + event.slice(1)
-    return eventEmitter.addListener(eventName, callback)
+  callbacksObj: {
+    [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
+    [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
+    [PHYLLO_ON_TOKEN_EXPIRED_KEY.callbackName]: null,
+    [PHYLLO_ON_EXIT_KEY.callbackName]: null,
   },
-  initialize: ({
+  initialize: function ({
     clientDisplayName,
     token,
     userId,
     environment,
     workPlatformId = '',
-  }: IPhylloInitialize) => {
+  }: IPhylloInitialize) {
     validateConfig({
       clientDisplayName,
       token,
@@ -64,7 +107,16 @@ const PhylloConnectSDK = {
     )
 
     // this is to solely match web sdk signature
-    return { open: () => phyllo.open() }
+    return {
+      open: () => {
+        validateCallbacks(this.callbacksObj)
+        attachCallbacks(this.callbacksObj)
+        phyllo.open()
+      },
+      on: (event: TEventType, callback: any) => {
+        this.callbacksObj[event] = callback
+      },
+    }
   },
 }
 
