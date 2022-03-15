@@ -33,7 +33,7 @@ const validateConfig = (params: IPhylloInitialize) => {
     throw new Error('Please provide a User Id')
   }
   if (!params.clientDisplayName) {
-    throw new Error('Please Provide Client Display Name')
+    throw new Error('Please provide Client Display Name')
   }
   if (!params.token) {
     throw new Error('Please provide a Token')
