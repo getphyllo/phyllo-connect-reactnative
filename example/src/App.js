@@ -45,7 +45,7 @@ export default function ExampleApp() {
   }
   const onAccountDisconnectedCallBack = (accountId, workplatformId, userId) => {
     console.log(
-      'Account connected:',
+      'Account Disconnected:',
       accountId,
       'User ID:',
       userId,
