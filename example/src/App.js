@@ -37,20 +37,20 @@ export default function ExampleApp() {
     console.log(
       'Account connected:',
       accountId,
+      'Workplatform Item ID:',
+      workplatformId,
       'User ID:',
       userId,
-      'Workplatform Item ID:',
-      workplatformId
     )
   }
   const onAccountDisconnectedCallBack = (accountId, workplatformId, userId) => {
     console.log(
       'Account Disconnected:',
       accountId,
+      'Workplatform Item ID:',
+      workplatformId,
       'User ID:',
       userId,
-      'Workplatform Item ID:',
-      workplatformId
     )
   }
   const onTokenExpiredCallBack = (userId) => {
