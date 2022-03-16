@@ -31,30 +31,16 @@ export default function ExampleApp() {
 
   // A callback function called upon event
   const onExitCallBack = (reason, userId) => {
-    console.log('Flow exited with reason : ', reason, 'UserId : ', userId)
+    console.log(`onExit reason: ${reason}, userId: ${userId}`);
   }
   const onAccountConnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(
-      'Account connected:',
-      accountId,
-      'Workplatform Item ID:',
-      workplatformId,
-      'User ID:',
-      userId,
-    )
+    console.log(`onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`);
   }
   const onAccountDisconnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(
-      'Account Disconnected:',
-      accountId,
-      'Workplatform Item ID:',
-      workplatformId,
-      'User ID:',
-      userId,
-    )
+    console.log(`onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`);
   }
   const onTokenExpiredCallBack = (userId) => {
-    console.log('Token got expired', userId)
+    console.log(`onTokenExpired userId: ${userId}`);
   }
 
   const onPressButton = async (workPlatformId) => {
