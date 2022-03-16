@@ -8,8 +8,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "start": "react-native start",
-    "test": "jest",
-    "dev": "cd .. && npm pack && cd example && npm install ../react-native-phyllo-connect-0.0.9.tgz"
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.16.1",
