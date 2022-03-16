@@ -273,7 +273,7 @@ PODS:
   - React-jsinspector (0.67.3)
   - React-logger (0.67.3):
     - glog
-  - react-native-phyllo-connect (0.1.14):
+  - react-native-phyllo-connect (0.1.15):
     - PhylloConnect (~> 0.1.24)
     - React
   - react-native-simple-toast (1.1.3):
@@ -529,7 +529,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 15ea57ead631a11fad57634ff69f78e797113a39
   React-jsinspector: 1e1e03345cf6d47779e2061d679d0a87d9ae73d8
   React-logger: 1e10789cb84f99288479ba5f20822ce43ced6ffe
-  react-native-phyllo-connect: 950868d45adab2003550551119a5899c7a2e93b7
+  react-native-phyllo-connect: e7fbc8fc1b54b9827603cbdd9c0f6020eb383ecc
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
   React-perflogger: 93d3f142d6d9a46e635f09ba0518027215a41098
   React-RCTActionSheet: 87327c3722203cc79cf79d02fb83e7332aeedd18
