@@ -29,7 +29,7 @@ org.gradle.jvmargs=--add-opens java.base/java.io=ALL-UNNAMED
 <br>
 <br>
 
-3. **Specs satisfying the PhylloConnect (~> 0.1.21) dependency were found, but they required a higher minimum deployment target**
+3. **Specs satisfying the PhylloConnect (~> 0.1.X) dependency were found, but they required a higher minimum deployment target**
    > [!] CocoaPods could not find compatible versions for pod "PhylloConnect":react-native-phyllo-connect (from ../node_modules/react-native-phyllo-connect) was resolved to X.Y.Z, which depends on PhylloConnect (~> X.Y.Z)
 
 If you are facing this error on pod install, then run

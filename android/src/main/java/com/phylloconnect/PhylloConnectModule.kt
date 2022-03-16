@@ -17,7 +17,7 @@ import android.view.WindowManager
 import android.view.Window
 import android.view.View
 import android.content.Intent
-import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
@@ -38,11 +38,11 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             environment = getPhylloEnvironment(environment),
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
-                    val params = Arguments.createMap();
-                    params.putString("account_id", accountId);
-                    params.putString("user_id", userId);
-                    params.putString("work_platform_id", platformId);
-                    sendEvent("onAccountConnected", params);
+                    val values = Arguments.createArray();
+                    values.pushString(accountId);
+                    values.pushString(platformId);
+                    values.pushString(userId);
+                    sendEvent("onAccountConnected", values);
                 }
 
                 override fun onError(errorMsg: String?) {
@@ -54,24 +54,24 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                 }
 
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
-                    val params = Arguments.createMap();
-                    params.putString("account_id", accountId);
-                    params.putString("user_id", userId);
-                    params.putString("work_platform_id", platformId);
-                    sendEvent("onAccountDisconnected", params);
+                    val values = Arguments.createArray();
+                    values.pushString(accountId);
+                    values.pushString(platformId);
+                    values.pushString(userId);
+                    sendEvent("onAccountDisconnected", values);
                 }
 
                 override fun onTokenExpired(userId: String?) {
-                    val params = Arguments.createMap();
-                    params.putString("user_id", userId);
-                    sendEvent("onTokenExpired", params);
+                    val values = Arguments.createArray();
+                    values.pushString(userId);
+                    sendEvent("onTokenExpired", values);
                 }
 
                 override fun onExit(reason:String?,userId: String?) {
-                    val params = Arguments.createMap();
-                    params.putString("user_id", userId);
-                    params.putString("reason", reason);
-                    sendEvent("onExit", params);
+                    val values = Arguments.createArray();
+                    values.pushString(reason);
+                    values.pushString(userId);
+                    sendEvent("onExit", values);
                 }
             })
         }
@@ -103,9 +103,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
   
     private fun sendEvent(
                     eventName:String,
-                    params:WritableMap?) {
+                    values:WritableArray?) {
         
-        reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, params)
+        reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit(eventName, values)
     }
 
       // Required for rn built in EventEmitter Calls. Otherwise it'll show warnings

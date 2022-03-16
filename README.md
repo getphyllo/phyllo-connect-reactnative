@@ -33,54 +33,57 @@ cd ios && pod install
 import PhylloConnect from 'react-native-phyllo-connect'
 ```
 
-### Subscribing to events
-
-```sh
-// Subscribe to an event by passing a callback
-PhylloConnect.on('<event-type>', callbackFunction)
-
-const callbackFunction = (body) => {
-  // callback body
-}
-```
-
-Event types can be `exit`, `accountConnected`, `accountDisconnected`, or `tokenExpired`.
-| Event type | Description | Callback body|
-| -----------| ------------| --------- |
-| exit | Called when a user exits from phyllo flow| user_id, reason |
-| accountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
-| accountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
-| tokenExpired | Called when a user token expires| user_id |
-
 ### Creating a user and token
 
 - [Check this document on creating a user](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user)
 - [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)
 
-### Open Phyllo SDK flow
+### Create a Phyllo Connect SDK Configuration
 
 ```sh
-import { PhylloEnvironment } from 'react-native-phyllo-connect'
+import PhylloConnect, { PhylloEnvironment } from "react-native-phyllo-connect";
 
 const config = {
-  clientDisplayName: clientDisplayName,
+  clientDisplayName: clientDisplayName, // the name of your app that you want the creators to see while granting access
+  environment: PhylloEnvironment.sandbox, // the mode in which you want to use the SDK,  `sandbox` or `production`
+  userId: userId, // the unique user_id parameter returned by Phyllo API when you create a user (see https://docs.getphyllo.com/docs/api-reference/reference/openapi.v1.yml/paths/~1v1~1users/post)
   token: token,
-  userId: userId,
-  environment: PhylloEnvironment.<environmentType>,
-  workPlatformId: workPlatformId,
-}
+  workPlatformId: workPlatformId, // (optional) the unique work_platform_id of a specific work platform, if you want the creator to skip the platform selection screen and just be able to connect just with a single work platform
+};
 
-const phylloConnect = PhylloConnect.initialize(config)
-phylloConnect.open()
+const phylloConnect = PhylloConnect.initialize(config);
 ```
 
-| Arguments         | Value                  | Type                                                                                       |
-| ----------------- | ---------------------- | ------------------------------------------------------------------------------------------ |
-| clientDisplayName | Client Display Name    | String                                                                                     |
-| token             | User Token             | String                                                                                     |
-| userId            | User Id                | String                                                                                     |
-| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
-| workPlatformId    | Platform Id (optional) | String or Null                                                                             |
+| Arguments         | Value                  | Type                                                      |
+| ----------------- | ---------------------- | --------------------------------------------------------- |
+| clientDisplayName | Client Display Name    | String                                                    |
+| token             | User Token             | String                                                    |
+| userId            | User Id                | String                                                    |
+| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.production |
+| workPlatformId    | Platform Id (optional) | String or Null                                            |
+
+### Subscribing to events
+
+```sh
+phylloConnect.on("accountConnected", (accountId, workplatformId, userId) => {  // gives the successfully connected account ID and work platform ID for the given user ID
+  console.log(`onAccountConnected: ${accountId}, ${workplatformId}, ${userId}`);
+})
+phylloConnect.on("accountDisconnected", (accountId, workplatformId, userId) => {  // gives the successfully disconnected account ID and work platform ID for the given user ID
+  console.log(`onAccountDisconnected: ${accountId}, ${workplatformId}, ${userId}`);
+})
+phylloConnect.on("tokenExpired", (userId) => {  // gives the user ID for which the token has expired
+  console.log(`onTokenExpired: ${userId}`);
+})
+phylloConnect.on("exit", (reason, userId) => {  // indicated that the user with given user ID has closed the SDK and gives an appropriate reason for it
+  console.log(`onExit: ${reason}, ${userId}`);
+})
+```
+
+### Open the connection screen
+
+```sh
+phylloConnect.open();
+```
 
 ### Examples
 
