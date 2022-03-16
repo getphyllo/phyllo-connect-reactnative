@@ -80,12 +80,9 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountConnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var dic = [String:String]()
-      dic["account_id"] = account_id
-      dic["work_platform_id"] = work_platform_id
-      dic["user_id"] = user_id
+      var values : [String] = [account_id, work_platform_id, user_id]
       if self.hasObservers ?? false {
-            self.sendEvent(withName: "onAccountConnected", body: dic)
+            self.sendEvent(withName: "onAccountConnected", body: values)
       }
     }
     
@@ -94,12 +91,9 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountDisconnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var dic = [String:String]()
-      dic["account_id"] = account_id
-      dic["work_platform_id"] = work_platform_id
-      dic["user_id"] = user_id
+      var values : [String] = [account_id, work_platform_id, user_id]
       if self.hasObservers ?? false {
-            self.sendEvent(withName: "onAccountDisconnected", body: dic)
+            self.sendEvent(withName: "onAccountDisconnected", body: values)
       }
     }
   }
@@ -107,22 +101,20 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onTokenExpired(user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var dic = [String:String]()
-      dic["user_id"] = user_id
+      var values : [String] = [user_id]
       if self.hasObservers ?? false {
-            self.sendEvent(withName: "onTokenExpired", body: dic)
+            self.sendEvent(withName: "onTokenExpired", body: values)
       }
     }
   }
+
   
   public func onExit(reason: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var dic = [String:String]()
-      dic["user_id"] = user_id
-      dic["reason"] = reason
+      var values = [reason, user_id]
       if self.hasObservers ?? false {
-            self.sendEvent(withName: "onExit", body: dic)
+            self.sendEvent(withName: "onExit", body: values)
       }
     }
   }

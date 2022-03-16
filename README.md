@@ -33,54 +33,57 @@ cd ios && pod install
 import PhylloConnect from 'react-native-phyllo-connect'
 ```
 
-### Subscribing to events
-
-```sh
-// Subscribe to an event by passing a callback
-PhylloConnect.on('<event-type>', callbackFunction)
-
-const callbackFunction = (body) => {
-  // callback body
-}
-```
-
-Event types can be `exit`, `accountConnected`, `accountDisconnected`, or `tokenExpired`.
-| Event type | Description | Callback body|
-| -----------| ------------| --------- |
-| exit | Called when a user exits from phyllo flow| user_id, reason |
-| accountConnected | Called when a user connects a platform| user_id, account_id, work_platform_id |
-| accountDisconnected | Called when a user disconnects a platform| user_id, account_id, work_platform_id |
-| tokenExpired | Called when a user token expires| user_id |
-
 ### Creating a user and token
 
 - [Check this document on creating a user](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user)
 - [Check this document on creating a user token](https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzc-create-an-sdk-token)
 
-### Open Phyllo SDK flow
+### Create a Phyllo Connect SDK Configuration
 
 ```sh
-import { PhylloEnvironment } from 'react-native-phyllo-connect'
+import PhylloConnect, { PhylloEnvironment } from "react-native-phyllo-connect";
 
 const config = {
   clientDisplayName: clientDisplayName,
-  token: token,
-  userId: userId,
   environment: PhylloEnvironment.<environmentType>,
-  workPlatformId: workPlatformId,
-}
+  userId: userId,
+  token: token,
+  workPlatformId: workPlatformId, // (optional)
+};
 
-const phylloConnect = PhylloConnect.initialize(config)
-phylloConnect.open()
+const phylloConnect = PhylloConnect.initialize(config);
 ```
 
-| Arguments         | Value                  | Type                                                                                       |
-| ----------------- | ---------------------- | ------------------------------------------------------------------------------------------ |
-| clientDisplayName | Client Display Name    | String                                                                                     |
-| token             | User Token             | String                                                                                     |
-| userId            | User Id                | String                                                                                     |
-| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.development or PhylloEnvironment.production |
-| workPlatformId    | Platform Id (optional) | String or Null                                                                             |
+| Arguments         | Value                  | Type                                                      |
+| ----------------- | ---------------------- | --------------------------------------------------------- |
+| clientDisplayName | Client Display Name    | String                                                    |
+| token             | User Token             | String                                                    |
+| userId            | User Id                | String                                                    |
+| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.production |
+| workPlatformId    | Platform Id (optional) | String or Null                                            |
+
+### Subscribing to events
+
+```sh
+phylloConnect.on("accountConnected", (account_id, work_platform_id, user_id) => {
+  console.log(`onAccountConnected: ${account_id}, ${work_platform_id}, ${user_id}`);
+})
+phylloConnect.on("accountDisconnected", (account_id, work_platform_id, user_id) => {
+  console.log(`onAccountDisconnected: ${account_id}, ${work_platform_id}, ${user_id}`);
+})
+phylloConnect.on("tokenExpired", (user_id) => {
+  console.log(`onTokenExpired: ${user_id}`);
+})
+phylloConnect.on("exit", (reason, user_id) => {
+  console.log(`onExit: ${reason}, ${user_id}`);
+})
+```
+
+### Open the connection screen
+
+```sh
+phylloConnect.open();
+```
 
 ### Examples
 
