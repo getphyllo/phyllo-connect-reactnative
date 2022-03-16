@@ -7,7 +7,6 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
 import clientConfig from './config'
-import config from './config'
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
@@ -31,16 +30,20 @@ export default function ExampleApp() {
 
   // A callback function called upon event
   const onExitCallBack = (reason, userId) => {
-    console.log(`onExit reason: ${reason}, userId: ${userId}`);
+    console.log(`onExit reason: ${reason}, userId: ${userId}`)
   }
   const onAccountConnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(`onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`);
+    console.log(
+      `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
   }
   const onAccountDisconnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(`onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`);
+    console.log(
+      `onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
   }
   const onTokenExpiredCallBack = (userId) => {
-    console.log(`onTokenExpired userId: ${userId}`);
+    console.log(`onTokenExpired userId: ${userId}`)
   }
 
   const onPressButton = async (workPlatformId) => {
