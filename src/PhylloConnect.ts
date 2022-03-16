@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter, ToastAndroid } from 'react-native'
+import { NativeModules, NativeEventEmitter } from 'react-native'
 import {
   PHYLLO_ACCOUNT_CONNECTED_KEY,
   PHYLLO_ACCOUNT_DISCONNECTED_KEY,

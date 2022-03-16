@@ -44,11 +44,11 @@ import PhylloConnect from 'react-native-phyllo-connect'
 import PhylloConnect, { PhylloEnvironment } from "react-native-phyllo-connect";
 
 const config = {
-  clientDisplayName: clientDisplayName,
-  environment: PhylloEnvironment.<environmentType>,
-  userId: userId,
+  clientDisplayName: clientDisplayName, // the name of your app that you want the creators to see while granting access
+  environment: PhylloEnvironment.sandbox, // the mode in which you want to use the SDK,  `sandbox` or `production`
+  userId: userId, // the unique user_id parameter returned by Phyllo API when you create a user (see https://docs.getphyllo.com/docs/api-reference/reference/openapi.v1.yml/paths/~1v1~1users/post)
   token: token,
-  workPlatformId: workPlatformId, // (optional)
+  workPlatformId: workPlatformId, // (optional) the unique work_platform_id of a specific work platform, if you want the creator to skip the platform selection screen and just be able to connect just with a single work platform
 };
 
 const phylloConnect = PhylloConnect.initialize(config);
@@ -65,17 +65,17 @@ const phylloConnect = PhylloConnect.initialize(config);
 ### Subscribing to events
 
 ```sh
-phylloConnect.on("accountConnected", (account_id, work_platform_id, user_id) => {
-  console.log(`onAccountConnected: ${account_id}, ${work_platform_id}, ${user_id}`);
+phylloConnect.on("accountConnected", (accountId, workplatformId, userId) => {  // gives the successfully connected account ID and work platform ID for the given user ID
+  console.log(`onAccountConnected: ${accountId}, ${workplatformId}, ${userId}`);
 })
-phylloConnect.on("accountDisconnected", (account_id, work_platform_id, user_id) => {
-  console.log(`onAccountDisconnected: ${account_id}, ${work_platform_id}, ${user_id}`);
+phylloConnect.on("accountDisconnected", (accountId, workplatformId, userId) => {  // gives the successfully disconnected account ID and work platform ID for the given user ID
+  console.log(`onAccountDisconnected: ${accountId}, ${workplatformId}, ${userId}`);
 })
-phylloConnect.on("tokenExpired", (user_id) => {
-  console.log(`onTokenExpired: ${user_id}`);
+phylloConnect.on("tokenExpired", (userId) => {  // gives the user ID for which the token has expired
+  console.log(`onTokenExpired: ${userId}`);
 })
-phylloConnect.on("exit", (reason, user_id) => {
-  console.log(`onExit: ${reason}, ${user_id}`);
+phylloConnect.on("exit", (reason, userId) => {  // indicated that the user with given user ID has closed the SDK and gives an appropriate reason for it
+  console.log(`onExit: ${reason}, ${userId}`);
 })
 ```
 
