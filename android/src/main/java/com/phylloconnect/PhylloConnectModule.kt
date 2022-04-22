@@ -31,10 +31,10 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String) {       
         Handler(Looper.getMainLooper()).post {
             PhylloConnect.initialize(context = reactApplicationContext,
-            name = name,
+            clientDisplayName = name,
             userId = userId,
             token = token,
-            platformId = platformId,
+            workPlatformId = platformId,
             environment = getPhylloEnvironment(environment),
             callback = object : ConnectCallback {
                 override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
@@ -43,14 +43,6 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     values.pushString(platformId);
                     values.pushString(userId);
                     sendEvent("onAccountConnected", values);
-                }
-
-                override fun onError(errorMsg: String?) {
-
-                }
-
-                override fun onEvent(event: PhylloConnect.EVENT) {
-
                 }
 
                 override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {

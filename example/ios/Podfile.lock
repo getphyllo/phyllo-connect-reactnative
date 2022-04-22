@@ -74,7 +74,7 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
-  - PhylloConnect (0.1.24)
+  - PhylloConnect (0.1.25)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -273,7 +273,7 @@ PODS:
   - React-jsinspector (0.67.3)
   - React-logger (0.67.3):
     - glog
-  - react-native-phyllo-connect (0.1.15):
+  - react-native-phyllo-connect (0.1.16):
     - PhylloConnect (~> 0.1.24)
     - React
   - react-native-simple-toast (1.1.3):
@@ -344,7 +344,7 @@ PODS:
     - React-jsi (= 0.67.3)
     - React-logger (= 0.67.3)
     - React-perflogger (= 0.67.3)
-  - RNCAsyncStorage (1.16.3):
+  - RNCAsyncStorage (1.16.1):
     - React-Core
   - Toast (4.0.0)
   - Yoga (1.14.0)
@@ -516,7 +516,7 @@ SPEC CHECKSUMS:
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
-  PhylloConnect: 5165b638a5c905e581f9c495ecdee51204b122cc
+  PhylloConnect: a114f3dcaeccecead89eb38f457462a5f24db5b2
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: 3c77b683474faf23920fbefc71c4e13af21470c0
   RCTTypeSafety: 720b1841260dac692444c2822b27403178da8b28
@@ -529,7 +529,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 15ea57ead631a11fad57634ff69f78e797113a39
   React-jsinspector: 1e1e03345cf6d47779e2061d679d0a87d9ae73d8
   React-logger: 1e10789cb84f99288479ba5f20822ce43ced6ffe
-  react-native-phyllo-connect: e7fbc8fc1b54b9827603cbdd9c0f6020eb383ecc
+  react-native-phyllo-connect: c08c998161e78fd869bec153c6d55f1c71aff4b6
   react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
   React-perflogger: 93d3f142d6d9a46e635f09ba0518027215a41098
   React-RCTActionSheet: 87327c3722203cc79cf79d02fb83e7332aeedd18
@@ -543,7 +543,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: d0361f15ea978958fab7ffb6960f475b5063d83f
   React-runtimeexecutor: af1946623656f9c5fd64ca6f36f3863516193446
   ReactCommon: 650e33cde4fb7d36781cd3143f5276da0abb2f96
-  RNCAsyncStorage: 13d3b40c7fae0796d10b23fbec382e7a76807a0f
+  RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: 90dcd029e45d8a7c1ff059e8b3c6612ff409061a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
