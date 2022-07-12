@@ -41,7 +41,7 @@ public class PhylloConnectModule: RCTEventEmitter {
             let phylloConfig = PhylloConfig (
                                             environment: self.getEnvironment(env: environment),
                                             clientDisplayName: clientDisplayName,
-                                            token: "Bearer \(token)",
+                                            token: "\(token)",
                                             userId: userId,
                                             delegate:self,
                                             workPlatformId: workPlatformId
