@@ -32,26 +32,26 @@ android {
     }
 }
 
-// rootProject.allprojects {
-//     repositories {
-//         google()
-//         maven{
-//             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-//         }
-//         //mavenCentral()
-//     }
-// }
-
-repositories {
-    google()
-    mavenCentral()
+rootProject.allprojects {
+    repositories {
+        google()
+        maven{
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+        }
+        //mavenCentral()
+    }
 }
+
+// repositories {
+//     google()
+//     mavenCentral()
+// }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.getphyllo:phyllo-connect:0.1.17'
-    
+    //implementation 'com.getphyllo:phyllo-connect:0.1.17'
+    implementation "com.getphyllo:phyllo-connect:0.1.19.3-SNAPSHOT"
     implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }
