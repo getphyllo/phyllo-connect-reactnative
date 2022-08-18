@@ -65,6 +65,14 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     values.pushString(userId);
                     sendEvent("onExit", values);
                 }
+
+                override fun onConnectionFailure(reason: String?,user_id: String?,work_platform_id: String?) {
+                    val values = Arguments.createArray();
+                    values.pushString(reason);
+                    values.pushString(user_id);
+                    values.pushString(work_platform_id);
+                    sendEvent("onConnectionFailure", values);
+                }
             })
         }
     }
