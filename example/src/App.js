@@ -7,6 +7,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
 import clientConfig from './config'
+import Toast from 'react-native-simple-toast'
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
@@ -31,9 +32,13 @@ export default function ExampleApp() {
   // A callback function called upon event
   const onExitCallBack = (reason, userId) => {
     console.log(`onExit reason: ${reason}, userId: ${userId}`)
+    Toast.show(`onExit reason: ${reason}, userId: ${userId}`)
   }
   const onAccountConnectedCallBack = (accountId, workplatformId, userId) => {
     console.log(
+      `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
+    Toast.show(
       `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
     )
   }
@@ -41,9 +46,22 @@ export default function ExampleApp() {
     console.log(
       `onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
     )
+    Toast.show(
+      `onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
   }
   const onTokenExpiredCallBack = (userId) => {
     console.log(`onTokenExpired userId: ${userId}`)
+    Toast.show(`onTokenExpired userId: ${userId}`)
+  }
+
+  const onConnectionFailure = (reason, workplatformId, userId) => {
+    console.log(
+      `onConnectionFailure reason: ${reason}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
+    Toast.show(
+      `onConnectionFailure reason: ${reason}, workplatformId: ${workplatformId}, userId: ${userId}`
+    )
   }
 
   const onPressButton = async (workPlatformId) => {
@@ -83,6 +101,8 @@ export default function ExampleApp() {
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
       phylloConnect.on('accountConnected', onAccountConnectedCallBack)
       phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
+      phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
+      // phylloConnect.on('connectionFailure', onConnectionFailure)
 
       phylloConnect.open()
     } catch (e) {

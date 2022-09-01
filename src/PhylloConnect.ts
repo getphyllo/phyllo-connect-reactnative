@@ -4,8 +4,7 @@ import {
   PHYLLO_ACCOUNT_DISCONNECTED_KEY,
   PHYLLO_ON_EXIT_KEY,
   PHYLLO_ON_TOKEN_EXPIRED_KEY,
-  callBacksDefintionArr,
-  callBacksDefinitionArr
+  callBacksDefinitionArr,
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 
@@ -42,22 +41,36 @@ const validateConfig = (params: IPhylloInitialize) => {
 }
 
 const validateCallbacks = (callbacksObj: any) => {
-  const keysArr = Object.keys(callbacksObj);
-  for(var i = 0 ; i < keysArr.length; i++) {
+  const keysArr = Object.keys(callbacksObj)
+  for (var i = 0; i < keysArr.length; i++) {
     // cheking if callbacks are passed by developer
-    if(!callbacksObj[keysArr[i]]) {
+    if (!callbacksObj[keysArr[i]]) {
       // checking if the missing callback is an optional or mandatory callback and throw error accordingly
-      if(callBacksDefinitionArr.mandatoryCallbacks.filter(item => item.callbackName === keysArr[i]).length > 0) throw new Error("Please add the callback: "+ keysArr[i]);
+      if (
+        callBacksDefinitionArr.mandatoryCallbacks.filter(
+          (item) => item.callbackName === keysArr[i]
+        ).length > 0
+      )
+        throw new Error('Please add the callback: ' + keysArr[i])
     }
 
     //checking if the required number of parameters are passed in the callback
-    if(callbacksObj[keysArr[i]]) {
-      if(callbacksObj[keysArr[i]].length < [...callBacksDefinitionArr.mandatoryCallbacks,...callBacksDefinitionArr.optionalCallbacks].filter(key => key.callbackName === keysArr[i])[0].argsLength)  {
-        throw new Error("Please add the required number of parameters in callback: "+ keysArr[i]);
-    }
+    if (callbacksObj[keysArr[i]]) {
+      if (
+        callbacksObj[keysArr[i]].length <
+        [
+          ...callBacksDefinitionArr.mandatoryCallbacks,
+          ...callBacksDefinitionArr.optionalCallbacks,
+        ].filter((key) => key.callbackName === keysArr[i])[0].argsLength
+      ) {
+        throw new Error(
+          'Please add the required number of parameters in callback: ' +
+            keysArr[i]
+        )
+      }
     }
   }
-};
+}
 
 // const validateCallbacks = (callbacksObj: any) => {
 //   const keysArr = Object.keys(callbacksObj)
@@ -66,7 +79,6 @@ const validateCallbacks = (callbacksObj: any) => {
 //     // cheking if callbacks are passed by developer
 //     if (!callbacksObj[keysArr[i]])
 //       throw new Error('Please add the callback: ' + keysArr[i])
-    
 
 //     //checking if the required number of parameters are passed in the callback
 //     if (
@@ -98,9 +110,12 @@ const attachCallbacks = (callbackObj: any) => {
 }
 
 const PhylloConnectSDK = {
-  callbacksObj: [...callBacksDefinitionArr.mandatoryCallbacks,...callBacksDefinitionArr.optionalCallbacks].forEach(key => {
-    callbacksObj[key.callbackName] = null
-  }),
+  callbacksObj: {
+    [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
+    [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
+    [PHYLLO_ON_TOKEN_EXPIRED_KEY.callbackName]: null,
+    [PHYLLO_ON_EXIT_KEY.callbackName]: null,
+  },
   // callbacksObj: {
   //   [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
   //   [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
@@ -137,13 +152,12 @@ const PhylloConnectSDK = {
         attachCallbacks(this.callbacksObj)
         phyllo.open()
       },
-      on: (event: TEventType, callback: any) => {
+      on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
       },
     }
   },
 }
-
 
 // export the object
 export default PhylloConnectSDK
