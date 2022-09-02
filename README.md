@@ -77,7 +77,7 @@ phylloConnect.on("tokenExpired", (userId) => {  // gives the user ID for which t
 phylloConnect.on("exit", (reason, userId) => {  // indicated that the user with given user ID has closed the SDK and gives an appropriate reason for it
   console.log(`onExit: ${reason}, ${userId}`);
 })
-phylloConnect.on("onConnectionFailure", (reason, workplatformId, userId) => {  // optional, Connection failure callback support : User can now add a new callback connectionFailure for tracking the reason of accounts not getting connected , this is optional callback .
+phylloConnect.on("connectionFailure", (reason, workplatformId, userId) => {  // optional, Connection failure callback support : User can now add a new callback connectionFailure for tracking the reason of accounts not getting connected , this is optional callback .
   console.log(`onConnectionFailure: ${reason}, ${workplatformId}, ${userId}`);
 })
 ```
