@@ -119,4 +119,14 @@ extension PhylloConnectModule : PhylloConnectDelegate {
       }
     }
   }
+
+  public func onConnectionFailure(reason: String,work_platform_id:String ,user_id: String) { 
+    //Event Sent After Get Connect
+    DispatchQueue.main.async {
+      var values = [reason,work_platform_id,user_id]
+      if self.hasObservers ?? false {
+            self.sendEvent(withName: "onConnectionFailure", body: values)
+      }
+    }
+  }
 }

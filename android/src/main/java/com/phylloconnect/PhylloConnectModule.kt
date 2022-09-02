@@ -36,34 +36,42 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             token = token,
             workPlatformId = platformId,
             environment = getPhylloEnvironment(environment),
-            callback = object : ConnectCallback {
-                override fun onAccountConnected(accountId: String?,platformId: String?, userId: String?) {
+            callback = object : ConnectCallback (){
+                override fun onAccountConnected(account_id: String?,work_platform_id: String?, user_id: String?) {
                     val values = Arguments.createArray();
-                    values.pushString(accountId);
-                    values.pushString(platformId);
-                    values.pushString(userId);
+                    values.pushString(account_id);
+                    values.pushString(work_platform_id);
+                    values.pushString(user_id);
                     sendEvent("onAccountConnected", values);
                 }
 
-                override fun onAccountDisconnected(accountId: String?,platformId: String?, userId: String?) {
+                override fun onAccountDisconnected(account_id: String?,work_platform_id: String?, user_id: String?) {
                     val values = Arguments.createArray();
-                    values.pushString(accountId);
-                    values.pushString(platformId);
-                    values.pushString(userId);
+                    values.pushString(account_id);
+                    values.pushString(work_platform_id);
+                    values.pushString(user_id);
                     sendEvent("onAccountDisconnected", values);
                 }
 
-                override fun onTokenExpired(userId: String?) {
+                override fun onTokenExpired(user_id: String?) {
                     val values = Arguments.createArray();
-                    values.pushString(userId);
+                    values.pushString(user_id);
                     sendEvent("onTokenExpired", values);
                 }
 
-                override fun onExit(reason:String?,userId: String?) {
+                override fun onExit(reason:String?, user_id: String?) {
                     val values = Arguments.createArray();
                     values.pushString(reason);
-                    values.pushString(userId);
+                    values.pushString(user_id);
                     sendEvent("onExit", values);
+                }
+
+                override fun onConnectionFailure(reason: String?,work_platform_id: String?,user_id: String?) {
+                    val values = Arguments.createArray();
+                    values.pushString(reason);
+                    values.pushString(work_platform_id);
+                    values.pushString(user_id);
+                    sendEvent("onConnectionFailure", values);
                 }
             })
         }

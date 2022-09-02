@@ -4,10 +4,10 @@ import {
   PHYLLO_ACCOUNT_DISCONNECTED_KEY,
   PHYLLO_ON_EXIT_KEY,
   PHYLLO_ON_TOKEN_EXPIRED_KEY,
-  callBacksDefintionArr,
+  callBacksDefinitionArr,
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
-
+import { ICallbacks } from './constants'
 interface IPhylloInitialize {
   clientDisplayName: string
   token: string
@@ -44,22 +44,55 @@ const validateCallbacks = (callbacksObj: any) => {
   const keysArr = Object.keys(callbacksObj)
   for (var i = 0; i < keysArr.length; i++) {
     // cheking if callbacks are passed by developer
-    if (!callbacksObj[keysArr[i]])
-      throw new Error('Please add the callback: ' + keysArr[i])
+    if (!callbacksObj[keysArr[i]]) {
+      // checking if the missing callback is an optional or mandatory callback and throw error accordingly
+      if (
+        callBacksDefinitionArr.mandatoryCallbacks.filter(
+          (item) => item.callbackName === keysArr[i]
+        ).length > 0
+      )
+        throw new Error('Please add the callback: ' + keysArr[i])
+    }
 
     //checking if the required number of parameters are passed in the callback
-    if (
-      callbacksObj[keysArr[i]].length !==
-      callBacksDefintionArr.filter((key) => key.callbackName === keysArr[i])[0]
-        .argsLength
-    ) {
-      throw new Error(
-        'Please match the required number of parameters in callback: ' +
-          keysArr[i]
-      )
+    if (callbacksObj[keysArr[i]]) {
+      if (
+        callbacksObj[keysArr[i]].length <
+        [
+          ...callBacksDefinitionArr.mandatoryCallbacks,
+          ...callBacksDefinitionArr.optionalCallbacks,
+        ].filter((key) => key.callbackName === keysArr[i])[0].argsLength
+      ) {
+        throw new Error(
+          'Please add the required number of parameters in callback: ' +
+            keysArr[i]
+        )
+      }
     }
   }
 }
+
+// const validateCallbacks = (callbacksObj: any) => {
+//   const keysArr = Object.keys(callbacksObj)
+//   // ['connect', 'disconnect', 'tokenExpired']
+//   for (var i = 0; i < keysArr.length; i++) {
+//     // cheking if callbacks are passed by developer
+//     if (!callbacksObj[keysArr[i]])
+//       throw new Error('Please add the callback: ' + keysArr[i])
+
+//     //checking if the required number of parameters are passed in the callback
+//     if (
+//       callbacksObj[keysArr[i]].length !==
+//       callBacksDefintionArr.filter((key) => key.callbackName === keysArr[i])[0]
+//         .argsLength
+//     ) {
+//       throw new Error(
+//         'Please match the required number of parameters in callback: ' +
+//           keysArr[i]
+//       )
+//     }
+//   }
+// }
 
 const attachCallbacks = (callbackObj: any) => {
   for (let key in callbackObj) {
@@ -75,14 +108,35 @@ const attachCallbacks = (callbackObj: any) => {
     eventEmitter.addListener(eventName, sysCallback)
   }
 }
+interface ICallBackObj {
+  [key: string]: any
+}
+
+const callbacksObj: ICallBackObj = {}
+const callbacksArray: Array<ICallbacks> = [
+  ...callBacksDefinitionArr.mandatoryCallbacks,
+  ...callBacksDefinitionArr.optionalCallbacks,
+]
+
+callbacksArray.forEach((key) => {
+  callbacksObj[key.callbackName] = null
+})
 
 const PhylloConnectSDK = {
-  callbacksObj: {
-    [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
-    [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
-    [PHYLLO_ON_TOKEN_EXPIRED_KEY.callbackName]: null,
-    [PHYLLO_ON_EXIT_KEY.callbackName]: null,
-  },
+  // const callbacksObj = [
+  //   ...callBacksDefinitionArr.mandatoryCallbacks,
+  //   ...callBacksDefinitionArr.optionalCallbacks,
+  // ].forEach((key) => {
+  //   callbacksObj[key.callbackName] = null
+  // })
+
+  // callbacksObj: {
+  //   [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
+  //   [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
+  //   [PHYLLO_ON_TOKEN_EXPIRED_KEY.callbackName]: null,
+  //   [PHYLLO_ON_EXIT_KEY.callbackName]: null,
+  // },
+  callbacksObj,
   initialize: function ({
     clientDisplayName,
     token,
@@ -113,7 +167,7 @@ const PhylloConnectSDK = {
         attachCallbacks(this.callbacksObj)
         phyllo.open()
       },
-      on: (event: TEventType, callback: any) => {
+      on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
       },
     }
