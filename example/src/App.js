@@ -101,7 +101,6 @@ export default function ExampleApp() {
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
       phylloConnect.on('accountConnected', onAccountConnectedCallBack)
       phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
-      phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
       phylloConnect.on('connectionFailure', onConnectionFailure)
 
       phylloConnect.open()
