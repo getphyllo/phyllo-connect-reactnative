@@ -52,6 +52,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    //implementation 'com.getphyllo:phyllo-connect:0.1.17'
-    implementation "com.getphyllo:phyllo-connect:0.1.20"
+    implementation "com.getphyllo:phyllo-connect:0.2.0"
 }
