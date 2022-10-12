@@ -8,6 +8,7 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
+import { version } from './../package.json'
 interface IPhylloInitialize {
   clientDisplayName: string
   token: string
@@ -169,6 +170,9 @@ const PhylloConnectSDK = {
       },
       on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
+      },
+      version: () => {
+        return version
       },
     }
   },
