@@ -8,7 +8,7 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
-import { version } from './../package.json'
+import { reactNativeVersionObj } from './constants'
 interface IPhylloInitialize {
   clientDisplayName: string
   token: string
@@ -172,7 +172,7 @@ const PhylloConnectSDK = {
         this.callbacksObj[event] = callback
       },
       version: () => {
-        return version
+        return reactNativeVersionObj
       },
     }
   },
