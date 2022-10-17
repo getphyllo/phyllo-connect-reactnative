@@ -4,7 +4,7 @@ export interface ICallbacks {
   argsArr: Array<string>
   argsLength: number
 }
-export interface Version {
+export interface IVersion {
   reactNativeSdkVersion: string
   minSupportedIosVersion: string
   maxSupportedIosVersion: string
@@ -13,7 +13,7 @@ export interface Version {
   maxSupportedAndroidVersion: string
 }
 
-export const reactNativeVersionObj: Version = {
+export const reactNativeVersionObj: IVersion = {
   reactNativeSdkVersion: '1',
   minSupportedIosVersion: '1',
   maxSupportedIosVersion: '1',
