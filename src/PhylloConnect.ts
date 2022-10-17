@@ -172,7 +172,8 @@ const PhylloConnectSDK = {
         this.callbacksObj[event] = callback
       },
       version: () => {
-        return reactNativeVersionObj
+        //return reactNativeVersionObj
+        return JSON.stringify(reactNativeVersionObj)
       },
     }
   },
