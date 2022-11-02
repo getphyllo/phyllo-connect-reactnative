@@ -103,7 +103,7 @@ export default function ExampleApp() {
       phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
       phylloConnect.on('connectionFailure', onConnectionFailure)
 
-      console.log('Version Object', phylloConnect.version())
+      //console.log('Version Object', phylloConnect.version())
       phylloConnect.open()
     } catch (e) {
       Alert.alert('An error occured', e.message)

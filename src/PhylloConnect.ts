@@ -8,13 +8,14 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
-import { reactNativeVersionObj } from './constants'
+//import { reactNativeVersionObj } from './constants'
 interface IPhylloInitialize {
   clientDisplayName: string
   token: string
   userId: string
   environment: PhylloEnvironment
   workPlatformId?: string
+  singleAccount?: Boolean
 }
 
 type TEventType =
@@ -144,6 +145,7 @@ const PhylloConnectSDK = {
     userId,
     environment,
     workPlatformId = '',
+    singleAccount = false
   }: IPhylloInitialize) {
     validateConfig({
       clientDisplayName,
@@ -158,7 +160,8 @@ const PhylloConnectSDK = {
       token,
       userId,
       environment,
-      workPlatformId
+      workPlatformId,
+      singleAccount
     )
 
     // this is to solely match web sdk signature
@@ -171,10 +174,10 @@ const PhylloConnectSDK = {
       on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
       },
-      version: () => {
-        //return reactNativeVersionObj
-        return JSON.stringify(reactNativeVersionObj)
-      },
+      // version: () => {
+      //   //return reactNativeVersionObj
+      //   return JSON.stringify(reactNativeVersionObj)
+      // },
     }
   },
 }

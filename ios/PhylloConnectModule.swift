@@ -34,8 +34,8 @@ public class PhylloConnectModule: RCTEventEmitter {
     }
     
     
-    @objc(initialize:::::)
-    func initialize(clientDisplayName:String,token:String,userId:String ,environment:String, workPlatformId:String) {
+    @objc(initialize::::::)
+    func initialize(clientDisplayName:String,token:String,userId:String ,environment:String, workPlatformId:String,singleAccount:String) {
         DispatchQueue.main.async {
 
         var phylloConfig = [String:Any]()
@@ -45,11 +45,9 @@ public class PhylloConnectModule: RCTEventEmitter {
         phylloConfig["userId"] = userId
         phylloConfig["delegate"] = self
         phylloConfig["workPlatformId"] = workPlatformId
-        phylloConfig["external_sdk_name"] = "reactnative" //for Tracking
-        phylloConfig["external_sdk_version"] = "0.3.0"  
+        phylloConfig["singleAccount"] = singleAccount
 
-        PhylloConnect.shared.initialize(config: phylloConfig)
-            PhylloConnect.shared.initialize(config: phylloConfig)
+         PhylloConnect.shared.initialize(config: phylloConfig)
         }
     }
 

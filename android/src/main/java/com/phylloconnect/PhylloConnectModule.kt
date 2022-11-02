@@ -28,15 +28,37 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String) {       
+    public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String,singleAccount:Boolean) {       
         Handler(Looper.getMainLooper()).post {
-            PhylloConnect.initialize(context = reactApplicationContext,
-            clientDisplayName = name,
-            userId = userId,
-            token = token,
-            workPlatformId = platformId,
-            environment = getPhylloEnvironment(environment),
-            callback = object : ConnectCallback (){
+
+            // val clientDisplayName = call.argument<String?>("clientDisplayName")
+            //     val userId = call.argument<String?>("userId")
+            //     val token = call.argument<String?>("token")
+            //     val environment = call.argument<String?>("environment")
+            //     val workPlatformId = call.argument<String?>("workPlatformId") ?: ""
+            //     val singleAccount = call.argument<Boolean?>("singleAccount") ?: false
+                
+            //     if (clientDisplayName == null) {
+            //         showToast("Please pass a valid clientDisplayName.")
+            //         return
+            //     }
+
+            //     if (userId == null) {
+            //         showToast("Please pass a valid userId.")
+            //         return
+            //     }
+
+            //     if (token == null) {
+            //         showToast("Please pass a valid token.")
+            //         return
+            //     }
+
+            //     if (environment == null) {
+            //         showToast("Please pass a valid environment.")
+            //         return
+            //     }
+
+            var callback = object : ConnectCallback (){
                 override fun onAccountConnected(account_id: String?,work_platform_id: String?, user_id: String?) {
                     val values = Arguments.createArray();
                     values.pushString(account_id);
@@ -73,7 +95,18 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     values.pushString(user_id);
                     sendEvent("onConnectionFailure", values);
                 }
-            })
+            }
+
+            var map = hashMapOf<String, Any?>(
+            "clientDisplayName" to name,
+            "token" to token,
+            "workPlatformId" to platformId,
+            "userId" to userId,
+            "environment" to  getPhylloEnvironment(environment),
+            "callback" to callback,
+            "singleAccount" to singleAccount
+           )
+            PhylloConnect.initialize(context = reactApplicationContext,map)
         }
     }
 
