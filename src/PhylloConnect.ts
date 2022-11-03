@@ -8,7 +8,6 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
-//import { reactNativeVersionObj } from './constants'
 interface IPhylloInitialize {
   clientDisplayName: string
   token: string
@@ -145,7 +144,7 @@ const PhylloConnectSDK = {
     userId,
     environment,
     workPlatformId = '',
-    singleAccount = false
+    singleAccount = false,
   }: IPhylloInitialize) {
     validateConfig({
       clientDisplayName,
@@ -173,7 +172,7 @@ const PhylloConnectSDK = {
       },
       on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
-      }
+      },
     }
   },
 }

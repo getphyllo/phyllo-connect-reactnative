@@ -68,6 +68,7 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
+    const singleAccount = true
 
     let id, token
     try {
@@ -92,6 +93,7 @@ export default function ExampleApp() {
         userId: id,
         workPlatformId,
         environment,
+        singleAccount
       }
 
       // opens the sdk flow
@@ -103,7 +105,6 @@ export default function ExampleApp() {
       phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
       phylloConnect.on('connectionFailure', onConnectionFailure)
 
-      //console.log('Version Object', phylloConnect.version())
       phylloConnect.open()
     } catch (e) {
       Alert.alert('An error occured', e.message)

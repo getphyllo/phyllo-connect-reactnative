@@ -1,4 +1,4 @@
-package com.example
+package com.phyllo.reactnative
 
 import android.app.Application
 import android.content.Context

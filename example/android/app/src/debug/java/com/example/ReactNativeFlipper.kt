@@ -1,4 +1,4 @@
-package com.example
+package com.phyllo.reactnative
 
 import android.content.Context
 import com.facebook.flipper.android.AndroidFlipperClient

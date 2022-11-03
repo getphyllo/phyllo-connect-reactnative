@@ -1,6 +1,6 @@
-const clientId = '0a62ced6-3b00-4112-9c6b-7e7e61db02d0' // add your Id here
-const clientSecret = '6260ff9d-1026-4b75-8d81-b33e317b4581' // add your client Secret
-const env = 'sandbox' // add your environment type, development, sandbox, production are the valid values
+const clientId = '2778c997-f4bc-401d-95c4-6f2178b85404' // add your Id here
+const clientSecret = '535b916c-292b-4771-bd6a-41dc4a53db6f' // add your client Secret
+const env = 'development' // add your environment type, development, sandbox, production are the valid values
 
 export default {
   clientId,
