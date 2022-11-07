@@ -144,7 +144,7 @@ const PhylloConnectSDK = {
     userId,
     environment,
     workPlatformId = '',
-    singleAccount = false,
+    singleAccount,
   }: IPhylloInitialize) {
     validateConfig({
       clientDisplayName,
