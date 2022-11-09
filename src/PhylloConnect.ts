@@ -14,6 +14,7 @@ interface IPhylloInitialize {
   userId: string
   environment: PhylloEnvironment
   workPlatformId?: string
+  singleAccount?: Boolean
 }
 
 type TEventType =
@@ -72,28 +73,6 @@ const validateCallbacks = (callbacksObj: any) => {
   }
 }
 
-// const validateCallbacks = (callbacksObj: any) => {
-//   const keysArr = Object.keys(callbacksObj)
-//   // ['connect', 'disconnect', 'tokenExpired']
-//   for (var i = 0; i < keysArr.length; i++) {
-//     // cheking if callbacks are passed by developer
-//     if (!callbacksObj[keysArr[i]])
-//       throw new Error('Please add the callback: ' + keysArr[i])
-
-//     //checking if the required number of parameters are passed in the callback
-//     if (
-//       callbacksObj[keysArr[i]].length !==
-//       callBacksDefintionArr.filter((key) => key.callbackName === keysArr[i])[0]
-//         .argsLength
-//     ) {
-//       throw new Error(
-//         'Please match the required number of parameters in callback: ' +
-//           keysArr[i]
-//       )
-//     }
-//   }
-// }
-
 const attachCallbacks = (callbackObj: any) => {
   for (let key in callbackObj) {
     const eventName = 'on' + key[0].toUpperCase() + key.slice(1)
@@ -123,42 +102,13 @@ callbacksArray.forEach((key) => {
 })
 
 const PhylloConnectSDK = {
-  // const callbacksObj = [
-  //   ...callBacksDefinitionArr.mandatoryCallbacks,
-  //   ...callBacksDefinitionArr.optionalCallbacks,
-  // ].forEach((key) => {
-  //   callbacksObj[key.callbackName] = null
-  // })
 
-  // callbacksObj: {
-  //   [PHYLLO_ACCOUNT_CONNECTED_KEY.callbackName]: null,
-  //   [PHYLLO_ACCOUNT_DISCONNECTED_KEY.callbackName]: null,
-  //   [PHYLLO_ON_TOKEN_EXPIRED_KEY.callbackName]: null,
-  //   [PHYLLO_ON_EXIT_KEY.callbackName]: null,
-  // },
   callbacksObj,
-  initialize: function ({
-    clientDisplayName,
-    token,
-    userId,
-    environment,
-    workPlatformId = '',
-  }: IPhylloInitialize) {
-    validateConfig({
-      clientDisplayName,
-      token,
-      userId,
-      environment,
-    })
+  initialize: function (clientConfig: IPhylloInitialize) {
+    validateConfig(clientConfig)
 
     // maintain the same order
-    phyllo.initialize(
-      clientDisplayName,
-      token,
-      userId,
-      environment,
-      workPlatformId
-    )
+    phyllo.initialize(clientConfig)
 
     // this is to solely match web sdk signature
     return {

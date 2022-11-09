@@ -68,7 +68,7 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-
+    
     let id, token
     try {
       // Create a user, SDK Token if the user is new user

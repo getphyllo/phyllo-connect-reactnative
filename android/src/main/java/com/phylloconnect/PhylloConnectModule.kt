@@ -28,15 +28,10 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String) {       
+    public fun initialize(config:HashMap<String, Any?>) {       
         Handler(Looper.getMainLooper()).post {
-            PhylloConnect.initialize(context = reactApplicationContext,
-            clientDisplayName = name,
-            userId = userId,
-            token = token,
-            workPlatformId = platformId,
-            environment = getPhylloEnvironment(environment),
-            callback = object : ConnectCallback (){
+
+            var callback = object : ConnectCallback (){
                 override fun onAccountConnected(account_id: String?,work_platform_id: String?, user_id: String?) {
                     val values = Arguments.createArray();
                     values.pushString(account_id);
@@ -73,7 +68,13 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     values.pushString(user_id);
                     sendEvent("onConnectionFailure", values);
                 }
-            })
+            }
+
+            val map = hashMapOf<String, Any?>()
+            map.putAll(config)
+            map["environment"] = getPhylloEnvironment(config["environment"] as String)
+            map["callback"] = callback
+            PhylloConnect.initialize(context = context, map)
         }
     }
 
