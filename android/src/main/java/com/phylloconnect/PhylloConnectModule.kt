@@ -28,7 +28,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String,singleAccount:Boolean = false) {       
+    public fun initialize(config:HashMap<String, Any?>) {       
         Handler(Looper.getMainLooper()).post {
 
             var callback = object : ConnectCallback (){
@@ -70,16 +70,11 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                 }
             }
 
-            var map = hashMapOf<String, Any?>(
-            "clientDisplayName" to name,
-            "token" to token,
-            "workPlatformId" to platformId,
-            "userId" to userId,
-            "environment" to  getPhylloEnvironment(environment),
-            "callback" to callback,
-            "singleAccount" to singleAccount
-           )
-            PhylloConnect.initialize(context = reactApplicationContext,map)
+            val map = hashMapOf<String, Any?>()
+            map.putAll(config)
+            map["environment"] = getPhylloEnvironment(config["environment"] as String)
+            map["callback"] = callback
+            PhylloConnect.initialize(context = context, map)
         }
     }
 

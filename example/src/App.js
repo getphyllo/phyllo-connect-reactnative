@@ -68,8 +68,7 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-    const singleAccount = true
-
+    
     let id, token
     try {
       // Create a user, SDK Token if the user is new user
@@ -93,7 +92,6 @@ export default function ExampleApp() {
         userId: id,
         workPlatformId,
         environment,
-        singleAccount
       }
 
       // opens the sdk flow

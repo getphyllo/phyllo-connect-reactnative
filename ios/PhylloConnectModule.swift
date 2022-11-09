@@ -34,19 +34,15 @@ public class PhylloConnectModule: RCTEventEmitter {
     }
     
     
-    @objc(initialize::::::)
-    func initialize(clientDisplayName:String,token:String,userId:String ,environment:String, workPlatformId:String,singleAccount:Bool = false) {
+    @objc(initialize:)
+    func initialize(config:[String:Any]) {
         DispatchQueue.main.async {
 
-        var phylloConfig = [String:Any]()
-        phylloConfig["environment"] = self.getEnvironment(env: environment)
-        phylloConfig["clientDisplayName"] = clientDisplayName
-        phylloConfig["token"] = token
-        phylloConfig["userId"] = userId
-        phylloConfig["delegate"] = self
-        phylloConfig["workPlatformId"] = workPlatformId
-        phylloConfig["singleAccount"] = singleAccount
-        PhylloConnect.shared.initialize(config: phylloConfig)
+         var phylloConfig = [String:Any]()
+         phylloConfig = config
+         phylloConfig["environment"] = self.getEnvironment(env: config["environment"] as? String ?? "")
+         phylloConfig["delegate"] = self
+         PhylloConnect.shared.initialize(config: phylloConfig)
 
         }
     }
