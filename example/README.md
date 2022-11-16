@@ -39,7 +39,7 @@ clientSecret = 'YOUR-SECRET-KEY'
 env = 'APPLICATION-ENVIRONMENT'
 ```
 
-Set the env to `production` or `sandbox`
+Set the env to `development` or `production` or `sandbox`
 
 ### 🚀 To launch the application, run the following commands in example folder:
 

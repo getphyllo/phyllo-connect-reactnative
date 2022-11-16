@@ -42,6 +42,8 @@ android {
 //     }
 // }
 
+
+
 repositories {
     google()
     mavenCentral()
@@ -50,6 +52,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation "com.getphyllo:phyllo-connect:0.3.0"
-    //implementation "com.getphyllo:phyllo-connect:0.2.3-SNAPSHOT"
+    implementation 'com.getphyllo:phyllo-connect:0.3.0'
 }

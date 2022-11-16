@@ -74,7 +74,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             map.putAll(config)
             map["environment"] = getPhylloEnvironment(config["environment"] as String)
             map["callback"] = callback
-            PhylloConnect.initialize(context = context, map)
+            PhylloConnect.initialize(context = reactApplicationContext, map)
         }
     }
 

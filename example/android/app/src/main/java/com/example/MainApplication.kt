@@ -42,7 +42,7 @@ class MainApplication : Application(), ReactApplication {
         private fun initializeFlipper(context: Context, reactInstanceManager: ReactInstanceManager) {
             if (BuildConfig.DEBUG) {
                 try {
-                    val aClass = Class.forName("com.example.ReactNativeFlipper")
+                    val aClass = Class.forName("com.phyllo.reactnative.ReactNativeFlipper")
                     aClass
                             .getMethod("initializeFlipper", Context::class.java, ReactInstanceManager::class.java)
                             .invoke(null, context, reactInstanceManager)
