@@ -89,13 +89,14 @@ export default function ExampleApp() {
       // set config
       const config = {
         clientDisplayName,
+        token,
         userId: id,
-        workPlatformId,
         environment,
+        workPlatformId,
         singleAccount
       }
 
-      
+      console.log(`configPhyllo : ${config}`)
       // opens the sdk flow
       const phylloConnect = PhylloConnect.initialize(config)
 
