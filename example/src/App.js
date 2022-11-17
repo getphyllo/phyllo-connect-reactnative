@@ -68,7 +68,7 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-    const singleAccount = "true"
+    
     
     let id, token
     try {
@@ -93,13 +93,12 @@ export default function ExampleApp() {
         userId: id,
         environment,
         workPlatformId,
-        singleAccount
       }
 
-      console.log(`configPhyllo : ${config}`)
+
       // opens the sdk flow
       const phylloConnect = PhylloConnect.initialize(config)
-
+      console.log(phylloConnect)
       phylloConnect.on('exit', onExitCallBack)
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
       phylloConnect.on('accountConnected', onAccountConnectedCallBack)

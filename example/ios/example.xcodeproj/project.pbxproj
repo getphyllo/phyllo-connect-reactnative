@@ -279,9 +279,11 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W46X4FW8UP;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W46X4FW8UP;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dev RN SampleApp";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,9 +295,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phylloconnect.prodrn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.getphyllo.reactnative;
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "prod-rn-dev-phyllo";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dev_reactnative_phyllo;
 				SWIFT_OBJC_BRIDGING_HEADER = "example/example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -314,8 +317,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W46X4FW8UP;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W46X4FW8UP;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = example/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dev RN SampleApp";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,9 +332,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.phylloconnect.prodrn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.getphyllo.reactnative;
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "prod-rn-dist-phyllo";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dist_reactnative_phyllo;
 				SWIFT_OBJC_BRIDGING_HEADER = "example/example-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

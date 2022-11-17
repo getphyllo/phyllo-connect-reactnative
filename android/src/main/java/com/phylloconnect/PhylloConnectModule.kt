@@ -30,7 +30,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(config:ReadableMap) {
+    public fun initialize(readableMap: ReadableMap) {
         Handler(Looper.getMainLooper()).post {
 
             var callback = object : ConnectCallback (){
@@ -71,9 +71,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     sendEvent("onConnectionFailure", values);
                 }
             }
-            //Log. config.toHashMap());
+
             var map = hashMapOf<String, Any?>()
-            map = config.toHashMap()
+            map = readableMap.toHashMap()
             map["environment"] = getPhylloEnvironment(map["environment"] as String)
             map["callback"] = callback
             PhylloConnect.initialize(context = reactApplicationContext, map)
