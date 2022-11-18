@@ -42,12 +42,10 @@ export const createUser = async (name, externalId) => {
   try {
     debugger
     const api = getAxiosInstance()
-    console.log(`createUser : ${api}`)
     let response = await api.post(CREATE_USER_ENDPOINT, {
       name,
       external_id: externalId,
     })
-    console.log(`createUser : ${response}`)
     return response.data.id
   } catch (err) {
     throw err
@@ -62,12 +60,10 @@ export const createUserToken = async (userId) => {
   }
   try {
     const api = getAxiosInstance()
-    console.log(`createUserToken : ${api}`)
     let response = await api.post(CREATE_USER_TOKEN_ENDPOINT, {
       user_id: userId,
       products: ['IDENTITY', 'ENGAGEMENT', 'INCOME'],
     })
-    console.log(`createUserToken : ${response}`)
     return response.data.sdk_token
   } catch (err) {
     throw err

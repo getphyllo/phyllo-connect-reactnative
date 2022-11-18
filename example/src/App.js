@@ -98,7 +98,6 @@ export default function ExampleApp() {
 
       // opens the sdk flow
       const phylloConnect = PhylloConnect.initialize(config)
-      console.log(phylloConnect)
       phylloConnect.on('exit', onExitCallBack)
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
       phylloConnect.on('accountConnected', onAccountConnectedCallBack)
@@ -108,7 +107,6 @@ export default function ExampleApp() {
       phylloConnect.open()
     } catch (e) {
       Alert.alert('An error occured', e.message)
-      console.log(e)
     }
   }
   return (
