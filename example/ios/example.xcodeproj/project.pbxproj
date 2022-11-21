@@ -283,7 +283,7 @@
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = example/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dev RN SampleApp";
+				INFOPLIST_KEY_CFBundleDisplayName = "Phyllo RN Sample App";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -320,7 +320,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W46X4FW8UP;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = example/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Dev RN SampleApp";
+				INFOPLIST_KEY_CFBundleDisplayName = "Phyllo RN Sample App";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

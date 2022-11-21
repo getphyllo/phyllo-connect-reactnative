@@ -40,7 +40,6 @@ const getAxiosInstance = () => {
 // creates a user, https://docs.getphyllo.com/docs/api-reference/b3A6MTQwNjEzNzY-create-a-user
 export const createUser = async (name, externalId) => {
   try {
-    debugger
     const api = getAxiosInstance()
     let response = await api.post(CREATE_USER_ENDPOINT, {
       name,
