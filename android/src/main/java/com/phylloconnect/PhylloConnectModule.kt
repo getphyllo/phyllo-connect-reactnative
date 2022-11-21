@@ -19,7 +19,9 @@ import android.view.View
 import android.content.Intent
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import kotlin.math.log
 
 class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -28,7 +30,7 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(config:HashMap<String, Any?>) {       
+    public fun initialize(readableMap: ReadableMap) {
         Handler(Looper.getMainLooper()).post {
 
             var callback = object : ConnectCallback (){
@@ -70,11 +72,11 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                 }
             }
 
-            val map = hashMapOf<String, Any?>()
-            map.putAll(config)
-            map["environment"] = getPhylloEnvironment(config["environment"] as String)
+            var map = hashMapOf<String, Any?>()
+            map = readableMap.toHashMap()
+            map["environment"] = getPhylloEnvironment(map["environment"] as String)
             map["callback"] = callback
-            PhylloConnect.initialize(context = context, map)
+            PhylloConnect.initialize(context = reactApplicationContext, map)
         }
     }
 
