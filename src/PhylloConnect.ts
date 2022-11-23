@@ -8,14 +8,7 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
-interface IPhylloInitialize {
-  clientDisplayName: string
-  token: string
-  userId: string
-  environment: PhylloEnvironment
-  workPlatformId?: string
-  singleAccount?: Boolean
-}
+
 
 type TEventType =
   | 'accountConnected'
@@ -26,18 +19,18 @@ type TEventType =
 const phyllo = NativeModules.PhylloConnectModule
 const eventEmitter = new NativeEventEmitter(phyllo)
 
-const validateConfig = (params: IPhylloInitialize) => {
+const validateConfig = (params: any) => {
   if (!params.environment || !(params.environment in PhylloEnvironment)) {
-    throw new Error('Please provide a valid environment')
+    throw new Error('Please pass a valid environment.')
   }
   if (!params.userId) {
-    throw new Error('Please provide a User Id')
+    throw new Error('Please pass a valid userId.')
   }
   if (!params.clientDisplayName) {
-    throw new Error('Please provide Client Display Name')
+    throw new Error('Please pass a valid clientDisplayName.')
   }
   if (!params.token) {
-    throw new Error('Please provide a Token')
+    throw new Error('Please pass a valid token.')
   }
 }
 
@@ -52,7 +45,9 @@ const validateCallbacks = (callbacksObj: any) => {
           (item) => item.callbackName === keysArr[i]
         ).length > 0
       )
-        throw new Error('Please add the callback: ' + keysArr[i])
+        throw new Error(
+          'Please add a callback to receive callbacks.' + keysArr[i]
+        )
     }
 
     //checking if the required number of parameters are passed in the callback
@@ -102,9 +97,8 @@ callbacksArray.forEach((key) => {
 })
 
 const PhylloConnectSDK = {
-
   callbacksObj,
-  initialize: function (clientConfig: IPhylloInitialize) {
+  initialize: function (clientConfig: any) {
     validateConfig(clientConfig)
 
     // maintain the same order
