@@ -41,7 +41,6 @@ const getAxiosInstance = () => {
 export const createUser = async (name, externalId) => {
   try {
     const api = getAxiosInstance()
-
     let response = await api.post(CREATE_USER_ENDPOINT, {
       name,
       external_id: externalId,

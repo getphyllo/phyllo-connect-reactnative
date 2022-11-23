@@ -19,7 +19,9 @@ import android.view.View
 import android.content.Intent
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
+
 
 class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -28,15 +30,10 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
     val logTag: String = "PhylloConnectModule"
 
     @ReactMethod
-    public fun initialize(name: String, token: String, userId: String, environment: String, platformId: String) {       
+    public fun initialize(readableMap: ReadableMap) {
         Handler(Looper.getMainLooper()).post {
-            PhylloConnect.initialize(context = reactApplicationContext,
-            clientDisplayName = name,
-            userId = userId,
-            token = token,
-            workPlatformId = platformId,
-            environment = getPhylloEnvironment(environment),
-            callback = object : ConnectCallback (){
+
+            var callback = object : ConnectCallback (){
                 override fun onAccountConnected(account_id: String?,work_platform_id: String?, user_id: String?) {
                     val values = Arguments.createArray();
                     values.pushString(account_id);
@@ -73,7 +70,13 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
                     values.pushString(user_id);
                     sendEvent("onConnectionFailure", values);
                 }
-            })
+            }
+
+            var map = hashMapOf<String, Any?>()
+            map = readableMap.toHashMap()
+            map["environment"] = getPhylloEnvironment(map["environment"] as String)
+            map["callback"] = callback
+            PhylloConnect.initialize(context = reactApplicationContext, map)
         }
     }
 

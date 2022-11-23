@@ -1,4 +1,4 @@
-package com.example
+package com.phyllo.reactnative
 
 import com.facebook.react.ReactActivity
 
