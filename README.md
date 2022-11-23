@@ -45,7 +45,7 @@ import PhylloConnect, { PhylloEnvironment } from "react-native-phyllo-connect";
 
 const config = {
   clientDisplayName: clientDisplayName, // the name of your app that you want the creators to see while granting access
-  environment: PhylloEnvironment.sandbox, // the mode in which you want to use the SDK,  `sandbox` or `production`
+  environment: 'sandbox', // the mode in which you want to use the SDK,  `sandbox` or `production`
   userId: userId, // the unique user_id parameter returned by Phyllo API when you create a user (see https://docs.getphyllo.com/docs/api-reference/reference/openapi.v1.yml/paths/~1v1~1users/post)
   token: token,
   workPlatformId: workPlatformId, // (optional) the unique work_platform_id of a specific work platform, if you want the creator to skip the platform selection screen and just be able to connect just with a single work platform
@@ -59,7 +59,7 @@ const phylloConnect = PhylloConnect.initialize(config);
 | clientDisplayName | Client Display Name    | String                                                    |
 | token             | User Token             | String                                                    |
 | userId            | User Id                | String                                                    |
-| environment       | Environment            | PhylloEnvironment.sandbox or PhylloEnvironment.production |
+| environment       | Environment            | String //'sandbox', 'production' are the valid values     |
 | workPlatformId    | Platform Id (optional) | String or Null                                            |
 
 ### Subscribing to events
