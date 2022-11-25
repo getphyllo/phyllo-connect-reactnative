@@ -1,7 +1,27 @@
+
 export interface ICallbacks {
   callbackName: string
   argsArr: Array<string>
   argsLength: number
+}
+
+
+export interface Version {
+  reactNativeSdkVersion: string
+  minSupportedIosVersion: string
+  maxSupportedIosVersion: string
+  androidSdkVersion: string
+  minSupportedAndroidVersion: string
+  maxSupportedAndroidVersion: string
+}
+
+export const reactNativeVersionObj: Version = {
+  reactNativeSdkVersion: '',
+  minSupportedIosVersion: '',
+  maxSupportedIosVersion: '',
+  androidSdkVersion: '',
+  minSupportedAndroidVersion: '',
+  maxSupportedAndroidVersion: '',
 }
 
 export const PHYLLO_ACCOUNT_CONNECTED_KEY: ICallbacks = {
