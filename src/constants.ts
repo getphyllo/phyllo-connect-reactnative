@@ -7,21 +7,24 @@ export interface ICallbacks {
 
 
 export interface Version {
-  reactNativeSdkVersion: string
-  minSupportedIosVersion: string
-  maxSupportedIosVersion: string
-  androidSdkVersion: string
-  minSupportedAndroidVersion: string
-  maxSupportedAndroidVersion: string
+  connect_reactnative_sdk_version: string
+  connect_ios_sdk_version: string
+  min_supported_ios_version: string
+  max_supported_ios_version: string
+  connect_android_sdk_version: string
+  min_supported_android_version: string
+  max_supported_android_version:string
 }
 
 export const reactNativeVersionObj: Version = {
-  reactNativeSdkVersion: '',
-  minSupportedIosVersion: '',
-  maxSupportedIosVersion: '',
-  androidSdkVersion: '',
-  minSupportedAndroidVersion: '',
-  maxSupportedAndroidVersion: '',
+  connect_reactnative_sdk_version: '0.3.1',
+  connect_ios_sdk_version: '0.3.1',
+  min_supported_ios_version: '12.0',
+  max_supported_ios_version: '16.0*',
+  connect_android_sdk_version: '0.3.0',
+  min_supported_android_version: '21',
+  max_supported_android_version: '31',
+
 }
 
 export const PHYLLO_ACCOUNT_CONNECTED_KEY: ICallbacks = {
