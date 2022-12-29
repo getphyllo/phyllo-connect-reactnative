@@ -21,7 +21,7 @@ export const reactNativeVersionObj: Version = {
   connect_ios_sdk_version: '0.3.1',
   min_supported_ios_version: '12.0',
   max_supported_ios_version: '16.0*',
-  connect_android_sdk_version: '0.3.0',
+  connect_android_sdk_version: '0.3.1',
   min_supported_android_version: '21',
   max_supported_android_version: '31',
 
