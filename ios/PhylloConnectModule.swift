@@ -42,6 +42,8 @@ public class PhylloConnectModule: RCTEventEmitter {
          phylloConfig = config
          phylloConfig["environment"] = self.getEnvironment(env: config["environment"] as? String ?? "")
          phylloConfig["delegate"] = self
+         phylloConfig["external_sdk_name"] = "reactnative" //for Analytics
+         phylloConfig["external_sdk_version"] = "0.3.1"  // for sdk version
          PhylloConnect.shared.initialize(config: phylloConfig)
 
         }

@@ -103,6 +103,9 @@ export default function ExampleApp() {
       phylloConnect.on('connectionFailure', onConnectionFailure)
 
       phylloConnect.open()
+
+      console.log('Version Object', phylloConnect.version())
+      
     } catch (e) {
       Toast.show(e.message)
     }
