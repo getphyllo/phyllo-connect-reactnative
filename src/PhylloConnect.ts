@@ -8,7 +8,7 @@ import {
 } from './constants'
 import { PhylloEnvironment } from './PhylloEnvironment'
 import { ICallbacks } from './constants'
-
+import { reactNativeVersionObj } from './constants'
 
 type TEventType =
   | 'accountConnected'
@@ -113,6 +113,9 @@ const PhylloConnectSDK = {
       },
       on: (event: string, callback: any) => {
         this.callbacksObj[event] = callback
+      },
+      version: () => {
+        return reactNativeVersionObj
       },
     }
   },

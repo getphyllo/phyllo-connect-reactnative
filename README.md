@@ -88,6 +88,10 @@ phylloConnect.on("connectionFailure", (reason, workplatformId, userId) => {  // 
 phylloConnect.open();
 ```
 
+### Version Details 
+console.log('Version Details', phylloConnect.version())
+
+
 ### Examples
 
 <b>Try our [sample app](https://github.com/getphyllo/phyllo-connect-reactnative/tree/main/example)
