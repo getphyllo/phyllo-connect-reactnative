@@ -5,6 +5,7 @@ import config from './config'
 const getEnvBaseURL = (env) => {
   if (env === 'production') return 'https://api.getphyllo.com'
   if (env === 'sandbox') return 'https://api.sandbox.getphyllo.com'
+  if (env === 'staging') return 'https://api.staging.getphyllo.com'
   return 'https://api.dev.getphyllo.com'
 }
 

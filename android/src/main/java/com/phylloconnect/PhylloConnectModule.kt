@@ -90,6 +90,9 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
             "sandbox" -> {
                 return PhylloConnect.ENVIRONMENT.SANDBOX
             }
+            "staging" -> {
+                return PhylloConnect.ENVIRONMENT.STAGING
+            }
             "production" -> {
                 return PhylloConnect.ENVIRONMENT.PRODUCTION
             }

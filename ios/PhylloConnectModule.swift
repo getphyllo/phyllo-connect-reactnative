@@ -63,6 +63,8 @@ public class PhylloConnectModule: RCTEventEmitter {
             return PhylloEnvironment.dev
         case "sandbox":
             return PhylloEnvironment.sandbox
+        case "staging":
+            return PhylloEnvironment.staging
         case "production":
             return PhylloEnvironment.prod
         default:
