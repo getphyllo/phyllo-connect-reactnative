@@ -68,7 +68,8 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-
+    
+   
     let id, token
     try {
       // Create a user, SDK Token if the user is new user
@@ -94,8 +95,17 @@ export default function ExampleApp() {
         workPlatformId,
       }
 
-      // opens the sdk flow
+      const baseURL = PhylloConnect.getEnvBaseURl('sandbox')
+      console.log(baseURL)
+
       const phylloConnect = PhylloConnect.initialize(config)
+
+      
+    //  => 
+     // phylloConnect.initialize(config)
+      
+      // opens the sdk flow
+     // phylloConnect.initialize(config)
       phylloConnect.on('exit', onExitCallBack)
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
       phylloConnect.on('accountConnected', onAccountConnectedCallBack)

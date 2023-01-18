@@ -43,7 +43,7 @@ public class PhylloConnectModule: RCTEventEmitter {
          phylloConfig["environment"] = self.getEnvironment(env: config["environment"] as? String ?? "")
          phylloConfig["delegate"] = self
          phylloConfig["external_sdk_name"] = "reactnative" //for Analytics
-         phylloConfig["external_sdk_version"] = "0.3.1"  // for sdk version
+         phylloConfig["external_sdk_version"] = "0.3.2"  // for sdk version
          PhylloConnect.shared.initialize(config: phylloConfig)
 
         }
@@ -56,6 +56,25 @@ public class PhylloConnectModule: RCTEventEmitter {
         }
     }
     
+
+
+@objc(getPhylloEnvironmentUrl::)
+func getPhylloEnvironmentUrl(_ environment:String,callback: @escaping RCTResponseSenderBlock) -> Void {
+ var baseUrl = ""
+    switch environment {
+        case "development":
+            baseUrl = PhylloEnvironment.dev.rawValue
+        case "sandbox":
+            baseUrl = PhylloEnvironment.sandbox.rawValue
+        case "staging":
+            baseUrl = PhylloEnvironment.staging.rawValue
+        case "production":
+            baseUrl = PhylloEnvironment.prod.rawValue
+        default:
+            baseUrl = PhylloEnvironment.sandbox.rawValue
+        }
+       callback([NSNull(), ["baseUrl": baseUrl]])
+   }
 
     func getEnvironment(env:String) -> PhylloEnvironment {
         switch env {
@@ -71,6 +90,8 @@ public class PhylloConnectModule: RCTEventEmitter {
             return PhylloEnvironment.sandbox
         }
     }
+
+    
     
     @objc public override static func requiresMainQueueSetup() -> Bool {
         return false
