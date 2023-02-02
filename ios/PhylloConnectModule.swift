@@ -14,7 +14,6 @@ import PhylloConnect
 public class PhylloConnectModule: RCTEventEmitter {
     
     var hasObservers:Bool?
-   // var hasBaseUrl = "Test"
     
     override public func supportedEvents() -> [String]! {
         return ["onAccountConnected","onAccountDisconnected","onTokenExpired","onExit","onConnectionFailure"]
@@ -57,30 +56,6 @@ public class PhylloConnectModule: RCTEventEmitter {
         }
     }
     
-
-
-//  @objc(getPhylloEnvironmentUrl:)
-// func getPhylloEnvironmentUrl(_ env:String) -> String {
-//   var baseUrl = ""
-//     switch env {
-//         case "development":
-//             baseUrl =  PhylloEnvironment.dev.rawValue
-//         case "sandbox":
-//             baseUrl =  PhylloEnvironment.sandbox.rawValue
-//         case "staging":
-//             baseUrl =  PhylloEnvironment.staging.rawValue
-//         case "production":
-//             baseUrl =  PhylloEnvironment.prod.rawValue
-//         default:
-//             baseUrl =  PhylloEnvironment.sandbox.rawValue
-//         }
-//       return baseUrl
-//  }
-
- 
-//  @objc func environmentUrl() -> [String: Any]! {
-//    return ["baseUrl": "Test"]
-//  }
 @objc func getPhylloEnvironmentUrl(_ environment:String ,resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
      let baseUrl = getEnvironment(env:environment).rawValue
      resolve(baseUrl)
