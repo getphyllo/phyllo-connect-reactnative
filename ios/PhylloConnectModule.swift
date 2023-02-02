@@ -43,7 +43,7 @@ public class PhylloConnectModule: RCTEventEmitter {
          phylloConfig["environment"] = self.getEnvironment(env: config["environment"] as? String ?? "")
          phylloConfig["delegate"] = self
          phylloConfig["external_sdk_name"] = "reactnative" //for Analytics
-         phylloConfig["external_sdk_version"] = "0.3.1"  // for sdk version
+         phylloConfig["external_sdk_version"] = "0.3.2"  // for sdk version
          PhylloConnect.shared.initialize(config: phylloConfig)
 
         }
@@ -56,23 +56,55 @@ public class PhylloConnectModule: RCTEventEmitter {
         }
     }
     
+@objc func getPhylloEnvironmentUrl(_ environment:String ,resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+     let baseUrl = getEnvironment(env:environment).rawValue
+     resolve(baseUrl)
+   }
 
-    func getEnvironment(env:String) -> PhylloEnvironment {
-        switch env {
-        case "development":
-            return PhylloEnvironment.dev
-        case "sandbox":
-            return PhylloEnvironment.sandbox
-        case "production":
-            return PhylloEnvironment.prod
-        default:
-            return PhylloEnvironment.sandbox
-        }
-    }
+func getEnvironment(env:String) -> PhylloEnvironment {
+    switch env {
+      case "development":
+        return PhylloEnvironment.dev
+      case "sandbox":
+        return PhylloEnvironment.sandbox
+      case "staging":
+        return PhylloEnvironment.staging
+      case "production":
+        return PhylloEnvironment.prod
+      default:
+        return PhylloEnvironment.sandbox
+      }
+}
+
+@objc public override static func requiresMainQueueSetup() -> Bool {
+      return true
+}
     
-    @objc public override static func requiresMainQueueSetup() -> Bool {
-        return false
-    }
+// @objc public func resolvePromise(
+//     _ resolve: RCTPromiseResolveBlock,
+//     rejecter reject: RCTPromiseRejectBlock
+//   ) -> Void {
+//     resolve(hasBaseUrl)
+//   }
+    
+//  @objc override public func constantsToExport() -> [AnyHashable : Any]! {
+//    return ["baseUrl": hasBaseUrl]
+//  }
+
+//   @objc
+//   func getBaseUrl(_ callback: RCTResponseSenderBlock) {
+//     callback([hasBaseUrl])
+//   }
+//  func _getphylloBaseUrl(name: String) -> Void {
+//    hasBaseUrl = getEnvironment(env:name).rawValue
+//  }
+//  @objc(getphylloBaseUrl:)
+//  func getphylloBaseUrl(_ name: String) -> Void {
+//     DispatchQueue.main.async {
+//       self._getphylloBaseUrl(name: name)
+//     }
+//   }
+
 }
 
 extension PhylloConnectModule : PhylloConnectDelegate {

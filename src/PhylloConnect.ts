@@ -98,7 +98,11 @@ callbacksArray.forEach((key) => {
 
 const PhylloConnectSDK = {
   callbacksObj,
-  initialize: function (clientConfig: any) {
+  getEnvBaseURl:  async function(env: string) {
+    var constantsToExportPhyllo = await phyllo.getPhylloEnvironmentUrl(env);
+    return constantsToExportPhyllo
+  },
+  initialize: function (clientConfig: any) {``
     validateConfig(clientConfig)
 
     // maintain the same order
