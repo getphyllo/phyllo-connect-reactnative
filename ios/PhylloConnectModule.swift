@@ -14,6 +14,7 @@ import PhylloConnect
 public class PhylloConnectModule: RCTEventEmitter {
     
     var hasObservers:Bool?
+   // var hasBaseUrl = "Test"
     
     override public func supportedEvents() -> [String]! {
         return ["onAccountConnected","onAccountDisconnected","onTokenExpired","onExit","onConnectionFailure"]
@@ -58,44 +59,77 @@ public class PhylloConnectModule: RCTEventEmitter {
     
 
 
-@objc(getPhylloEnvironmentUrl::)
-func getPhylloEnvironmentUrl(_ environment:String,callback: @escaping RCTResponseSenderBlock) -> Void {
- var baseUrl = ""
-    switch environment {
-        case "development":
-            baseUrl = PhylloEnvironment.dev.rawValue
-        case "sandbox":
-            baseUrl = PhylloEnvironment.sandbox.rawValue
-        case "staging":
-            baseUrl = PhylloEnvironment.staging.rawValue
-        case "production":
-            baseUrl = PhylloEnvironment.prod.rawValue
-        default:
-            baseUrl = PhylloEnvironment.sandbox.rawValue
-        }
-       callback([NSNull(), ["baseUrl": baseUrl]])
+//  @objc(getPhylloEnvironmentUrl:)
+// func getPhylloEnvironmentUrl(_ env:String) -> String {
+//   var baseUrl = ""
+//     switch env {
+//         case "development":
+//             baseUrl =  PhylloEnvironment.dev.rawValue
+//         case "sandbox":
+//             baseUrl =  PhylloEnvironment.sandbox.rawValue
+//         case "staging":
+//             baseUrl =  PhylloEnvironment.staging.rawValue
+//         case "production":
+//             baseUrl =  PhylloEnvironment.prod.rawValue
+//         default:
+//             baseUrl =  PhylloEnvironment.sandbox.rawValue
+//         }
+//       return baseUrl
+//  }
+
+ 
+//  @objc func environmentUrl() -> [String: Any]! {
+//    return ["baseUrl": "Test"]
+//  }
+@objc func getPhylloEnvironmentUrl(_ environment:String ,resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+     let baseUrl = getEnvironment(env:environment).rawValue
+     resolve(baseUrl)
    }
 
-    func getEnvironment(env:String) -> PhylloEnvironment {
-        switch env {
-        case "development":
-            return PhylloEnvironment.dev
-        case "sandbox":
-            return PhylloEnvironment.sandbox
-        case "staging":
-            return PhylloEnvironment.staging
-        case "production":
-            return PhylloEnvironment.prod
-        default:
-            return PhylloEnvironment.sandbox
-        }
-    }
+func getEnvironment(env:String) -> PhylloEnvironment {
+    switch env {
+      case "development":
+        return PhylloEnvironment.dev
+      case "sandbox":
+        return PhylloEnvironment.sandbox
+      case "staging":
+        return PhylloEnvironment.staging
+      case "production":
+        return PhylloEnvironment.prod
+      default:
+        return PhylloEnvironment.sandbox
+      }
+}
 
+@objc public override static func requiresMainQueueSetup() -> Bool {
+      return true
+}
     
+// @objc public func resolvePromise(
+//     _ resolve: RCTPromiseResolveBlock,
+//     rejecter reject: RCTPromiseRejectBlock
+//   ) -> Void {
+//     resolve(hasBaseUrl)
+//   }
     
-    @objc public override static func requiresMainQueueSetup() -> Bool {
-        return false
-    }
+//  @objc override public func constantsToExport() -> [AnyHashable : Any]! {
+//    return ["baseUrl": hasBaseUrl]
+//  }
+
+//   @objc
+//   func getBaseUrl(_ callback: RCTResponseSenderBlock) {
+//     callback([hasBaseUrl])
+//   }
+//  func _getphylloBaseUrl(name: String) -> Void {
+//    hasBaseUrl = getEnvironment(env:name).rawValue
+//  }
+//  @objc(getphylloBaseUrl:)
+//  func getphylloBaseUrl(_ name: String) -> Void {
+//     DispatchQueue.main.async {
+//       self._getphylloBaseUrl(name: name)
+//     }
+//   }
+
 }
 
 extension PhylloConnectModule : PhylloConnectDelegate {

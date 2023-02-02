@@ -21,6 +21,8 @@ import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.facebook.react.bridge.Callback
+import com.facebook.react.bridge.Promise
 
 
 class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -100,6 +102,21 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         }
     }
 
+    // @ReactMethod
+    // public fun getPhylloEnvironmentUrl(env: String, callback: Callback) {
+    //   val baseUrl = getPhylloEnvironment(env).baseUrl
+    //   callback.invoke(null, baseUrl)
+    // }
+
+    @ReactMethod
+    fun getPhylloEnvironmentUrl(environment: String, promise: Promise) {
+       try {
+            val baseUrl = getPhylloEnvironment(environment).baseUrl
+            promise.resolve(baseUrl)
+        } catch (e: Throwable) {
+            promise.reject("Create Event Error", e)
+        }
+    }
 
     
     @ReactMethod

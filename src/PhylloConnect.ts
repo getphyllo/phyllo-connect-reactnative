@@ -34,11 +34,6 @@ const validateConfig = (params: any) => {
   }
 }
 
-const getEnvBaseURl = (env: String) => {
-  return phyllo.getPhylloEnvironmentUrl(env);
-  // phyllo.getPhylloEnvironmentUrl(env,(err,r) => console.log(r));  
-}
-
 const validateCallbacks = (callbacksObj: any) => {
   const keysArr = Object.keys(callbacksObj)
   for (var i = 0; i < keysArr.length; i++) {
@@ -103,15 +98,11 @@ callbacksArray.forEach((key) => {
 
 const PhylloConnectSDK = {
   callbacksObj,
-  getEnvBaseURl: function(env: String) {
-   
-    phyllo.getPhylloEnvironmentUrl(env, function(error:any, response:any) {
-      let downloadedPath = response.baseUrl;
-      console.log("Success!", downloadedPath);
-  });
-    //return phyllo.getPhylloEnvironmentUrl(env);
+  getEnvBaseURl:  async function(env: string) {
+    var constantsToExportPhyllo = await phyllo.getPhylloEnvironmentUrl(env);
+    return constantsToExportPhyllo
   },
-  initialize: function (clientConfig: any) {
+  initialize: function (clientConfig: any) {``
     validateConfig(clientConfig)
 
     // maintain the same order
