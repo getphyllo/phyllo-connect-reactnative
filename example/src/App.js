@@ -68,7 +68,7 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-
+    const baseURL = await PhylloConnect.getEnvBaseURl(environment.toString())
     let id, token
     try {
       // Create a user, SDK Token if the user is new user
@@ -76,9 +76,8 @@ export default function ExampleApp() {
         id = userId
         token = userToken
       } else {
-        id = await createUser(generateRandomString(8), externalId)
-        token = await createUserToken(id)
-
+        id = await createUser(generateRandomString(8), externalId,baseURL)
+        token = await createUserToken(id,baseURL)
         await AsyncStorage.setItem('user-id', id)
         await AsyncStorage.setItem('user-token', token)
         setUserId(id)
@@ -94,7 +93,6 @@ export default function ExampleApp() {
         workPlatformId,
       }
 
-      // opens the sdk flow
       const phylloConnect = PhylloConnect.initialize(config)
       phylloConnect.on('exit', onExitCallBack)
       phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
