@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.10')}"
     }
 }
@@ -31,6 +31,7 @@ android {
         targetSdkVersion safeExtGet('targetSdkVersion', 31)
     }
 }
+//For Snapshot
 
 // rootProject.allprojects {
 //     repositories {
@@ -42,6 +43,7 @@ android {
 //     }
 // }
 
+//For Release version
 repositories {
     google()
     mavenCentral()
@@ -50,6 +52,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    //implementation 'com.getphyllo:phyllo-connect:0.3.1'
-    implementation 'com.getphyllo:phyllo-connect:0.3.2'
+    implementation 'com.getphyllo:phyllo-connect:0.3.3'
 }
