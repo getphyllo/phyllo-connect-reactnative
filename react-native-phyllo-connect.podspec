@@ -17,5 +17,5 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m,swift}"
 
   s.dependency 'React'
-  s.dependency 'PhylloConnect', '0.3.2'
+  s.dependency 'PhylloConnect','0.3.3'
 end
