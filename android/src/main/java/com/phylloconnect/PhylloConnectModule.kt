@@ -17,12 +17,15 @@ import android.view.WindowManager
 import android.view.Window
 import android.view.View
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.bridge.Callback
 import com.facebook.react.bridge.Promise
+import android.content.pm.PackageManager
 
 
 class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -124,8 +127,42 @@ class PhylloConnectModule(reactContext: ReactApplicationContext) : ReactContextB
         Handler(Looper.getMainLooper()).post {
             PhylloConnect.open()
         }
-    } 
-  
+    }
+
+    @ReactMethod
+    fun getAppVersion(promise: Promise) {
+
+        val packageName = reactApplicationContext.packageName
+        val packageInfo: PackageInfo = reactApplicationContext.packageManager.getPackageInfo(packageName, 0)
+        val applicationInfo: ApplicationInfo = packageInfo.applicationInfo
+
+//        val packageInfo = reactApplicationContext.packageName //packageManager.getPackageInfo(packageName, 0)
+
+
+//        val applicationInfo =  //packageInfo.applicationInfo
+
+// Check if the field is available using reflection
+        try {
+            val minSdkVersionField = ApplicationInfo::class.java.getDeclaredField("minSdkVersion")
+            val minSdkVersion = minSdkVersionField.getInt(applicationInfo)
+            val targetSdkVersionField = ApplicationInfo::class.java.getDeclaredField("targetSdkVersion")
+            val targetSdkVersion = targetSdkVersionField.getInt(applicationInfo)
+            // Create a WritableMap to pass multiple values to Promise
+            val resultMap = Arguments.createMap()
+            resultMap.putInt("minSdkVersion", minSdkVersion)
+            resultMap.putInt("targetSdkVersion", targetSdkVersion)
+
+            // Resolve the Promise with the WritableMap
+            promise.resolve(resultMap)
+        } catch (e: NoSuchFieldException) {
+            promise.reject("Create Event Error", e)
+            e.printStackTrace()
+        } catch (e: IllegalAccessException) {
+            promise.reject("Create Event Error", e)
+            e.printStackTrace()
+        }
+    }
+
     private fun sendEvent(
                     eventName:String,
                     values:WritableArray?) {
