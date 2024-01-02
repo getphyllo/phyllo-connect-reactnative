@@ -33,21 +33,21 @@ android {
 }
 //For Snapshot
 
-// rootProject.allprojects {
-//     repositories {
-//         google()
-//         maven{
-//             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-//         }
-//         //mavenCentral()
-//     }
-// }
+rootProject.allprojects {
+    repositories {
+        google()
+        maven{
+            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+        }
+        //mavenCentral()
+    }
+}
 
 //For Release version
-repositories {
-    google()
-    mavenCentral()
-}
+// repositories {
+//     google()
+//     mavenCentral()
+// }
 
 dependencies {
     //noinspection GradleDynamicVersion
