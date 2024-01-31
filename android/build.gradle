@@ -33,24 +33,24 @@ android {
 }
 //For Snapshot
 
-rootProject.allprojects {
-    repositories {
-        google()
-        maven{
-            url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-        }
-        //mavenCentral()
-    }
-}
+// rootProject.allprojects {
+//     repositories {
+//         google()
+//         maven{
+//             url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+//         }
+//         //mavenCentral()
+//     }
+// }
 
 //For Release version
-// repositories {
-//     google()
-//     mavenCentral()
-// }
+repositories {
+    google()
+    mavenCentral()
+}
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.getphyllo:phyllo-connect:0.3.4.1-SNAPSHOT'
+    implementation 'com.getphyllo:phyllo-connect:0.3.5'
 }
