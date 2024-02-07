@@ -68,5 +68,9 @@
     "phyllo",
     "react-native-phyllo-connect",
     "phyllo-connect-react-native"
-  ]
+  ],
+  "overrides": {
+    "json5": "2.2.2",
+    "hermes-engine": "0.10.0"
+  }
 }
