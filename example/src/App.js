@@ -8,6 +8,8 @@ import { createUser, createUserToken } from './APIHandler'
 import { generateRandomString } from './randomGenerator'
 import clientConfig from './config'
 import Toast from 'react-native-simple-toast'
+import { NativeModules } from 'react-native'
+const { DismissViewNativeModule } = NativeModules
 
 export default function ExampleApp() {
   const [existingUser, setExistingUser] = useState(false)
@@ -35,6 +37,7 @@ export default function ExampleApp() {
     Toast.show(`onExit reason: ${reason}, userId: ${userId}`)
   }
   const onAccountConnectedCallBack = (accountId, workplatformId, userId) => {
+    DismissViewNativeModule.dismissViewController()
     console.log(
       `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
     )
@@ -103,7 +106,7 @@ export default function ExampleApp() {
       phylloConnect.open()
 
       console.log('Version Object', phylloConnect.version())
-      
+
     } catch (e) {
       Toast.show(e.message)
     }
