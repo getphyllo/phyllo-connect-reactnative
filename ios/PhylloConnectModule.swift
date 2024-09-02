@@ -151,10 +151,9 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onExit(reason: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      let values: NSMutableDictionary = [:]
-       values["reason"] = account_id
-       values["userId"] = work_platform_id
-      var values = [reason, user_id]
+        let values: NSMutableDictionary = [:]
+       values["reason"] = reason
+       values["userId"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onExit", body: values)
       }
@@ -164,7 +163,10 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onConnectionFailure(reason: String,work_platform_id:String ,user_id: String) { 
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values = [reason,work_platform_id,user_id]
+       let values: NSMutableDictionary = [:]
+       values["reason"] = reason
+       values["workplatformId"] = work_platform_id
+       values["userId"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onConnectionFailure", body: values)
       }
