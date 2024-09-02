@@ -1,5 +1,6 @@
-import PhylloConnect from './PhylloConnect'
-import { PhylloEnvironment } from './PhylloEnvironment'
+import { NativeModules, NativeEventEmitter } from 'react-native'
+const { PhylloConnectModule } = NativeModules;
 
-export { PhylloEnvironment }
-export default PhylloConnect
+const PhylloConnect = PhylloConnectModule;
+
+export default PhylloConnect;

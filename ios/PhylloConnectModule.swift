@@ -76,9 +76,9 @@ func getEnvironment(env:String) -> PhylloEnvironment {
       }
 }
 
-@objc public override static func requiresMainQueueSetup() -> Bool {
-      return true
-}
+// @objc public override static func requiresMainQueueSetup() -> Bool {
+//       return true
+// }
     
 // @objc public func resolvePromise(
 //     _ resolve: RCTPromiseResolveBlock,
@@ -112,7 +112,10 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountConnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values : [String] = [account_id, work_platform_id, user_id]
+      var values : [String:Any] = []
+       values["account_id"] = account_id
+       values["work_platform_id"] = work_platform_id
+       values["user_id"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onAccountConnected", body: values)
       }
@@ -123,7 +126,10 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountDisconnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values : [String] = [account_id, work_platform_id, user_id]
+      var values : [String:Any] = []
+       values["account_id"] = account_id
+       values["work_platform_id"] = work_platform_id
+       values["user_id"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onAccountDisconnected", body: values)
       }

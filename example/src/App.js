@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, TouchableOpacity, Alert, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Text,
+  NativeEventEmitter,
+} from 'react-native'
 import PhylloConnect from 'react-native-phyllo-connect'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
@@ -68,7 +75,8 @@ export default function ExampleApp() {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
     const environment = clientConfig.env
-    const baseURL = await PhylloConnect.getEnvBaseURl(environment.toString())
+    const baseURL = await PhylloConnect.getPhylloEnvironmentUrl('sandbox')
+    console.log('baseURL', baseURL)
     let id, token
     try {
       // Create a user, SDK Token if the user is new user
@@ -76,8 +84,8 @@ export default function ExampleApp() {
         id = userId
         token = userToken
       } else {
-        id = await createUser(generateRandomString(8), externalId,baseURL)
-        token = await createUserToken(id,baseURL)
+        id = await createUser(generateRandomString(8), externalId, baseURL)
+        token = await createUserToken(id, baseURL)
         await AsyncStorage.setItem('user-id', id)
         await AsyncStorage.setItem('user-token', token)
         setUserId(id)
@@ -93,17 +101,61 @@ export default function ExampleApp() {
         workPlatformId,
       }
 
-      const phylloConnect = PhylloConnect.initialize(config)
-      phylloConnect.on('exit', onExitCallBack)
-      phylloConnect.on('tokenExpired', onTokenExpiredCallBack)
-      phylloConnect.on('accountConnected', onAccountConnectedCallBack)
-      phylloConnect.on('accountDisconnected', onAccountDisconnectedCallBack)
-      phylloConnect.on('connectionFailure', onConnectionFailure)
-
-      phylloConnect.open()
-
-      console.log('Version Object', phylloConnect.version())
+      PhylloConnect.initialize(config)
+      const eventEmitter = new NativeEventEmitter(PhylloConnect)
       
+      this.eventListener = eventEmitter.addListener(
+        'onAccountConnected',
+        (event) => {
+          console.log(
+            `onAccountConnected accountId: ${event.accountId}, workplatformId: ${event.accountId}, userId: ${event.userId}`
+          )
+          Toast.show(
+            `onAccountConnected accountId: ${event.accountId}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
+          )
+        }
+      )
+
+      this.eventListener = eventEmitter.addListener(
+        'onAccountDisconnectedCallBack',
+        (event) => {
+          console.log(
+            `onAccountDisconnectedCallBack accountId: ${event.accountId}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
+          )
+        }
+      )
+
+      this.eventListener = eventEmitter.addListener(
+        'onConnectionFailure',
+        (event) => {
+          console.log(
+            `onConnectionFailure reason: ${event.reason}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
+          )
+          Toast.show(
+            `onConnectionFailure reason: ${event.reason}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
+          )
+        }
+      )
+
+      this.eventListener = eventEmitter.addListener(
+        'onTokenExpiredCallBack',
+        (event) => {
+          console.log(`onTokenExpired userId: ${event.userId}`)
+          Toast.show(`onTokenExpired userId: ${event.userId}`)
+        }
+      )
+
+      this.eventListener = eventEmitter.addListener(
+        'onExit',
+        (event) => {
+          console.log(`onExit reason: ${event.reason}, userId: ${event.userId}`)
+          Toast.show(`onExit reason: ${event.reason}, userId: ${event.userId}`)
+        }
+      )
+
+      PhylloConnect.open()
+
+      //console.log('Version Object', PhylloConnect.version())
     } catch (e) {
       Toast.show(e.message)
     }

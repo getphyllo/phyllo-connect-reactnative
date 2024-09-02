@@ -73,7 +73,7 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - PhylloConnect (0.3.5)
+  - PhylloConnect (0.3.6)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -945,10 +945,10 @@ PODS:
   - React-Mapbuffer (0.73.4):
     - glog
     - React-debug
-  - react-native-phyllo-connect (0.3.6):
-    - PhylloConnect (= 0.3.5)
+  - react-native-phyllo-connect (0.3.7):
+    - PhylloConnect
     - React
-  - react-native-simple-toast (3.2.0):
+  - react-native-simple-toast (3.3.1):
     - React-Core
     - Toast (~> 4)
   - React-nativeconfig (0.73.4)
@@ -1118,12 +1118,12 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RNCAsyncStorage (1.21.0):
+  - RNCAsyncStorage (1.24.0):
     - React-Core
   - RNCMaskedView (0.3.1):
     - React-Core
   - SocketRocket (0.6.1)
-  - Toast (4.1.0)
+  - Toast (4.1.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1349,7 +1349,7 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PhylloConnect: 0aab76f66e2e3c667ca2f807f7efed26f4ea86af
+  PhylloConnect: 0bfc30a6f77683efe92d8e97e3fa62ccdad17ba4
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1371,8 +1371,8 @@ SPEC CHECKSUMS:
   React-jsinspector: 9ac353eccf6ab54d1e0a33862ba91221d1e88460
   React-logger: 0a57b68dd2aec7ff738195f081f0520724b35dab
   React-Mapbuffer: 63913773ed7f96b814a2521e13e6d010282096ad
-  react-native-phyllo-connect: 9649105a1cf5a7f93d22e2c307add64749d62013
-  react-native-simple-toast: 2079d417c52fc3ca295edba094d5632f7720e68d
+  react-native-phyllo-connect: 960f939317aa0e7aa1abc5798ee4eb4f0234e535
+  react-native-simple-toast: 1f1cc551d419bc0ab05dcb0136554006c274789d
   React-nativeconfig: d7af5bae6da70fa15ce44f045621cf99ed24087c
   React-NativeModulesApple: 0123905d5699853ac68519607555a9a4f5c7b3ac
   React-perflogger: 8a1e1af5733004bdd91258dcefbde21e0d1faccd
@@ -1393,10 +1393,10 @@ SPEC CHECKSUMS:
   React-runtimescheduler: ed48e5faac6751e66ee1261c4bd01643b436f112
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
-  RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
+  RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Toast: ec33c32b8688982cecc6348adeae667c1b9938da
+  Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: c25872b6c8e4ec17e5338750fa46de6bf56fcdce
