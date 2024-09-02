@@ -112,10 +112,10 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountConnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values : [String:Any] = []
-       values["account_id"] = account_id
-       values["work_platform_id"] = work_platform_id
-       values["user_id"] = user_id
+      let values: NSMutableDictionary = [:]
+       values["accountId"] = account_id
+       values["workplatformId"] = work_platform_id
+       values["userId"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onAccountConnected", body: values)
       }
@@ -126,10 +126,10 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onAccountDisconnected(account_id: String, work_platform_id: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values : [String:Any] = []
-       values["account_id"] = account_id
-       values["work_platform_id"] = work_platform_id
-       values["user_id"] = user_id
+      let values: NSMutableDictionary = [:]
+       values["accountId"] = account_id
+       values["workplatformId"] = work_platform_id
+       values["userId"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onAccountDisconnected", body: values)
       }
@@ -139,7 +139,8 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onTokenExpired(user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
-      var values : [String] = [user_id]
+      let values: NSMutableDictionary = [:]
+      values["userId"] = user_id
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onTokenExpired", body: values)
       }
@@ -150,6 +151,9 @@ extension PhylloConnectModule : PhylloConnectDelegate {
   public func onExit(reason: String, user_id: String) {
     //Event Sent After Get Connect
     DispatchQueue.main.async {
+      let values: NSMutableDictionary = [:]
+       values["reason"] = account_id
+       values["userId"] = work_platform_id
       var values = [reason, user_id]
       if self.hasObservers ?? false {
             self.sendEvent(withName: "onExit", body: values)
