@@ -76,9 +76,9 @@ func getEnvironment(env:String) -> PhylloEnvironment {
       }
 }
 
-// @objc public override static func requiresMainQueueSetup() -> Bool {
-//       return true
-// }
+@objc public override static func requiresMainQueueSetup() -> Bool {
+      return true
+}
     
 // @objc public func resolvePromise(
 //     _ resolve: RCTPromiseResolveBlock,

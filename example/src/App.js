@@ -36,41 +36,6 @@ export default function ExampleApp() {
     getUserFromStorage()
   }, [])
 
-  // A callback function called upon event
-  const onExitCallBack = (reason, userId) => {
-    console.log(`onExit reason: ${reason}, userId: ${userId}`)
-    Toast.show(`onExit reason: ${reason}, userId: ${userId}`)
-  }
-  const onAccountConnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(
-      `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-    Toast.show(
-      `onAccountConnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-  }
-  const onAccountDisconnectedCallBack = (accountId, workplatformId, userId) => {
-    console.log(
-      `onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-    Toast.show(
-      `onAccountDisconnected accountId: ${accountId}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-  }
-  const onTokenExpiredCallBack = (userId) => {
-    console.log(`onTokenExpired userId: ${userId}`)
-    Toast.show(`onTokenExpired userId: ${userId}`)
-  }
-
-  const onConnectionFailure = (reason, workplatformId, userId) => {
-    console.log(
-      `onConnectionFailure reason: ${reason}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-    Toast.show(
-      `onConnectionFailure reason: ${reason}, workplatformId: ${workplatformId}, userId: ${userId}`
-    )
-  }
-
   const onPressButton = async (workPlatformId) => {
     const clientDisplayName = 'Example'
     const externalId = generateRandomString(20)
@@ -113,17 +78,21 @@ export default function ExampleApp() {
           Toast.show(
             `onAccountConnected accountId: ${event.accountId}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
           )
+          this.eventListener.remove()
         }
       )
+      
 
       this.eventListener = eventEmitter.addListener(
-        'onAccountDisconnectedCallBack',
+        'onAccountDisconnected',
         (event) => {
           console.log(
             `onAccountDisconnectedCallBack accountId: ${event.accountId}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
           )
+          this.eventListener.remove()
         }
       )
+      
 
       this.eventListener = eventEmitter.addListener(
         'onConnectionFailure',
@@ -134,24 +103,30 @@ export default function ExampleApp() {
           Toast.show(
             `onConnectionFailure reason: ${event.reason}, workplatformId: ${event.workplatformId}, userId: ${event.userId}`
           )
+          this.eventListener.remove()
         }
       )
+      
 
       this.eventListener = eventEmitter.addListener(
-        'onTokenExpiredCallBack',
+        'onTokenExpired',
         (event) => {
           console.log(`onTokenExpired userId: ${event.userId}`)
           Toast.show(`onTokenExpired userId: ${event.userId}`)
+          this.eventListener.remove()
         }
       )
+      
 
       this.eventListener = eventEmitter.addListener(
         'onExit',
         (event) => {
           console.log(`onExit reason: ${event.reason}, userId: ${event.userId}`)
           Toast.show(`onExit reason: ${event.reason}, userId: ${event.userId}`)
+          this.eventListener.remove()
         }
       )
+      
 
       PhylloConnect.open()
 

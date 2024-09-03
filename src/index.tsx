@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter } from 'react-native'
+import { NativeModules } from 'react-native'
 const { PhylloConnectModule } = NativeModules;
 
 const PhylloConnect = PhylloConnectModule;
