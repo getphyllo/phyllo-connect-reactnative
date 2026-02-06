@@ -10,6 +10,22 @@
 
 </div>
 
+## Requirements
+
+### Android
+- Minimum Android SDK: **24** (Android 7.0 Nougat)
+- Compile SDK: 35
+- Target SDK: 35
+- Android Gradle Plugin: 8.3.0+
+- Kotlin: 1.9.22+
+- Java: 17
+
+### iOS
+- iOS 12.0 or later
+
+### React Native
+- React Native 0.60.0 or later
+
 ## Configuring the SDK
 
 In your React Native project directory:
