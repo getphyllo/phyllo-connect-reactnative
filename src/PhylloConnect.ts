@@ -102,7 +102,7 @@ const PhylloConnectSDK = {
     var constantsToExportPhyllo = await phyllo.getPhylloEnvironmentUrl(env);
     return constantsToExportPhyllo
   },
-  initialize: function (clientConfig: any) {``
+  initialize: function (clientConfig: any) {
     validateConfig(clientConfig)
 
     // maintain the same order
