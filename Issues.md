@@ -38,4 +38,43 @@ If you are facing this error on pod install, then run
 pod update
 ```
 
+4. **Unable to load script. Make sure you're running Metro or that your bundle index.android.bundle is packaged correctly for release**
+
+If you are facing this error on Android after installing the SDK, follow these steps:
+
+**Step 1:** Clear all caches
+```sh
+# In your app directory
+npx react-native start --reset-cache
+
+# Clean Android build
+cd android && ./gradlew clean && cd ..
+
+# Clear node modules
+rm -rf node_modules
+npm install
+```
+
+**Step 2:** Add packaging options to your app's `android/app/build.gradle`:
+```gradle
+android {
+    ...
+    packagingOptions {
+        pickFirst "**/libc++_shared.so"
+        pickFirst "**/libfbjni.so"
+        pickFirst "**/*.so"
+    }
+}
+```
+
+**Step 3:** Rebuild the app
+```sh
+npx react-native run-android
+```
+
+**Step 4:** If still facing issues, add this to your app's `android/gradle.properties`:
+```
+android.enableDexingArtifactTransform.desugaring=false
+```
+
 If your issue not listed here, raise an issue in the [issues section](https://github.com/getphyllo/phyllo-connect-reactnative/issues) or report your issue on [#bug-reports](https://discord.com/channels/897097781355888640/949535402845405184) channel of our [Discord server](https://discord.com/channels/897097781355888640/).
